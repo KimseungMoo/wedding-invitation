@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 웨딩 테마 색상 */
+  --wedding-pink: #e8a4b8;
+  --wedding-pink-light: #fdf2f5;
+  --wedding-pink-dark: #d4788f;
+  --wedding-gold: #c9a961;
+  --wedding-gold-light: #f5edd6;
+  --wedding-cream: #faf8f5;
+  --wedding-gray: #6b7280;
+  --wedding-text: #3d3d3d;
+
+  --background: var(--wedding-cream);
+  --foreground: var(--wedding-text);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-noto-serif-kr), "Noto Serif KR", Georgia, serif;
+
+  /* 커스텀 색상 */
+  --color-wedding-pink: var(--wedding-pink);
+  --color-wedding-pink-light: var(--wedding-pink-light);
+  --color-wedding-pink-dark: var(--wedding-pink-dark);
+  --color-wedding-gold: var(--wedding-gold);
+  --color-wedding-gold-light: var(--wedding-gold-light);
+  --color-wedding-cream: var(--wedding-cream);
+  --color-wedding-gray: var(--wedding-gray);
+  --color-wedding-text: var(--wedding-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 기본 스타일 */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-serif);
+}
+
+/* 터치 최적화 */
+* {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* 스크롤바 숨기기 (모바일 스타일) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 선택 비활성화 (인터랙션 요소) */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 애니메이션 감소 모드 지원 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 하트 채우기 애니메이션 */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 꽃잎 떨어지기 애니메이션 */
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* 별 반짝임 */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
