@@ -73,7 +73,7 @@ export const GardenGate = () => {
 
       {/* === 안내 문구 === */}
       <motion.div
-        className="absolute top-20 z-10 text-center"
+        className="absolute top-24 z-10 pt-safe text-center sm:top-20"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: progress > 50 ? 0 : 1, y: 0 }}
         transition={{ duration: 0.8 }}
