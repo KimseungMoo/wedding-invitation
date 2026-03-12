@@ -24,8 +24,7 @@ export default function InvitationPage() {
       <MainVisual
         groomName="김승무"
         brideName="성은지"
-        // greeting={`저희 두 사람이 사랑과 믿음으로\n한 가정을 이루게 되었습니다.\n\n귀한 걸음 하시어\n축복해 주시면 감사하겠습니다.`}
-        greeting={`사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준 그 사람이 정녕 고맙다고\n-양귀자 '모순'-`}
+        greeting={`사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준 그 사람이\n정녕 고맙다고\n-양귀자 '모순'-`}
       />
 
       {/* 일시/장소 */}
@@ -51,7 +50,7 @@ export default function InvitationPage() {
       <Account />
 
       {/* 푸터 */}
-      <footer className="bg-[#faf9f6] px-6 py-16">
+      <footer className="bg-[#faf9f6] px-6 pb-safe py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -14,9 +14,9 @@ interface MainVisualProps {
  * 우아한 화이트 톤 디자인
  */
 export const MainVisual = ({
-  groomName = "김신랑",
-  brideName = "이신부",
-  greeting = "저희 두 사람이 사랑과 믿음으로\n한 가정을 이루게 되었습니다.\n\n귀한 걸음 하시어\n축복해 주시면 감사하겠습니다.",
+  groomName = "김승무",
+  brideName = "성은지",
+  greeting = "사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준 그 사람이 정녕 고맙다고\n-양귀자 '모순'-",
 }: MainVisualProps) => {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#faf9f6] px-6 py-20">
@@ -57,7 +57,7 @@ export const MainVisual = ({
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
       >
-        <div className="relative h-72 w-72 overflow-hidden rounded-full border border-[#d4c5a9]/30 bg-gradient-to-br from-[#f5f0e8] to-[#ebe4d8] shadow-[0_10px_40px_rgba(180,160,130,0.15)]">
+        <div className="relative h-56 w-56 overflow-hidden rounded-full border border-[#d4c5a9]/30 bg-gradient-to-br from-[#f5f0e8] to-[#ebe4d8] shadow-[0_10px_40px_rgba(180,160,130,0.15)] sm:h-72 sm:w-72">
           {/* 메인 이미지 */}
           <Image
             src="/IMG_1566.JPG"
@@ -123,7 +123,7 @@ export const MainVisual = ({
 
       {/* === 스크롤 힌트 === */}
       <motion.div
-        className="absolute bottom-10 z-10"
+        className="absolute bottom-10 z-10 pb-safe"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
