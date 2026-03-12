@@ -26,7 +26,7 @@ export const DoorOpen = () => {
   }, [isOpen, router]);
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#faf9f6]">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#faf9f6] pt-safe">
       {/* === 배경 === */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-[#f5efe8] via-[#faf9f6] to-[#f8f5f0]" />
@@ -62,7 +62,7 @@ export const DoorOpen = () => {
 
       {/* === 안내 문구 === */}
       <motion.div
-        className="absolute top-24 z-10 pt-safe text-center sm:top-20"
+        className="relative z-10 mb-10 text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: isOpen ? 0 : 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -183,7 +183,7 @@ export const DoorOpen = () => {
 
       {/* === 하단 힌트 === */}
       <motion.div
-        className="absolute bottom-16 z-10"
+        className="relative z-10 mt-10 text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: isOpen ? 0 : 1 }}
         transition={{ duration: 0.5 }}
