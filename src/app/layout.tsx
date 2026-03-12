@@ -13,14 +13,14 @@ const notoSerifKR = Noto_Serif_KR({
 
 export const metadata: Metadata = {
   title: "결혼합니다",
-  description: "소중한 분들을 초대합니다",
+  description: "김승무 ❤︎ 성은지 결혼식 초대장",
   icons: {
     icon: "/wedding-invitation.png",
     apple: "/wedding-invitation.png",
   },
   openGraph: {
     title: "결혼합니다",
-    description: "소중한 분들을 초대합니다",
+    description: "김승무 ❤︎ 성은지 결혼식 초대장",
     type: "website",
   },
 };
