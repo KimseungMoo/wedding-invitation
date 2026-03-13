@@ -24,7 +24,7 @@ export default function InvitationPage() {
       <MainVisual
         groomName="김승무"
         brideName="성은지"
-        greeting={`사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준 그 사람이\n정녕 고맙다고\n-양귀자 '모순'-`}
+        greeting={`사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준\n그 사람이 정녕 고맙다고\n-양귀자 '모순'-`}
       />
 
       {/* 일시/장소 */}

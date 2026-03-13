@@ -16,7 +16,7 @@ interface MainVisualProps {
 export const MainVisual = ({
   groomName = "김승무",
   brideName = "성은지",
-  greeting = "사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준 그 사람이 정녕 고맙다고\n-양귀자 '모순'-",
+  greeting = "사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준\n그 사람이 정녕 고맙다고\n-양귀자 '모순'-",
 }: MainVisualProps) => {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#faf9f6] px-6 py-20">
@@ -60,7 +60,7 @@ export const MainVisual = ({
         <div className="relative h-56 w-56 overflow-hidden rounded-full border border-[#d4c5a9]/30 bg-gradient-to-br from-[#f5f0e8] to-[#ebe4d8] shadow-[0_10px_40px_rgba(180,160,130,0.15)] sm:h-72 sm:w-72">
           {/* 메인 이미지 */}
           <Image
-            src="/IMG_1566.JPG"
+            src="/main.jpeg"
             alt="웨딩 사진"
             fill
             className="object-cover"
