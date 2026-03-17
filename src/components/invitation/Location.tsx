@@ -18,7 +18,7 @@ interface LocationProps {
  */
 export const Location = ({
   venue = "채플홀",
-  address = "서울특별시 강남구 선릉로 757",
+  address = "서울특별시 강남구 선릉로 757, 채플홀(6층)",
   tel = "02-421-1121",
   parking = "1시간 30분 무료",
 }: LocationProps) => {
@@ -90,10 +90,20 @@ export const Location = ({
             <circle cx="85" cy="155" r="2.5" fill="#8b7355" />
 
             {/* === 예식장 카드 (마커에서 떨어진 위치, 점선 연결) === */}
-            <rect x="18" y="98" width="100" height="34" rx="4" fill="#8b7355" />
+            <rect x="18" y="90" width="100" height="44" rx="4" fill="#8b7355" />
             <text
               x="68"
-              y="119"
+              y="108"
+              fontSize="7.5"
+              fill="#fff"
+              textAnchor="middle"
+              opacity="0.85"
+            >
+              The Chapel
+            </text>
+            <text
+              x="68"
+              y="124"
               fontSize="10.5"
               fill="#fff"
               textAnchor="middle"
@@ -103,7 +113,7 @@ export const Location = ({
             </text>
             {/* 카드 → 이중원 마커 ㄴ자 점선 연결 */}
             <polyline
-              points="68,132 68,155 79,155"
+              points="68,134 68,155 79,155"
               fill="none"
               stroke="#8b7355"
               strokeWidth="0.8"
