@@ -101,24 +101,13 @@ export const Location = ({
             >
               더채플앳청담
             </text>
-            {/* 카드 → 이중원 마커 점선 연결 */}
-            <line
-              x1="75"
-              y1="132"
-              x2="83"
-              y2="149"
+            {/* 카드 → 이중원 마커 ㄴ자 점선 연결 */}
+            <polyline
+              points="68,132 68,155 79,155"
+              fill="none"
               stroke="#8b7355"
               strokeWidth="0.8"
               strokeDasharray="3 2"
-            />
-
-            {/* === 셔틀 경로 (점선): 강남구청역 3번출구 → 북쪽 → 서쪽 → 예식장 === */}
-            <polyline
-              points="195,250 195,155 91,155"
-              fill="none"
-              stroke="#a08d6e"
-              strokeWidth="1"
-              strokeDasharray="4 3"
             />
 
             {/* === ⑦ 강남구청역 3번 출구 (하단 6시 방향) === */}
@@ -138,11 +127,6 @@ export const Location = ({
             </text>
             <text x="195" y="304" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
               3번 출구
-            </text>
-            {/* 3번 출구 방향 화살표 (북쪽/예식장 방향) + 셔틀 승차 표시 */}
-            <polygon points="195,250 190,257 200,257" fill="#6B8E23" opacity="0.7" />
-            <text x="208" y="253" fontSize="6.5" fill="#a08d6e">
-              셔틀 승차
             </text>
 
             {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
