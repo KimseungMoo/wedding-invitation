@@ -53,19 +53,20 @@ export const VenueMap = () => {
         <rect x="245" y="195" width="30" height="20" fill="#f5f1eb" rx="2" />
 
         {/* === 강남구청역 === */}
-        {/* 7호선 라인 */}
-        <rect x="108" y="56" width="30" height="4" fill="#698B69" rx="2" />
-        <rect x="108" y="78" width="30" height="4" fill="#698B69" rx="2" />
-        {/* 수인분당선 라인 */}
-        <rect x="108" y="62" width="30" height="4" fill="#E8A735" rx="2" />
-        <rect x="108" y="72" width="30" height="4" fill="#E8A735" rx="2" />
-        {/* 역명 */}
-        <text x="123" y="71" fontSize="6.5" fill="#4a4a4a" textAnchor="middle" fontWeight="500">강남구청</text>
+        <g>
+          {/* M 심볼 */}
+          <circle cx="120" cy="69" r="7" fill="#4a4a4a" />
+          <text x="120" y="72" fontSize="7" fill="white" textAnchor="middle" fontWeight="700">M</text>
+          {/* 역명 */}
+          <text x="134" y="72" fontSize="8" fill="#4a4a4a" fontWeight="500">강남구청역</text>
+        </g>
 
         {/* 3번 출구 */}
-        <circle cx="170" cy="98" r="9" fill="none" stroke="#c9a961" strokeWidth="1" />
-        <text x="170" y="101" fontSize="7" fill="#c9a961" textAnchor="middle" fontWeight="600">3</text>
-        <text x="186" y="101" fontSize="6.5" fill="#b5a48a" fontWeight="300">번출구</text>
+        <g>
+          <circle cx="170" cy="98" r="7.5" fill="#4a4a4a" />
+          <text x="170" y="101" fontSize="7" fill="white" textAnchor="middle" fontWeight="600">3</text>
+          <text x="183" y="101" fontSize="7" fill="#6b6b6b" fontWeight="400">번출구</text>
+        </g>
 
         {/* === 경로 점선 === */}
         <line x1="170" y1="107" x2="170" y2="143" stroke="#c9a961" strokeWidth="0.8" strokeDasharray="2 2" />
