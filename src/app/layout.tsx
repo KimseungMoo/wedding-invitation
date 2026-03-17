@@ -12,15 +12,15 @@ const notoSerifKR = Noto_Serif_KR({
 });
 
 export const metadata: Metadata = {
-  title: "결혼합니다",
-  description: "김승무 ❤︎ 성은지 결혼식 초대장",
+  title: "우리, 결혼합니다",
+  description: "2027년 2월 21일, 김승무 그리고 성은지의 결혼식에 초대합니다.",
   icons: {
     icon: "/wedding-invitation.png",
     apple: "/wedding-invitation.png",
   },
   openGraph: {
-    title: "결혼합니다",
-    description: "김승무 ❤︎ 성은지 결혼식 초대장",
+    title: "우리, 결혼합니다",
+    description: "2027년 2월 21일, 김승무 그리고 성은지의 결혼식에 초대합니다.",
     type: "website",
   },
 };
