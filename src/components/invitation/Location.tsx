@@ -85,11 +85,15 @@ export const Location = ({
             <text x="203" y="25" fontSize="8" fill="#a08d6e">선릉로</text>
             <text x="260" y="73" fontSize="8" fill="#a08d6e">도산대로</text>
 
-            {/* === 더채플앳청담 (메인 장소, 선릉로 왼쪽) === */}
-            <rect x="38" y="130" width="100" height="36" rx="4" fill="#8b7355" />
+            {/* === 예식장 정확한 위치 (이중원 마커) === */}
+            <circle cx="85" cy="155" r="6" fill="none" stroke="#8b7355" strokeWidth="1.5" />
+            <circle cx="85" cy="155" r="2.5" fill="#8b7355" />
+
+            {/* === 예식장 카드 (마커에서 떨어진 위치, 점선 연결) === */}
+            <rect x="18" y="98" width="100" height="34" rx="4" fill="#8b7355" />
             <text
-              x="88"
-              y="152"
+              x="68"
+              y="119"
               fontSize="10.5"
               fill="#fff"
               textAnchor="middle"
@@ -97,18 +101,25 @@ export const Location = ({
             >
               더채플앳청담
             </text>
+            {/* 카드 → 이중원 마커 점선 연결 */}
+            <line
+              x1="75"
+              y1="132"
+              x2="83"
+              y2="149"
+              stroke="#8b7355"
+              strokeWidth="0.8"
+              strokeDasharray="3 2"
+            />
 
-            {/* === 셔틀 경로 (점선): 강남구청역 → 북쪽 → 서쪽 → 예식장 === */}
+            {/* === 셔틀 경로 (점선): 강남구청역 3번출구 → 북쪽 → 서쪽 → 예식장 === */}
             <polyline
-              points="195,258 195,155 138,155"
+              points="195,250 195,155 91,155"
               fill="none"
               stroke="#a08d6e"
               strokeWidth="1"
               strokeDasharray="4 3"
             />
-            <text x="210" y="215" fontSize="6.5" fill="#a08d6e">
-              셔틀버스
-            </text>
 
             {/* === ⑦ 강남구청역 3번 출구 (하단 6시 방향) === */}
             <circle cx="195" cy="272" r="11" fill="#fff" stroke="#6B8E23" strokeWidth="1.8" />
@@ -127,6 +138,11 @@ export const Location = ({
             </text>
             <text x="195" y="304" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
               3번 출구
+            </text>
+            {/* 3번 출구 방향 화살표 (북쪽/예식장 방향) + 셔틀 승차 표시 */}
+            <polygon points="195,250 190,257 200,257" fill="#6B8E23" opacity="0.7" />
+            <text x="208" y="253" fontSize="6.5" fill="#a08d6e">
+              셔틀 승차
             </text>
 
             {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
