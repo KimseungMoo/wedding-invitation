@@ -57,6 +57,100 @@ export const Location = ({
           </div>
         </motion.div>
 
+        {/* === 약도 === */}
+        <motion.div
+          className="mb-8 overflow-hidden rounded-lg border border-[#e8e2d9] bg-[#f7f3ec] px-4 py-5"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+        >
+          <svg
+            viewBox="0 0 340 310"
+            className="mx-auto w-full max-w-[320px]"
+            role="img"
+            aria-label="더채플앳청담 약도"
+          >
+            {/* === 보조 도로 === */}
+            <line x1="85" y1="5" x2="85" y2="300" stroke="#ebe4d8" strokeWidth="1.2" />
+            <line x1="285" y1="5" x2="285" y2="300" stroke="#ebe4d8" strokeWidth="1.2" />
+            <line x1="5" y1="155" x2="335" y2="155" stroke="#ebe4d8" strokeWidth="1.2" />
+
+            {/* === 주도로: 선릉로 (수직, 중앙~우측) === */}
+            <line x1="195" y1="5" x2="195" y2="300" stroke="#d4c5a9" strokeWidth="2.5" />
+            {/* === 주도로: 도산대로 (수평, 상단) === */}
+            <line x1="5" y1="80" x2="335" y2="80" stroke="#d4c5a9" strokeWidth="2.5" />
+
+            {/* === 도로명 라벨 === */}
+            <text x="203" y="25" fontSize="8" fill="#a08d6e">선릉로</text>
+            <text x="260" y="73" fontSize="8" fill="#a08d6e">도산대로</text>
+
+            {/* === 더채플앳청담 (메인 장소, 선릉로 왼쪽) === */}
+            <rect x="38" y="130" width="100" height="36" rx="4" fill="#8b7355" />
+            <text
+              x="88"
+              y="152"
+              fontSize="10.5"
+              fill="#fff"
+              textAnchor="middle"
+              fontWeight="500"
+            >
+              더채플앳청담
+            </text>
+
+            {/* === 셔틀 경로 (점선): 강남구청역 → 북쪽 → 서쪽 → 예식장 === */}
+            <polyline
+              points="195,258 195,155 138,155"
+              fill="none"
+              stroke="#a08d6e"
+              strokeWidth="1"
+              strokeDasharray="4 3"
+            />
+            <text x="210" y="215" fontSize="6.5" fill="#a08d6e">
+              셔틀버스
+            </text>
+
+            {/* === ⑦ 강남구청역 3번 출구 (하단 6시 방향) === */}
+            <circle cx="195" cy="272" r="11" fill="#fff" stroke="#6B8E23" strokeWidth="1.8" />
+            <text
+              x="195"
+              y="276"
+              fontSize="10"
+              fill="#6B8E23"
+              textAnchor="middle"
+              fontWeight="bold"
+            >
+              7
+            </text>
+            <text x="195" y="293" fontSize="8" fill="#6b6b6b" textAnchor="middle">
+              강남구청역
+            </text>
+            <text x="195" y="304" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
+              3번 출구
+            </text>
+
+            {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
+            {/* 도산공원 (좌상단) */}
+            <circle cx="38" cy="45" r="2.5" fill="#c9a961" />
+            <text x="46" y="48" fontSize="7.5" fill="#8b8b8b">도산공원</text>
+
+            {/* CGV (좌측, 도산대로 근처) */}
+            <circle cx="120" cy="62" r="2.5" fill="#c9a961" />
+            <text x="128" y="65" fontSize="7.5" fill="#8b8b8b">CGV</text>
+
+            {/* 학동사거리 (도산대로 × 선릉로 교차점) */}
+            <text x="205" y="95" fontSize="7" fill="#a08d6e">학동사거리</text>
+
+            {/* 삼성디지털프라자 (예식장 우측, 선릉로 옆) */}
+            <circle cx="215" cy="143" r="2.5" fill="#c9a961" />
+            <text x="223" y="146" fontSize="7.5" fill="#8b8b8b">삼성디지털프라자</text>
+
+            {/* 영동중학교 (예식장과 강남구청역 사이) */}
+            <circle cx="220" cy="210" r="2.5" fill="#c9a961" />
+            <text x="228" y="213" fontSize="7.5" fill="#8b8b8b">영동중학교</text>
+          </svg>
+        </motion.div>
+
         {/* === 장소 정보 === */}
         <motion.div
           className="mb-8 rounded-lg border border-[#e8e2d9] bg-[#faf9f6] p-6"
@@ -108,122 +202,6 @@ export const Location = ({
               <circle cx="18.5" cy="18.5" r="2.5" />
             </svg>
             <p className="text-sm text-[#6b6b6b]">{parking}</p>
-          </div>
-        </motion.div>
-
-        {/* === 약도 === */}
-        <motion.div
-          className="mb-8 overflow-hidden rounded-lg border border-[#e8e2d9] bg-[#f7f3ec] px-4 py-5"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-        >
-          <p className="mb-1 text-center font-serif text-sm italic text-[#a08d6e]">
-            Detail
-          </p>
-          <p className="mb-5 text-center text-[11px] leading-relaxed text-[#8b8b8b]">
-            강남구 선릉로 757,<br />
-            더채플앳청담
-          </p>
-
-          <svg
-            viewBox="0 0 350 260"
-            className="mx-auto w-full max-w-[320px]"
-            role="img"
-            aria-label="더채플앳청담 약도"
-          >
-            {/* === 보조 도로 === */}
-            <line x1="90" y1="8" x2="90" y2="252" stroke="#ebe4d8" strokeWidth="1.2" />
-            <line x1="278" y1="8" x2="278" y2="252" stroke="#ebe4d8" strokeWidth="1.2" />
-            <line x1="8" y1="78" x2="342" y2="78" stroke="#ebe4d8" strokeWidth="1.2" />
-
-            {/* === 주도로: 선릉로 (수직) === */}
-            <line x1="188" y1="8" x2="188" y2="252" stroke="#d4c5a9" strokeWidth="2.5" />
-            {/* === 주도로: 학동로 (수평) === */}
-            <line x1="8" y1="158" x2="342" y2="158" stroke="#d4c5a9" strokeWidth="2.5" />
-
-            {/* === 도로명 라벨 === */}
-            <text x="196" y="28" fontSize="8" fill="#a08d6e">선릉로</text>
-            <text x="295" y="151" fontSize="8" fill="#a08d6e">학동로</text>
-
-            {/* === 더채플앳청담 (메인 장소) === */}
-            <rect x="140" y="96" width="96" height="34" rx="4" fill="#8b7355" />
-            <text
-              x="188"
-              y="117"
-              fontSize="10.5"
-              fill="#fff"
-              textAnchor="middle"
-              fontWeight="500"
-            >
-              더채플앳청담
-            </text>
-
-            {/* === 셔틀 경로 (점선) === */}
-            <polyline
-              points="68,158 140,158 140,113"
-              fill="none"
-              stroke="#a08d6e"
-              strokeWidth="1"
-              strokeDasharray="4 3"
-            />
-            <text x="105" y="150" fontSize="6.5" fill="#a08d6e" textAnchor="middle">
-              셔틀버스
-            </text>
-
-            {/* === ⑦ 강남구청역 3번 출구 === */}
-            <circle cx="48" cy="158" r="10" fill="#fff" stroke="#6B8E23" strokeWidth="1.8" />
-            <text
-              x="48"
-              y="162"
-              fontSize="9.5"
-              fill="#6B8E23"
-              textAnchor="middle"
-              fontWeight="bold"
-            >
-              7
-            </text>
-            <text x="48" y="178" fontSize="7.5" fill="#6b6b6b" textAnchor="middle">
-              강남구청역
-            </text>
-            <text x="48" y="188" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
-              3번 출구
-            </text>
-
-            {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
-            {/* 강남구청 */}
-            <circle cx="82" cy="58" r="2.5" fill="#c9a961" />
-            <text x="90" y="61" fontSize="7.5" fill="#8b8b8b">
-              강남구청
-            </text>
-
-            {/* 학동사거리 */}
-            <text x="206" y="172" fontSize="7" fill="#a08d6e">
-              학동사거리
-            </text>
-
-            {/* CGV 청담씨네시티 */}
-            <circle cx="270" cy="192" r="2.5" fill="#c9a961" />
-            <text x="278" y="195" fontSize="7.5" fill="#8b8b8b">
-              CGV
-            </text>
-
-            {/* LG 베스트샵 */}
-            <circle cx="118" cy="195" r="2.5" fill="#c9a961" />
-            <text x="100" y="210" fontSize="7.5" fill="#8b8b8b">
-              LG베스트샵
-            </text>
-          </svg>
-
-          {/* 안내 문구 */}
-          <div className="mt-4 space-y-0.5 text-center">
-            <p className="text-[10px] text-[#a08d6e]">
-              *강남구청역 3번 출구 앞 셔틀버스를 이용하십시오.
-            </p>
-            <p className="text-[10px] text-[#a08d6e]">
-              *축하 화환은 정중히 사양합니다.
-            </p>
           </div>
         </motion.div>
 
