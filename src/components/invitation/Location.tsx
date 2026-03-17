@@ -7,6 +7,8 @@ import { KakaoMap } from "./KakaoMap";
 interface LocationProps {
   venue?: string;
   address?: string;
+  lat?: number;
+  lng?: number;
   tel?: string;
   parking?: string;
   kakaoMapUrl?: string;
@@ -21,6 +23,8 @@ interface LocationProps {
 export const Location = ({
   venue = "채플홀",
   address = "서울특별시 강남구 선릉로 757",
+  lat = 37.5175,
+  lng = 127.0417,
   tel = "02-421-1121",
   parking = "1시간 30분 무료",
   kakaoMapUrl = "https://map.kakao.com",
@@ -66,7 +70,7 @@ export const Location = ({
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <KakaoMap address={address} venue={venue} />
+          <KakaoMap venue={venue} lat={lat} lng={lng} />
         </motion.div>
 
         {/* === 장소 정보 === */}
