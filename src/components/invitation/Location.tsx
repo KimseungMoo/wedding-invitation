@@ -111,6 +111,122 @@ export const Location = ({
           </div>
         </motion.div>
 
+        {/* === 약도 === */}
+        <motion.div
+          className="mb-8 overflow-hidden rounded-lg border border-[#e8e2d9] bg-[#f7f3ec] px-4 py-5"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+        >
+          <p className="mb-1 text-center font-serif text-sm italic text-[#a08d6e]">
+            Detail
+          </p>
+          <p className="mb-5 text-center text-[11px] leading-relaxed text-[#8b8b8b]">
+            강남구 선릉로 757,<br />
+            더채플앳청담
+          </p>
+
+          <svg
+            viewBox="0 0 350 260"
+            className="mx-auto w-full max-w-[320px]"
+            role="img"
+            aria-label="더채플앳청담 약도"
+          >
+            {/* === 보조 도로 === */}
+            <line x1="90" y1="8" x2="90" y2="252" stroke="#ebe4d8" strokeWidth="1.2" />
+            <line x1="278" y1="8" x2="278" y2="252" stroke="#ebe4d8" strokeWidth="1.2" />
+            <line x1="8" y1="78" x2="342" y2="78" stroke="#ebe4d8" strokeWidth="1.2" />
+
+            {/* === 주도로: 선릉로 (수직) === */}
+            <line x1="188" y1="8" x2="188" y2="252" stroke="#d4c5a9" strokeWidth="2.5" />
+            {/* === 주도로: 학동로 (수평) === */}
+            <line x1="8" y1="158" x2="342" y2="158" stroke="#d4c5a9" strokeWidth="2.5" />
+
+            {/* === 도로명 라벨 === */}
+            <text x="196" y="28" fontSize="8" fill="#a08d6e">선릉로</text>
+            <text x="295" y="151" fontSize="8" fill="#a08d6e">학동로</text>
+
+            {/* === 더채플앳청담 (메인 장소) === */}
+            <rect x="140" y="96" width="96" height="34" rx="4" fill="#8b7355" />
+            <text
+              x="188"
+              y="117"
+              fontSize="10.5"
+              fill="#fff"
+              textAnchor="middle"
+              fontWeight="500"
+            >
+              더채플앳청담
+            </text>
+
+            {/* === 셔틀 경로 (점선) === */}
+            <polyline
+              points="68,158 140,158 140,113"
+              fill="none"
+              stroke="#a08d6e"
+              strokeWidth="1"
+              strokeDasharray="4 3"
+            />
+            <text x="105" y="150" fontSize="6.5" fill="#a08d6e" textAnchor="middle">
+              셔틀버스
+            </text>
+
+            {/* === ⑦ 강남구청역 3번 출구 === */}
+            <circle cx="48" cy="158" r="10" fill="#fff" stroke="#6B8E23" strokeWidth="1.8" />
+            <text
+              x="48"
+              y="162"
+              fontSize="9.5"
+              fill="#6B8E23"
+              textAnchor="middle"
+              fontWeight="bold"
+            >
+              7
+            </text>
+            <text x="48" y="178" fontSize="7.5" fill="#6b6b6b" textAnchor="middle">
+              강남구청역
+            </text>
+            <text x="48" y="188" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
+              3번 출구
+            </text>
+
+            {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
+            {/* 강남구청 */}
+            <circle cx="82" cy="58" r="2.5" fill="#c9a961" />
+            <text x="90" y="61" fontSize="7.5" fill="#8b8b8b">
+              강남구청
+            </text>
+
+            {/* 학동사거리 */}
+            <text x="206" y="172" fontSize="7" fill="#a08d6e">
+              학동사거리
+            </text>
+
+            {/* CGV 청담씨네시티 */}
+            <circle cx="270" cy="192" r="2.5" fill="#c9a961" />
+            <text x="278" y="195" fontSize="7.5" fill="#8b8b8b">
+              CGV
+            </text>
+
+            {/* LG 베스트샵 */}
+            <circle cx="118" cy="195" r="2.5" fill="#c9a961" />
+            <text x="100" y="210" fontSize="7.5" fill="#8b8b8b">
+              LG베스트샵
+            </text>
+          </svg>
+
+          {/* 안내 문구 */}
+          <div className="mt-4 space-y-0.5 text-center">
+            <p className="text-[10px] text-[#a08d6e]">
+              *강남구청역 3번 출구 앞 셔틀버스를 이용하십시오.
+            </p>
+            <p className="text-[10px] text-[#a08d6e]">
+              *축하 화환은 정중히 사양합니다.
+            </p>
+          </div>
+        </motion.div>
+
         {/* === 네비게이션 버튼 === */}
         <motion.div
           className="grid grid-cols-2 gap-3"
