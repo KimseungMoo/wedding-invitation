@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 /**
  * 약도 컴포넌트
- * 참고 이미지 스타일 — 깔끔한 도로 + 위치 강조 마커
+ * 선릉로 좌측(서쪽) 구역 중심
  */
 export const VenueMap = () => {
   return (
@@ -15,64 +15,58 @@ export const VenueMap = () => {
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
     >
-      <svg viewBox="0 0 300 280" className="w-full" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 280 280" className="w-full" xmlns="http://www.w3.org/2000/svg">
 
         {/* === 도로 === */}
-        {/* 선릉로 (남북) */}
-        <line x1="155" y1="0" x2="155" y2="280" stroke="#c4b9a8" strokeWidth="1.2" />
-        {/* 학동로 (동서) */}
-        <line x1="0" y1="220" x2="300" y2="220" stroke="#c4b9a8" strokeWidth="1.2" />
+        {/* 선릉로 (우측 경계) */}
+        <line x1="250" y1="0" x2="250" y2="280" stroke="#c4b9a8" strokeWidth="1.2" />
+        {/* 학동로 (하단) */}
+        <line x1="0" y1="230" x2="280" y2="230" stroke="#c4b9a8" strokeWidth="1.2" />
 
-        {/* 골목길 좌측 */}
-        <line x1="75" y1="40" x2="75" y2="220" stroke="#d8cfc0" strokeWidth="0.6" />
-        <line x1="0" y1="100" x2="155" y2="100" stroke="#d8cfc0" strokeWidth="0.6" />
-        <line x1="0" y1="165" x2="155" y2="165" stroke="#d8cfc0" strokeWidth="0.6" />
-
-        {/* 골목길 우측 */}
-        <line x1="235" y1="40" x2="235" y2="220" stroke="#d8cfc0" strokeWidth="0.6" />
-        <line x1="155" y1="90" x2="300" y2="90" stroke="#d8cfc0" strokeWidth="0.6" />
-        <line x1="155" y1="155" x2="300" y2="155" stroke="#d8cfc0" strokeWidth="0.6" />
+        {/* 골목길 */}
+        <line x1="130" y1="30" x2="130" y2="230" stroke="#d8cfc0" strokeWidth="0.6" />
+        <line x1="0" y1="95" x2="250" y2="95" stroke="#d8cfc0" strokeWidth="0.6" />
+        <line x1="0" y1="160" x2="250" y2="160" stroke="#d8cfc0" strokeWidth="0.6" />
 
         {/* === 도로명 === */}
-        <text x="162" y="25" fontSize="8" fill="#8a7d6e" fontWeight="400" letterSpacing="0.12em">선릉로</text>
-        <text x="240" y="235" fontSize="8" fill="#8a7d6e" fontWeight="400" letterSpacing="0.12em">학동로</text>
+        <text x="256" y="28" fontSize="8" fill="#8a7d6e" fontWeight="400" letterSpacing="0.12em">선릉로</text>
+        <text x="15" y="244" fontSize="8" fill="#8a7d6e" fontWeight="400" letterSpacing="0.12em">학동로</text>
 
-        {/* === 더채플앳청담 (예식장 강조) === */}
-        <rect x="82" y="60" width="68" height="30" fill="#6b5e50" rx="3" />
-        <text x="116" y="78" fontSize="9.5" fill="#f5f0e8" textAnchor="middle" fontWeight="500">더채플앳청담</text>
+        {/* === 더채플앳청담 === */}
+        <rect x="145" y="42" width="68" height="30" fill="#6b5e50" rx="3" />
+        <text x="179" y="60" fontSize="9.5" fill="#f5f0e8" textAnchor="middle" fontWeight="500">더채플앳청담</text>
 
-        {/* 위치 강조 마커 (참고이미지 스타일 ⊙) */}
-        <circle cx="116" cy="108" r="7" fill="none" stroke="#c9a961" strokeWidth="1.2" />
-        <circle cx="116" cy="108" r="2.5" fill="#c9a961" />
+        {/* 뱃지 → 마커 점선 연결 */}
+        <line x1="179" y1="72" x2="179" y2="100" stroke="#c9a961" strokeWidth="0.8" strokeDasharray="2 2" />
 
-        {/* === 강남구청역 3번 출구 (참고이미지 스타일) === */}
+        {/* 위치 강조 마커 ⊙ */}
+        <circle cx="179" cy="112" r="7" fill="none" stroke="#c9a961" strokeWidth="1.2" />
+        <circle cx="179" cy="112" r="2.5" fill="#c9a961" />
+
+        {/* === 강남구청역 3번 출구 === */}
+        <circle cx="250" cy="230" r="3" fill="#6b5e50" />
+
         <g>
-          <circle cx="130" cy="200" r="7" fill="#6b5e50" />
-          <text x="130" y="203.5" fontSize="8" fill="white" textAnchor="middle" fontWeight="700">3</text>
-          <text x="105" y="196" fontSize="8" fill="#4a3f35" textAnchor="end" fontWeight="500">강남구청역</text>
-          <text x="105" y="207" fontSize="7" fill="#8a7d6e" textAnchor="end" fontWeight="300">3번 출구</text>
+          <circle cx="230" cy="210" r="7" fill="#6b5e50" />
+          <text x="230" y="213.5" fontSize="8" fill="white" textAnchor="middle" fontWeight="700">3</text>
+          <text x="218" y="206" fontSize="8" fill="#4a3f35" textAnchor="end" fontWeight="500">강남구청역</text>
+          <text x="218" y="217" fontSize="7" fill="#8a7d6e" textAnchor="end" fontWeight="300">3번 출구</text>
         </g>
 
-        {/* 역 교차점 */}
-        <circle cx="155" cy="220" r="3" fill="#6b5e50" />
-        <text x="160" y="248" fontSize="7" fill="#8a7d6e" fontWeight="300">7호선 · 수인분당선</text>
+        <text x="256" y="248" fontSize="7" fill="#8a7d6e" fontWeight="300">7호선 · 수인분당선</text>
 
-        {/* === 주변 건물 === */}
-        {/* 소방서 (더채플 좌측 하단) */}
-        <circle cx="90" cy="130" r="1.5" fill="#a0937f" />
-        <text x="98" y="133" fontSize="7.5" fill="#6b5e50" fontWeight="400">소방서</text>
+        {/* === 주변 건물 (선릉로 서쪽 구역) === */}
+        {/* 소방서 */}
+        <circle cx="170" cy="140" r="1.5" fill="#a0937f" />
+        <text x="178" y="143" fontSize="7.5" fill="#6b5e50" fontWeight="400">소방서</text>
 
-        {/* 영동고등학교 (선릉로 동쪽, 더채플 맞은편) */}
-        <circle cx="200" cy="68" r="1.5" fill="#a0937f" />
-        <text x="210" y="71" fontSize="7.5" fill="#6b5e50" fontWeight="400">영동고등학교</text>
+        {/* 호림아트센터 */}
+        <circle cx="80" cy="130" r="1.5" fill="#a0937f" />
+        <text x="80" y="123" fontSize="7.5" fill="#6b5e50" textAnchor="middle" fontWeight="400">호림아트센터</text>
 
-        {/* 호림아트센터 (동쪽 중간) */}
-        <circle cx="200" cy="135" r="1.5" fill="#a0937f" />
-        <text x="210" y="138" fontSize="7.5" fill="#6b5e50" fontWeight="400">호림아트센터</text>
-
-        {/* 강남구청 (학동로 동쪽) */}
-        <circle cx="200" cy="205" r="1.5" fill="#a0937f" />
-        <text x="210" y="208" fontSize="7.5" fill="#6b5e50" fontWeight="400">강남구청</text>
+        {/* 영동고등학교 */}
+        <circle cx="200" cy="180" r="1.5" fill="#a0937f" />
+        <text x="208" y="183" fontSize="7.5" fill="#6b5e50" fontWeight="400">영동고등학교</text>
       </svg>
     </motion.div>
   );
