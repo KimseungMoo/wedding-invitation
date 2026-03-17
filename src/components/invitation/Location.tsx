@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useCallback } from "react";
-import { VenueMap } from "./VenueMap";
+
 
 interface LocationProps {
   venue?: string;
@@ -55,17 +55,6 @@ export const Location = ({
             <div className="h-1 w-1 rotate-45 border border-[#c9a961]/50" />
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#d4c5a9]/50" />
           </div>
-        </motion.div>
-
-        {/* === 지도 === */}
-        <motion.div
-          className="mb-8 overflow-hidden rounded-lg border border-[#e8e2d9]"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <VenueMap />
         </motion.div>
 
         {/* === 장소 정보 === */}
