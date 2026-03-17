@@ -28,12 +28,12 @@ export default function InvitationPage() {
       />
 
       {/* 일시/장소 */}
-      <WeddingDate
+      {/* <WeddingDate
         date="2027년 2월 21일"
         time="일요일 오전 11시 30분"
-        venue="채플홀"
+        venue="채플홀(6층)"
         address="서울특별시 강남구 선릉로 757"
-      />
+      /> */}
 
       {/* 갤러리 */}
       <Gallery />
@@ -41,7 +41,7 @@ export default function InvitationPage() {
       {/* 오시는 길 */}
       <Location
         venue="더채플앳청담"
-        address="서울특별시 강남구 선릉로 757"
+        address="서울특별시 강남구 선릉로 757, 채플홀(6층)"
         tel="02-421-1121"
         parking="1시간 30분 무료"
       />
