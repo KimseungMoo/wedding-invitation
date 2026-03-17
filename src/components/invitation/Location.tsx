@@ -57,7 +57,7 @@ export const Location = ({
           </div>
         </motion.div>
 
-        {/* === 카카오맵 === */}
+        {/* === 지도 === */}
         <motion.div
           className="mb-8 overflow-hidden rounded-lg border border-[#e8e2d9]"
           initial={{ opacity: 0, y: 20 }}
@@ -65,7 +65,7 @@ export const Location = ({
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <MapEmbed address={address} venue={venue} />
+          <MapEmbed venue={venue} />
         </motion.div>
 
         {/* === 장소 정보 === */}

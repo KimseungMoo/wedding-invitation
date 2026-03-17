@@ -40,7 +40,7 @@ export default function InvitationPage() {
 
       {/* 오시는 길 */}
       <Location
-        venue="채플홀"
+        venue="더채플앳청담"
         address="서울특별시 강남구 선릉로 757"
         tel="02-421-1121"
         parking="1시간 30분 무료"
