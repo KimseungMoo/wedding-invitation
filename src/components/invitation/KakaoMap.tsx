@@ -10,8 +10,8 @@ interface MapEmbedProps {
  * Google Maps embed (API 키 불필요, iframe 안정적 렌더링)
  */
 export const MapEmbed = ({ address, venue }: MapEmbedProps) => {
-  const query = encodeURIComponent(`${address} ${venue}`);
-  const src = `https://maps.google.com/maps?q=${query}&t=&z=16&ie=UTF8&iwloc=B&output=embed`;
+  const query = encodeURIComponent(`${venue} ${address}`);
+  const src = `https://www.google.com/maps?q=${query}&z=16&output=embed`;
 
   return (
     <iframe
