@@ -1,15 +1,19 @@
 interface MapEmbedProps {
   /** 장소 이름 */
   venue: string;
+  /** 위도 */
+  lat: number;
+  /** 경도 */
+  lng: number;
 }
 
 /**
  * 지도 임베드 컴포넌트
- * Google Maps embed (API 키 불필요, iframe 안정적 렌더링)
+ * 카카오맵 link API로 정확한 위치에 마커 표시
  */
-export const MapEmbed = ({ venue }: MapEmbedProps) => {
-  const query = encodeURIComponent(venue);
-  const src = `https://www.google.com/maps?q=${query}&z=16&output=embed`;
+export const MapEmbed = ({ venue, lat, lng }: MapEmbedProps) => {
+  const encodedVenue = encodeURIComponent(venue);
+  const src = `https://map.kakao.com/link/map/${encodedVenue},${lat},${lng}`;
 
   return (
     <iframe
@@ -17,7 +21,6 @@ export const MapEmbed = ({ venue }: MapEmbedProps) => {
       className="aspect-video w-full rounded-lg"
       allowFullScreen
       loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
       title={`${venue} 지도`}
     />
   );
