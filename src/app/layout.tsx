@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   title: "우리, 결혼합니다",
   description: "김승무 ❤︎ 성은지 결혼식 초대장",
   icons: {
-    icon: "/wedding-invitation.png",
-    apple: "/wedding-invitation.png",
+    icon: "/main.jpeg",
+    apple: "/main.jpeg",
   },
   openGraph: {
     title: "우리, 결혼합니다",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/wedding-invitation.png",
+        url: "/main.jpeg",
         width: 512,
         height: 512,
       },
