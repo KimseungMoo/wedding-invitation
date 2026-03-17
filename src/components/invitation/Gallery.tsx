@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 interface GalleryProps {
   images?: string[];
@@ -25,6 +25,38 @@ export const Gallery = ({ images }: GalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // === 자동 넘김 (4초 간격) ===
+  const startAutoPlay = useCallback(() => {
+    autoPlayRef.current = setInterval(() => {
+      setCurrentIndex((prev) =>
+        prev === placeholderImages.length - 1 ? 0 : prev + 1
+      );
+    }, 4000);
+  }, [placeholderImages.length]);
+
+  const stopAutoPlay = useCallback(() => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isModalOpen) startAutoPlay();
+    return () => stopAutoPlay();
+  }, [isModalOpen, startAutoPlay, stopAutoPlay]);
+
+  /** 사용자 조작 시 자동 넘김 리셋 */
+  const handleUserInteraction = useCallback(
+    (action: () => void) => {
+      stopAutoPlay();
+      action();
+      startAutoPlay();
+    },
+    [stopAutoPlay, startAutoPlay]
+  );
 
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) =>
@@ -107,7 +139,7 @@ export const Gallery = ({ images }: GalleryProps) => {
 
           {/* 좌우 버튼 */}
           <button
-            onClick={handlePrev}
+            onClick={() => handleUserInteraction(handlePrev)}
             className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4c5a9]/30 bg-white/90 shadow-sm transition-all hover:bg-white"
             aria-label="이전 사진"
           >
@@ -116,7 +148,7 @@ export const Gallery = ({ images }: GalleryProps) => {
             </svg>
           </button>
           <button
-            onClick={handleNext}
+            onClick={() => handleUserInteraction(handleNext)}
             className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4c5a9]/30 bg-white/90 shadow-sm transition-all hover:bg-white"
             aria-label="다음 사진"
           >
@@ -131,7 +163,7 @@ export const Gallery = ({ images }: GalleryProps) => {
           {placeholderImages.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => handleUserInteraction(() => setCurrentIndex(index))}
               className={`h-1.5 rounded-full transition-all ${
                 index === currentIndex
                   ? "w-5 bg-[#c9a961]"
