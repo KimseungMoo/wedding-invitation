@@ -1,21 +1,17 @@
-"use client";
-
-interface KakaoMapProps {
+interface MapEmbedProps {
+  /** 주소 */
+  address: string;
   /** 장소 이름 */
   venue: string;
-  /** 위도 */
-  lat: number;
-  /** 경도 */
-  lng: number;
 }
 
 /**
- * 카카오맵 iframe 임베드 컴포넌트
- * API 키 없이 카카오맵을 표시
+ * 지도 임베드 컴포넌트
+ * Google Maps embed (API 키 불필요, iframe 안정적 렌더링)
  */
-export const KakaoMap = ({ venue, lat, lng }: KakaoMapProps) => {
-  const encodedVenue = encodeURIComponent(venue);
-  const src = `https://map.kakao.com/link/map/${encodedVenue},${lat},${lng}`;
+export const MapEmbed = ({ address, venue }: MapEmbedProps) => {
+  const query = encodeURIComponent(`${address} ${venue}`);
+  const src = `https://maps.google.com/maps?q=${query}&t=&z=16&ie=UTF8&iwloc=B&output=embed`;
 
   return (
     <iframe
@@ -23,6 +19,7 @@ export const KakaoMap = ({ venue, lat, lng }: KakaoMapProps) => {
       className="aspect-video w-full rounded-lg"
       allowFullScreen
       loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
       title={`${venue} 지도`}
     />
   );

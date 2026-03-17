@@ -2,17 +2,13 @@
 
 import { motion } from "framer-motion";
 import { useCallback } from "react";
-import { KakaoMap } from "./KakaoMap";
+import { MapEmbed } from "./KakaoMap";
 
 interface LocationProps {
   venue?: string;
   address?: string;
-  lat?: number;
-  lng?: number;
   tel?: string;
   parking?: string;
-  kakaoMapUrl?: string;
-  naverMapUrl?: string;
   tMapUrl?: string;
 }
 
@@ -23,13 +19,12 @@ interface LocationProps {
 export const Location = ({
   venue = "채플홀",
   address = "서울특별시 강남구 선릉로 757",
-  lat = 37.5175,
-  lng = 127.0417,
   tel = "02-421-1121",
   parking = "1시간 30분 무료",
-  kakaoMapUrl = "https://map.kakao.com",
-  naverMapUrl = "https://map.naver.com"
 }: LocationProps) => {
+  const encodedAddress = encodeURIComponent(address);
+  const kakaoMapUrl = `https://map.kakao.com/link/search/${encodedAddress}`;
+  const naverMapUrl = `https://map.naver.com/v5/search/${encodedAddress}`;
   const handleCopyAddress = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(address);
@@ -70,7 +65,7 @@ export const Location = ({
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <KakaoMap venue={venue} lat={lat} lng={lng} />
+          <MapEmbed address={address} venue={venue} />
         </motion.div>
 
         {/* === 장소 정보 === */}

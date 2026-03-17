@@ -42,8 +42,6 @@ export default function InvitationPage() {
       <Location
         venue="채플홀"
         address="서울특별시 강남구 선릉로 757"
-        lat={37.5175}
-        lng={127.0417}
         tel="02-421-1121"
         parking="1시간 30분 무료"
       />
