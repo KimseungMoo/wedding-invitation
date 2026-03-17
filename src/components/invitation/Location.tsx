@@ -188,8 +188,8 @@ export const Location = ({
               <span className="text-sm font-light text-[#4a4a4a]">버스</span>
             </div>
             <p className="pl-6 text-sm text-[#8b8b8b]">
-              간선: <br />
-              지선: 
+              간선: 301, 351, 472<br />
+              지선: 4212, 4412
             </p>
           </div>
         </motion.div>
