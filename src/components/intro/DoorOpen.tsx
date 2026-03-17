@@ -77,10 +77,10 @@ export const DoorOpen = () => {
           <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#c9a961]/50" />
         </motion.div>
         <h1 className="mb-2 text-xl font-light tracking-wide text-[#5a5a5a]">
-          새로운 시작
+          사랑과 용기를 담아 초대합니다
         </h1>
         <p className="text-sm tracking-wider text-[#a0a0a0]">
-          문을 터치하세요
+          문을 클릭해 열어주세요
         </p>
       </motion.div>
 
