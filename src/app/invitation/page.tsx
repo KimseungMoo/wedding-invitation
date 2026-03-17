@@ -50,7 +50,7 @@ export default function InvitationPage() {
       <Account />
 
       {/* 푸터 */}
-      <footer className="bg-[#faf9f6] px-6 pb-safe py-16">
+      <footer className="bg-[#faf9f6] px-6 pb-safe pt-16 pb-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
