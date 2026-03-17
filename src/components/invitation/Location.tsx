@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useCallback } from "react";
-import { MapEmbed } from "./KakaoMap";
+import { VenueMap } from "./VenueMap";
 
 interface LocationProps {
   venue?: string;
@@ -65,7 +65,7 @@ export const Location = ({
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <MapEmbed venue={venue} lat={37.5222098} lng={127.038892} />
+          <VenueMap />
         </motion.div>
 
         {/* === 장소 정보 === */}
