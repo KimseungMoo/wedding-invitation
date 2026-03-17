@@ -46,7 +46,7 @@ export const VenueMap = () => {
           strokeWidth="0.8"
           strokeDasharray="3 2"
         />
-        <text x="118" y="117" fontSize="6.5" fill="#b08d2e" textAnchor="middle" fontWeight="400">도보 2분</text>
+        <text x="118" y="117" fontSize="6.5" fill="#b08d2e" textAnchor="middle" fontWeight="400">셔틀버스</text>
 
         {/* === 더채플앳청담 === */}
         <rect x="140" y="108" width="72" height="34" fill="#6b5e50" rx="4" />
