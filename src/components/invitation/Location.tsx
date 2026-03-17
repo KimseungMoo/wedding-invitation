@@ -7,6 +7,7 @@ import { useCallback } from "react";
 interface LocationProps {
   venue?: string;
   address?: string;
+  copyAddress?: string;
   tel?: string;
   parking?: string;
   tMapUrl?: string;
@@ -19,6 +20,7 @@ interface LocationProps {
 export const Location = ({
   venue = "채플홀",
   address = "서울특별시 강남구 선릉로 757, 채플홀(6층)",
+  copyAddress = "서울특별시 강남구 선릉로 757",
   tel = "02-421-1121",
   parking = "1시간 30분 무료",
 }: LocationProps) => {
@@ -27,12 +29,12 @@ export const Location = ({
   const naverMapUrl = `https://map.naver.com/v5/search/${encodedAddress}`;
   const handleCopyAddress = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(address);
+      await navigator.clipboard.writeText(copyAddress);
       alert("주소가 복사되었습니다.");
     } catch {
       alert("주소 복사에 실패했습니다.");
     }
-  }, [address]);
+  }, [copyAddress]);
 
   const handleCall = useCallback(() => {
     window.location.href = `tel:${tel.replace(/-/g, "")}`;
@@ -138,6 +140,10 @@ export const Location = ({
             <text x="195" y="304" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
               3번 출구
             </text>
+
+            {/* 셔틀버스 (3번 출구 옆) */}
+            <circle cx="230" cy="258" r="2.5" fill="#c9a961" />
+            <text x="238" y="261" fontSize="7.5" fill="#8b8b8b">셔틀버스</text>
 
             {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
             {/* 도산공원 (좌상단) */}
@@ -281,8 +287,8 @@ export const Location = ({
               <span className="text-sm font-light text-[#4a4a4a]">버스</span>
             </div>
             <p className="pl-6 text-sm text-[#8b8b8b]">
-              간선: 301, 351, 472<br />
-              지선: 4212, 4412
+              간선: 301, 342, 472<br />
+              지선: 3011, 4212, 4312
             </p>
           </div>
         </motion.div>
