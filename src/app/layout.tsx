@@ -12,6 +12,7 @@ const notoSerifKR = Noto_Serif_KR({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://seungmoo-eunji-wedding-invitation.vercel.app"),
   title: "우리, 결혼합니다",
   description: "김승무 ❤︎ 성은지 결혼식 초대장",
   icons: {
@@ -22,6 +23,13 @@ export const metadata: Metadata = {
     title: "우리, 결혼합니다",
     description: "김승무 ❤︎ 성은지 결혼식 초대장",
     type: "website",
+    images: [
+      {
+        url: "/wedding-invitation.png",
+        width: 512,
+        height: 512,
+      },
+    ],
   },
 };
 
