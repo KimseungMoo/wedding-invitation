@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useCallback } from "react";
+import { KakaoMap } from "./KakaoMap";
 
 interface LocationProps {
   venue?: string;
@@ -57,21 +58,15 @@ export const Location = ({
           </div>
         </motion.div>
 
-        {/* === 지도 플레이스홀더 === */}
+        {/* === 카카오맵 === */}
         <motion.div
-          className="mb-8 overflow-hidden rounded-lg border border-[#e8e2d9] bg-gradient-to-br from-[#f5f0e8] to-[#ebe4d8]"
+          className="mb-8 overflow-hidden rounded-lg border border-[#e8e2d9]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="flex aspect-video flex-col items-center justify-center">
-            <svg className="mb-3 h-10 w-10 text-[#c9a961]/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <p className="text-xs tracking-wider text-[#a0a0a0]">MAP</p>
-          </div>
+          <KakaoMap address={address} venue={venue} />
         </motion.div>
 
         {/* === 장소 정보 === */}
