@@ -93,16 +93,15 @@ export const Location = ({
 
             {/* === 예식장 카드 (마커에서 떨어진 위치, 점선 연결) === */}
             <rect x="60" y="128" width="100" height="44" rx="4" fill="#8b7355" />
-            <text
-              x="110"
-              y="146"
-              fontSize="7.5"
-              fill="#fff"
-              textAnchor="middle"
-              opacity="0.85"
-            >
-              The Chapel
-            </text>
+            <image
+              href="/더채플로고.jpg"
+              x="80"
+              y="130"
+              width="60"
+              height="20"
+              preserveAspectRatio="xMidYMid meet"
+              style={{ mixBlendMode: "screen" }}
+            />
             <text
               x="110"
               y="162"
