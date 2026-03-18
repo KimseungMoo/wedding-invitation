@@ -157,9 +157,9 @@ export const Location = ({
             {/* 학동사거리 (도산대로 × 선릉로 교차점) */}
             <text x="205" y="95" fontSize="7" fill="#a08d6e">학동사거리</text>
 
-            {/* 삼성스토어 (학동사거리 도로변, 예식장 옆) */}
-            <circle cx="160" cy="90" r="2.5" fill="#c9a961" />
-            <text x="168" y="93" fontSize="7.5" fill="#8b8b8b">삼성스토어</text>
+            {/* 삼성스토어 (학동사거리 도로변, 선릉로 바로 왼쪽) */}
+            <circle cx="182" cy="92" r="2.5" fill="#c9a961" />
+            <text x="178" y="95" fontSize="7.5" fill="#8b8b8b" textAnchor="end">삼성스토어</text>
 
             {/* 영동고등학교 (예식장과 강남구청역 사이, 선릉로 오른쪽) */}
             <circle cx="220" cy="185" r="2.5" fill="#c9a961" />
