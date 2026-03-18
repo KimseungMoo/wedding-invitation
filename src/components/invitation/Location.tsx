@@ -78,8 +78,8 @@ export const Location = ({
             <line x1="285" y1="5" x2="285" y2="300" stroke="#ebe4d8" strokeWidth="1.2" />
             <line x1="5" y1="155" x2="335" y2="155" stroke="#ebe4d8" strokeWidth="1.2" />
 
-            {/* === 주도로: 선릉로 (수직, 중앙~우측) === */}
-            <line x1="195" y1="5" x2="195" y2="300" stroke="#d4c5a9" strokeWidth="2.5" />
+            {/* === 주도로: 선릉로 (수직, 역 위에서 끊김) === */}
+            <line x1="195" y1="5" x2="195" y2="258" stroke="#d4c5a9" strokeWidth="2.5" />
             {/* === 주도로: 도산대로 (수평, 상단) === */}
             <line x1="5" y1="80" x2="335" y2="80" stroke="#d4c5a9" strokeWidth="2.5" />
 
@@ -122,7 +122,7 @@ export const Location = ({
               strokeDasharray="3 2"
             />
 
-            {/* === ⑦ 강남구청역 3번 출구 (하단 6시 방향) === */}
+            {/* === ⑦ 강남구청역 (하단 6시 방향) === */}
             <circle cx="195" cy="272" r="11" fill="#fff" stroke="#6B8E23" strokeWidth="1.8" />
             <text
               x="195"
@@ -134,18 +134,17 @@ export const Location = ({
             >
               7
             </text>
-            <text x="195" y="293" fontSize="8" fill="#6b6b6b" textAnchor="middle">
+            <text x="195" y="292" fontSize="8" fill="#6b6b6b" textAnchor="middle">
               강남구청역
             </text>
-            {/* 3번 출구 (왼쪽/예식장 방향 표시) */}
-            <text x="178" y="272" fontSize="6.5" fill="#8b8b8b" textAnchor="end">
-              3번 출구
+            <text x="195" y="303" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
+              (3번 출구)
             </text>
-            <text x="170" y="272" fontSize="7" fill="#a08d6e">←</text>
 
-            {/* 셔틀버스 (3번 출구 왼쪽) */}
-            <circle cx="148" cy="265" r="2.5" fill="#c9a961" />
-            <text x="126" y="277" fontSize="7.5" fill="#8b8b8b">셔틀버스</text>
+            {/* 셔틀버스 (3번 출구 왼쪽, 예식장 방향) */}
+            <text x="155" y="270" fontSize="7" fill="#a08d6e">← 3번 출구</text>
+            <circle cx="148" cy="280" r="2.5" fill="#c9a961" />
+            <text x="130" y="292" fontSize="7.5" fill="#8b8b8b">셔틀버스</text>
 
             {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
             {/* 도산공원 (좌상단) */}
