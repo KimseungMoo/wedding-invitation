@@ -88,14 +88,14 @@ export const Location = ({
             <text x="260" y="73" fontSize="8" fill="#a08d6e">도산대로</text>
 
             {/* === 예식장 정확한 위치 (이중원 마커) === */}
-            <circle cx="130" cy="178" r="6" fill="none" stroke="#8b7355" strokeWidth="1.5" />
-            <circle cx="130" cy="178" r="2.5" fill="#8b7355" />
+            <circle cx="160" cy="105" r="6" fill="none" stroke="#8b7355" strokeWidth="1.5" />
+            <circle cx="160" cy="105" r="2.5" fill="#8b7355" />
 
             {/* === 예식장 카드 (마커에서 떨어진 위치, 점선 연결) === */}
-            <rect x="40" y="120" width="100" height="44" rx="4" fill="#8b7355" />
+            <rect x="50" y="115" width="100" height="44" rx="4" fill="#8b7355" />
             <text
-              x="90"
-              y="138"
+              x="100"
+              y="133"
               fontSize="7.5"
               fill="#fff"
               textAnchor="middle"
@@ -104,8 +104,8 @@ export const Location = ({
               The Chapel
             </text>
             <text
-              x="90"
-              y="154"
+              x="100"
+              y="149"
               fontSize="10.5"
               fill="#fff"
               textAnchor="middle"
@@ -115,7 +115,7 @@ export const Location = ({
             </text>
             {/* 카드 → 이중원 마커 ㄴ자 점선 연결 */}
             <polyline
-              points="105,164 105,178 124,178"
+              points="120,115 120,105 154,105"
               fill="none"
               stroke="#8b7355"
               strokeWidth="0.8"
@@ -157,9 +157,9 @@ export const Location = ({
             {/* 학동사거리 (도산대로 × 선릉로 교차점) */}
             <text x="205" y="95" fontSize="7" fill="#a08d6e">학동사거리</text>
 
-            {/* 삼성스토어 (학동사거리 아래, 선릉로 왼쪽, 예식장 위) */}
-            <circle cx="155" cy="102" r="2.5" fill="#c9a961" />
-            <text x="118" y="105" fontSize="7.5" fill="#8b8b8b">삼성스토어</text>
+            {/* 삼성스토어 (학동사거리 도로변, 예식장 옆) */}
+            <circle cx="160" cy="90" r="2.5" fill="#c9a961" />
+            <text x="168" y="93" fontSize="7.5" fill="#8b8b8b">삼성스토어</text>
 
             {/* 영동고등학교 (예식장과 강남구청역 사이, 선릉로 오른쪽) */}
             <circle cx="220" cy="185" r="2.5" fill="#c9a961" />
