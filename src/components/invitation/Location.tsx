@@ -88,14 +88,14 @@ export const Location = ({
             <text x="260" y="73" fontSize="8" fill="#a08d6e">도산대로</text>
 
             {/* === 예식장 정확한 위치 (이중원 마커) === */}
-            <circle cx="160" cy="105" r="6" fill="none" stroke="#8b7355" strokeWidth="1.5" />
-            <circle cx="160" cy="105" r="2.5" fill="#8b7355" />
+            <circle cx="178" cy="118" r="6" fill="none" stroke="#8b7355" strokeWidth="1.5" />
+            <circle cx="178" cy="118" r="2.5" fill="#8b7355" />
 
             {/* === 예식장 카드 (마커에서 떨어진 위치, 점선 연결) === */}
-            <rect x="50" y="115" width="100" height="44" rx="4" fill="#8b7355" />
+            <rect x="60" y="128" width="100" height="44" rx="4" fill="#8b7355" />
             <text
-              x="100"
-              y="133"
+              x="110"
+              y="146"
               fontSize="7.5"
               fill="#fff"
               textAnchor="middle"
@@ -104,8 +104,8 @@ export const Location = ({
               The Chapel
             </text>
             <text
-              x="100"
-              y="149"
+              x="110"
+              y="162"
               fontSize="10.5"
               fill="#fff"
               textAnchor="middle"
@@ -115,7 +115,7 @@ export const Location = ({
             </text>
             {/* 카드 → 이중원 마커 ㄴ자 점선 연결 */}
             <polyline
-              points="120,115 120,105 154,105"
+              points="130,128 130,118 172,118"
               fill="none"
               stroke="#8b7355"
               strokeWidth="0.8"
