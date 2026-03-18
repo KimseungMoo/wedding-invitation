@@ -92,29 +92,29 @@ export const Location = ({
             <circle cx="178" cy="118" r="2.5" fill="#8b7355" />
 
             {/* === 예식장 카드 (마커에서 떨어진 위치, 점선 연결) === */}
-            <rect x="60" y="118" width="100" height="54" rx="4" fill="#4a3728" />
+            <rect x="85" y="125" width="80" height="38" rx="3" fill="#4a3728" />
             <image
               href="/더채플로고-dark.png"
-              x="78"
-              y="119"
-              width="44"
-              height="34"
+              x="97"
+              y="125"
+              width="30"
+              height="24"
               preserveAspectRatio="xMidYMid meet"
             />
             <text
-              x="110"
-              y="166"
-              fontSize="7"
+              x="125"
+              y="158"
+              fontSize="6.5"
               fill="#fff"
               textAnchor="middle"
-              opacity="0.8"
-              letterSpacing="1"
+              opacity="0.85"
+              letterSpacing="0.5"
             >
               더채플앳청담
             </text>
             {/* 카드 → 이중원 마커 ㄴ자 점선 연결 */}
             <polyline
-              points="130,128 130,118 172,118"
+              points="165,140 178,140 178,124"
               fill="none"
               stroke="#8b7355"
               strokeWidth="0.8"
