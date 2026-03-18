@@ -92,19 +92,19 @@ export const Location = ({
             <circle cx="178" cy="118" r="2.5" fill="#8b7355" />
 
             {/* === 예식장 카드 (마커에서 떨어진 위치, 점선 연결) === */}
-            <rect x="90" y="92" width="76" height="68" rx="3" fill="#4a3728" />
+            <rect x="100" y="96" width="62" height="48" rx="3" fill="#4a3728" />
             <image
               href="/더채플로고-dark.png"
-              x="90"
-              y="92"
-              width="76"
-              height="54"
+              x="100"
+              y="96"
+              width="62"
+              height="36"
               preserveAspectRatio="xMidYMid meet"
             />
             <text
-              x="128"
-              y="155"
-              fontSize="7.5"
+              x="131"
+              y="140"
+              fontSize="6.5"
               fill="#fff"
               textAnchor="middle"
               opacity="0.9"
