@@ -142,9 +142,9 @@ export const Location = ({
             </text>
 
             {/* 셔틀버스 (3번 출구 왼쪽, 예식장 방향) */}
-            <text x="148" y="262" fontSize="7" fill="#a08d6e" textAnchor="end">3번 출구 ←</text>
-            <circle cx="130" cy="275" r="2.5" fill="#c9a961" />
-            <text x="112" y="287" fontSize="7.5" fill="#8b8b8b">셔틀버스</text>
+            {/* <text x="155" y="270" fontSize="7" fill="#a08d6e">← 3번 출구</text> */}
+            <circle cx="148" cy="280" r="2.5" fill="#c9a961" />
+            <text x="130" y="292" fontSize="7.5" fill="#8b8b8b">셔틀버스</text>
 
             {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
             {/* 도산공원 (좌상단) */}
