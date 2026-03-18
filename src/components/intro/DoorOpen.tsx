@@ -81,7 +81,7 @@ export const DoorOpen = () => {
           사랑과 용기를 담아 초대합니다
         </h1>
         <p className="text-sm tracking-wider text-[#a0a0a0]">
-          문을 클릭해 열어주세요
+          문을 터치하세요
         </p>
       </motion.div>
 
