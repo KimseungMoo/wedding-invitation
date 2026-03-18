@@ -137,13 +137,15 @@ export const Location = ({
             <text x="195" y="293" fontSize="8" fill="#6b6b6b" textAnchor="middle">
               강남구청역
             </text>
-            <text x="195" y="304" fontSize="6.5" fill="#8b8b8b" textAnchor="middle">
+            {/* 3번 출구 (왼쪽/예식장 방향 표시) */}
+            <text x="178" y="272" fontSize="6.5" fill="#8b8b8b" textAnchor="end">
               3번 출구
             </text>
+            <text x="170" y="272" fontSize="7" fill="#a08d6e">←</text>
 
             {/* 셔틀버스 (3번 출구 왼쪽) */}
-            <circle cx="160" cy="265" r="2.5" fill="#c9a961" />
-            <text x="138" y="277" fontSize="7.5" fill="#8b8b8b">셔틀버스</text>
+            <circle cx="148" cy="265" r="2.5" fill="#c9a961" />
+            <text x="126" y="277" fontSize="7.5" fill="#8b8b8b">셔틀버스</text>
 
             {/* === 주변 건물 (찾기 쉬운 건물 위주) === */}
             {/* 도산공원 (좌상단) */}
