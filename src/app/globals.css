@@ -167,6 +167,18 @@ body {
 }
 
 /* /us 에디터 얼굴 — 하객장 토큰과 분리 */
+html:has(.us-root[data-theme="dark"]),
+html:has(.us-root[data-theme="dark"]) body {
+  background: #0e1421;
+  color-scheme: dark;
+}
+
+html:has(.us-root[data-theme="light"]),
+html:has(.us-root[data-theme="light"]) body {
+  background: #f3eee6;
+  color-scheme: light;
+}
+
 .us-root {
   --us-ink: #0e1421;
   --us-ink-2: #161e2f;
@@ -181,6 +193,7 @@ body {
   --us-groom: #82aaff;
   --us-bride: #d9a7a0;
   min-height: 100%;
+  background: #0e1421;
   background: var(--us-ink);
   color: var(--us-paper);
   font-family: var(--font-sans);
@@ -199,6 +212,7 @@ body {
   --us-blush: #9f4d4d;
   --us-groom: #2563eb;
   --us-bride: #9f4d4d;
+  background: #f3eee6;
 }
 
 .us-caret {

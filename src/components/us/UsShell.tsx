@@ -36,10 +36,10 @@ export const UsShell = ({ children }: { children: React.ReactNode }) => {
         <button
           type="button"
           onClick={toggleTheme}
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded border border-[var(--us-line)] font-mono text-xs text-[var(--us-dim)]"
+          className="shrink-0 rounded border border-[var(--us-line)] px-2 py-1 font-mono text-[10px] text-[var(--us-dim)]"
           aria-label={theme === "dark" ? "밝은 화면" : "어두운 화면"}
         >
-          {theme === "dark" ? "☾" : "☀"}
+          {theme === "dark" ? "light" : "dark"}
         </button>
       </header>
       {children}
