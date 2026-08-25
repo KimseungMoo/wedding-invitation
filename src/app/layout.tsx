@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Serif_KR } from "next/font/google";
+import { Geist_Mono, Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
 
 /**
@@ -9,6 +9,11 @@ const notoSerifKR = Noto_Serif_KR({
   variable: "--font-noto-serif-kr",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -48,7 +53,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSerifKR.variable} font-serif antialiased`}>
+      <body
+        className={`${notoSerifKR.variable} ${geistMono.variable} font-serif antialiased`}
+      >
         {children}
       </body>
     </html>
