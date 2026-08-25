@@ -44,9 +44,11 @@ export const wedding = {
   greeting: `사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준\n그 사람이 정녕 고맙다고\n-양귀자 '모순'-`,
   date: {
     iso: "2027-02-21",
+    at: "2027-02-21T11:30:00+09:00",
     label: "2027년 2월 21일",
     weekday: "일요일",
     time: "오전 11시 30분",
+    line: "2027.02.21 SUN AM 11:30",
     full: "2027년 2월 21일 일요일 오전 11시 30분",
   },
   venue: {
@@ -56,6 +58,8 @@ export const wedding = {
     copyAddress: "서울특별시 강남구 선릉로 757",
     tel: "02-421-1121",
     parking: "1시간 30분 무료",
+    subway: "강남구청역 3번 출구 앞 셔틀버스",
+    bus: "간선 301, 342, 472 · 지선 3011, 4212, 4312",
   },
   accounts: {
     groom: [
@@ -72,10 +76,13 @@ export const wedding = {
   us: {
     botName: "약속이",
     todayAlertCount: 1,
-    todayAlertText: "오늘은 알림이 하나예요. 우리, 결혼합니다.",
-    intro: "까먹을까 봐 만나기로 한 날을 봇에 적어 두기 시작했어요.",
+    todayAlertText: "오늘 알림 1. 우리, 결혼합니다.",
+    typeLine: "우리, 결혼합니다.",
+    intro: "까먹을까 봐 봇에 적어 두기 시작했어요.",
     peekLink: "승무가 몰래 적어 둔 이야기",
     backLink: "일반 청첩장으로",
+    tabName: "우리.md",
+    releaseLabel: "WEDDING — RELEASE v1.0.0",
     chats: [
       {
         title: "금요일 저녁",

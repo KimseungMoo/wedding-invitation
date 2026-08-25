@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { wedding, type ChatSpeaker } from "@/wedding.config";
-import { SectionHeader } from "./SectionHeader";
+import { UsPanel } from "./UsPanel";
 
 const speakerName = (from: ChatSpeaker) => {
   if (from === "groom") return wedding.groom.shortName;
@@ -10,61 +9,43 @@ const speakerName = (from: ChatSpeaker) => {
   return wedding.us.botName;
 };
 
-const bubbleClass = (from: ChatSpeaker) => {
-  if (from === "groom") {
-    return "ml-8 border-[#d4c5a9]/30 bg-[#e8f0f8]/70";
-  }
-  if (from === "bride") {
-    return "mr-8 border-[#d4c5a9]/30 bg-[#fdf0f0]/80";
-  }
-  return "mr-6 border-[#e8e2d9] bg-[#faf9f6]";
+const nameClass = (from: ChatSpeaker) => {
+  if (from === "groom") return "text-[var(--us-groom)]";
+  if (from === "bride") return "text-[var(--us-bride)]";
+  return "font-mono text-[var(--us-leaf)]";
 };
 
 export const PromiseChat = () => {
-  const { us } = wedding;
-
   return (
-    <section className="bg-[#f8f5f0] px-6 py-20">
-      <div className="mx-auto max-w-md">
-        <SectionHeader label="DATES" subtitle={us.intro} />
-
-        <div className="space-y-4">
-          {us.chats.map((thread, index) => (
-            <motion.article
-              key={thread.title}
-              className="rounded-lg border border-[#e8e2d9] bg-white p-5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-            >
-              <p className="mb-4 text-center text-xs font-light tracking-wide text-[#8b7355]">
-                {thread.title}
-              </p>
-              <div className="space-y-3">
-                {thread.messages.map((message) => (
-                  <div key={`${thread.title}-${message.text}`}>
-                    <p
-                      className={`mb-1 text-[10px] tracking-wide text-[#a0a0a0] ${
-                        message.from === "bot" ? "font-mono" : "font-light"
-                      }`}
-                    >
-                      {speakerName(message.from)}
-                    </p>
-                    <div
-                      className={`rounded-lg border px-3.5 py-2.5 ${bubbleClass(message.from)}`}
-                    >
-                      <p className="text-sm font-light leading-relaxed text-[#4a4a4a]">
-                        {message.text}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.article>
-          ))}
-        </div>
+    <UsPanel label="BOT" title={wedding.us.botName}>
+      <p className="mb-4 text-[13px] leading-relaxed text-[var(--us-dim)]">
+        {wedding.us.intro}
+      </p>
+      <div className="space-y-4">
+        {wedding.us.chats.map((thread) => (
+          <article
+            key={thread.title}
+            className="rounded border border-[var(--us-line)] bg-[var(--us-ink-3)] p-3"
+          >
+            <p className="mb-2 font-mono text-[10px] text-[var(--us-amber)]">
+              {thread.title}
+            </p>
+            <div className="space-y-2">
+              {thread.messages.map((message) => (
+                <p
+                  key={`${thread.title}-${message.text}`}
+                  className="text-[13px] leading-relaxed text-[var(--us-paper)]"
+                >
+                  <span className={`mr-2 text-[11px] ${nameClass(message.from)}`}>
+                    {speakerName(message.from)}
+                  </span>
+                  {message.text}
+                </p>
+              ))}
+            </div>
+          </article>
+        ))}
       </div>
-    </section>
+    </UsPanel>
   );
 };
