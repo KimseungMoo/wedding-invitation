@@ -1,19 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   MainVisual,
-  WeddingDate,
   Gallery,
   Location,
   Account,
 } from "@/components/invitation";
+import { wedding } from "@/wedding.config";
 
 /**
  * 청첩장 메인 페이지
  * 우아한 화이트 톤 디자인
  */
 export default function InvitationPage() {
+  const { groom, bride, greeting, date, venue, accounts, us } = wedding;
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -22,17 +25,17 @@ export default function InvitationPage() {
     >
       {/* 메인 비주얼 */}
       <MainVisual
-        groomName="김승무"
-        brideName="성은지"
-        greeting={`사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준\n그 사람이 정녕 고맙다고\n-양귀자 '모순'-`}
+        groomName={groom.name}
+        brideName={bride.name}
+        greeting={greeting}
       />
 
       {/* 일시/장소 */}
       {/* <WeddingDate
-        date="2027년 2월 21일"
-        time="일요일 오전 11시 30분"
-        venue="채플홀(6층)"
-        address="서울특별시 강남구 선릉로 757"
+        date={date.label}
+        time={`${date.weekday} ${date.time}`}
+        venue={venue.hall}
+        address={venue.copyAddress}
       /> */}
 
       {/* 갤러리 */}
@@ -40,14 +43,18 @@ export default function InvitationPage() {
 
       {/* 오시는 길 */}
       <Location
-        venue="더채플앳청담"
-        address="서울특별시 강남구 선릉로 757, 채플홀(6층)"
-        tel="02-421-1121"
-        parking="1시간 30분 무료"
+        venue={venue.name}
+        address={venue.address}
+        copyAddress={venue.copyAddress}
+        tel={venue.tel}
+        parking={venue.parking}
       />
 
       {/* 축의금 계좌 */}
-      <Account />
+      <Account
+        groomAccounts={[...accounts.groom]}
+        brideAccounts={[...accounts.bride]}
+      />
 
       {/* 푸터 */}
       <footer className="bg-[#faf9f6] px-6 pb-6 pt-16">
@@ -69,11 +76,18 @@ export default function InvitationPage() {
 
           {/* 이름 */}
           <p className="mb-2 text-base font-light text-[#4a4a4a]">
-            김승무 & 성은지
+            {groom.name} & {bride.name}
           </p>
           <p className="text-sm text-[#8b8b8b]">
-            2027년 2월 21일 일요일 오전 11시 30분
+            {date.full}
           </p>
+
+          <Link
+            href="/us"
+            className="mt-8 inline-block text-[10px] tracking-wider text-[#b0a48c] transition-colors hover:text-[#8b7355]"
+          >
+            {us.peekLink}
+          </Link>
 
           {/* 저작권 */}
           <p className="mt-10 text-[10px] tracking-wider text-[#c9c9c9]">

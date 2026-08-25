@@ -19,6 +19,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-serif: var(--font-noto-serif-kr), "Noto Serif KR", Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-sans: ui-sans-serif, system-ui, "Apple SD Gothic Neo", sans-serif;
 
   /* 커스텀 색상 */
   --color-wedding-pink: var(--wedding-pink);
@@ -161,5 +163,70 @@ body {
   50% {
     opacity: 1;
     transform: scale(1.2);
+  }
+}
+
+/* /us 에디터 얼굴 — 하객장 토큰과 분리 */
+html:has(.us-root[data-theme="dark"]),
+html:has(.us-root[data-theme="dark"]) body {
+  background: #0e1421;
+  color-scheme: dark;
+}
+
+html:has(.us-root[data-theme="light"]),
+html:has(.us-root[data-theme="light"]) body {
+  background: #f3eee6;
+  color-scheme: light;
+}
+
+.us-root {
+  --us-ink: #0e1421;
+  --us-ink-2: #161e2f;
+  --us-ink-3: #1c2537;
+  --us-line: #222c42;
+  --us-paper: #c7d2e4;
+  --us-dim: #7e8ca6;
+  --us-amber: #e8b84b;
+  --us-sky: #82aaff;
+  --us-leaf: #89dda0;
+  --us-blush: #d9a7a0;
+  --us-groom: #82aaff;
+  --us-bride: #d9a7a0;
+  min-height: 100%;
+  background: #0e1421;
+  background: var(--us-ink);
+  color: var(--us-paper);
+  font-family: var(--font-sans);
+}
+
+.us-root[data-theme="light"] {
+  --us-ink: #f3eee6;
+  --us-ink-2: #fffcf7;
+  --us-ink-3: #e8e2d6;
+  --us-line: #d4cdbe;
+  --us-paper: #1d2540;
+  --us-dim: #5a6178;
+  --us-amber: #b45309;
+  --us-sky: #2563eb;
+  --us-leaf: #15803d;
+  --us-blush: #9f4d4d;
+  --us-groom: #2563eb;
+  --us-bride: #9f4d4d;
+  background: #f3eee6;
+}
+
+.us-caret {
+  display: inline-block;
+  width: 7px;
+  height: 0.95em;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: var(--us-sky);
+  animation: us-blink 1.05s steps(1) infinite;
+}
+
+@keyframes us-blink {
+  50% {
+    opacity: 0;
   }
 }
