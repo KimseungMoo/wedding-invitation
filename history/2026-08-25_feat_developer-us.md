@@ -20,3 +20,6 @@
 - 변경 파일 eslint 통과
 - `yarn build` — `/us` 정적 라우트 생성
 - 금지 단어(branch, repository, merge, commit, PR, CI, deploy, git log) 없음
+- 브라우저(390폭): `/invitation` 푸터 링크 → `/us` 전 섹션 → 일반 청첩장으로 복귀. `/opening/door` → `/invitation` 회귀
+- 푸터 링크 대비를 `#b0a48c`로 조금 올림(너무 흐려서 찾기 어려웠음)
+- `UsHero` 원형 사진에 `sizes` 추가(콘솔 경고)

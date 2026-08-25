@@ -84,7 +84,7 @@ export default function InvitationPage() {
 
           <Link
             href="/us"
-            className="mt-8 inline-block text-[10px] tracking-wider text-[#c9c9c9] transition-colors hover:text-[#a08d6e]"
+            className="mt-8 inline-block text-[10px] tracking-wider text-[#b0a48c] transition-colors hover:text-[#8b7355]"
           >
             {us.peekLink}
           </Link>

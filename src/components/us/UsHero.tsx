@@ -49,6 +49,7 @@ export const UsHero = () => {
             alt={`${groom.name}와 ${bride.name} 웨딩 사진`}
             fill
             className="object-cover"
+            sizes="(max-width: 640px) 14rem, 18rem"
             priority
           />
         </div>
