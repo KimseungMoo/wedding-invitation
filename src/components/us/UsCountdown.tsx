@@ -7,35 +7,33 @@ import { UsWidget } from "./UsWidget";
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export const useCountdown = (at: string) => {
-  const [now, setNow] = useState<number | null>(null);
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    setNow(Date.now());
     const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(id);
   }, []);
 
   const target = new Date(at).getTime();
-  const diff = now === null ? 0 : Math.max(0, target - now);
+  const diff = Math.max(0, target - now);
   return {
     days: Math.floor(diff / 86_400_000),
     hours: Math.floor((diff % 86_400_000) / 3_600_000),
     minutes: Math.floor((diff % 3_600_000) / 60_000),
     seconds: Math.floor((diff % 60_000) / 1000),
-    done: now !== null && diff === 0,
-    ready: now !== null,
+    done: diff === 0,
   };
 };
 
 export const DdayWidget = () => {
   const count = useCountdown(wedding.date.at);
-  const label = !count.ready || count.done ? "D-DAY" : `D-${count.days}`;
+  const label = count.done ? "D-DAY" : `D-${count.days}`;
 
   return (
     <UsWidget>
       <p className="us-widget-kicker">결혼식까지</p>
       <p className="us-dday">{label}</p>
-      {count.ready && !count.done ? (
+      {!count.done ? (
         <p className="us-dday-clock">
           {pad(count.hours)}:{pad(count.minutes)}:{pad(count.seconds)}
         </p>
