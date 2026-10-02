@@ -51,38 +51,38 @@ const PixelSprite = ({
 
 // Original 16x16 NES adventurer — red cap / blue shirt. No M, mushroom, or Nintendo marks.
 const GROOM_MAP = [
-  "................",
-  ".....ooooo......",
-  "....oRRRRRo.....",
-  "....oHHHHHo.....",
+  ".....oooooo.....",
+  "....oRRRRRRo....",
+  "...oRRRRRRRRo...",
+  "....oHHHHHHo....",
   "...oHSeSSeHo....",
   "...oSSSSSSSo....",
   "....oSSSSSo.....",
   "...oBBBBBBBo....",
   "..oBBBBBBBBBo...",
-  "...oBBBBBBBo....",
-  "...on.BB.no.....",
-  "....onn.nno.....",
+  ".oSBBBBBBBBoSo..",
+  "..oBBBBBBBBBo...",
+  "...onn...nno....",
+  "....nn...nn.....",
   "....oKK.KKo.....",
   ".....oo.oo......",
-  "................",
   "................",
 ] as const;
 
 // Original 16x16 partner — black bob, purple dress. Same world as the 시안.
 const BRIDE_MAP = [
-  "................",
-  ".....oooooo.....",
-  "....oHHHHHHo....",
-  "...oHHHHHHHHo...",
-  "...oHSeSSeHHo...",
-  "...oHSSSSSHHo...",
-  "....oSSSSSSo....",
-  "...oPPPPPPPPo...",
-  "...oPPPPPPPPo...",
-  "...oPPPPPPPPo...",
-  "...oPPPPPPPPo...",
-  "....oPPPPPPo....",
+  "....oooooooo....",
+  "...oHHHHHHHo....",
+  "..oHHHHHHHHHo...",
+  "..oHHSeSSeHHo...",
+  "..oHHSSSSSHHo...",
+  "...oHSSSSHHo....",
+  "....oSSSSSo.....",
+  "...oPPPPPPPo....",
+  "..oPPPPPPPPPo...",
+  "..oPPPPPPPPPo...",
+  "..oPPPPPPPPPo...",
+  "...oPPPPPPPo....",
   "....oPP.PPo.....",
   "....oKK.KKo.....",
   ".....oo.oo......",
@@ -110,7 +110,7 @@ const BRIDE_PALETTE = {
 };
 
 export const GroomAdventurer = ({
-  scale = 2,
+  scale = 3,
   label,
 }: {
   scale?: number;
@@ -125,7 +125,7 @@ export const GroomAdventurer = ({
 );
 
 export const BrideAdventurer = ({
-  scale = 2,
+  scale = 3,
   label,
 }: {
   scale?: number;
@@ -137,32 +137,6 @@ export const BrideAdventurer = ({
     scale={scale}
     label={label}
   />
-);
-
-export const PixelHeart = ({
-  size = 12,
-  className,
-}: {
-  size?: number;
-  className?: string;
-}) => (
-  <svg
-    className={className}
-    width={size}
-    height={size}
-    viewBox="0 0 7 6"
-    aria-hidden
-    shapeRendering="crispEdges"
-  >
-    <g fill="currentColor">
-      <rect x="1" y="0" width="2" height="1" />
-      <rect x="4" y="0" width="2" height="1" />
-      <rect x="0" y="1" width="7" height="2" />
-      <rect x="1" y="3" width="5" height="1" />
-      <rect x="2" y="4" width="3" height="1" />
-      <rect x="3" y="5" width="1" height="1" />
-    </g>
-  </svg>
 );
 
 export const HollowHeart = ({

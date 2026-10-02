@@ -175,6 +175,10 @@ html:has(.us-root) body {
 
 html:has(.us-root-body),
 html:has(.us-root-body) body {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: #1a1a1c;
   color-scheme: dark;
 }
@@ -254,33 +258,33 @@ html:has(.us-root-body) body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28px;
-  padding: 36px 16px calc(28px + env(safe-area-inset-bottom));
+  gap: 20px;
+  padding: 20px 10px calc(16px + env(safe-area-inset-bottom));
   color: #f6f1ea;
 }
 
 .us-file-banner {
-  width: min(17.25rem, 72%);
-  padding: 14px 10px 12px;
+  width: min(19.5rem, 84%);
+  padding: 18px 12px 16px;
   text-align: center;
 }
 
 .us-file-banner h1 {
   margin: 0;
   color: #f6f1ea;
-  font-size: clamp(10px, 3.2vw, 12px);
+  font-size: clamp(11px, 3.8vw, 14px);
   white-space: nowrap;
 }
 
 .us-file-frame {
-  width: min(21.25rem, 88%);
+  width: min(22.5rem, 92%);
   padding: 16px;
 }
 
 .us-file-inner {
   position: relative;
   display: flex;
-  min-height: 468px;
+  min-height: 520px;
   flex-direction: column;
   padding: 36px 22px 22px;
   background: #000;
@@ -300,7 +304,7 @@ html:has(.us-root-body) body {
 
 .us-file-rule {
   display: block;
-  width: 7.4rem;
+  width: 6.1rem;
   height: 2px;
   margin-top: 8px;
   background: #f6f1ea;
@@ -309,7 +313,7 @@ html:has(.us-root-body) body {
 .us-file-stats {
   margin-top: 28px;
   color: #f6f1ea;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.75;
 }
@@ -439,8 +443,8 @@ html:has(.us-root-body) body {
   height: 100%;
   object-fit: cover;
   object-position: center 32%;
-  filter: blur(28px) saturate(1.08) brightness(0.78);
-  transform: scale(1.16);
+  filter: blur(14px) saturate(1.16) brightness(1.08);
+  transform: scale(1.1);
 }
 
 .us-ios-home {
@@ -451,7 +455,7 @@ html:has(.us-root-body) body {
   max-width: 24.375rem;
   margin: 0 auto;
   flex-direction: column;
-  padding: calc(8px + env(safe-area-inset-top)) 16px 10px;
+  padding: calc(6px + env(safe-area-inset-top)) 12px 8px;
 }
 
 .us-ios-status {
@@ -480,25 +484,12 @@ html:has(.us-root-body) body {
 }
 
 .us-ios-signal,
-.us-ios-wifi,
+.us-ios-wifi {
+  display: block;
+}
+
 .us-ios-battery {
   display: block;
-  background: #fff;
-}
-
-.us-ios-signal {
-  width: 17px;
-  height: 10px;
-  clip-path: polygon(0 100%, 22% 100%, 22% 70%, 44% 70%, 44% 45%, 66% 45%, 66% 22%, 100% 22%, 100% 100%);
-}
-
-.us-ios-wifi {
-  width: 15px;
-  height: 11px;
-  clip-path: polygon(50% 100%, 0 40%, 18% 28%, 50% 72%, 82% 28%, 100% 40%);
-}
-
-.us-ios-battery {
   width: 24px;
   height: 11px;
   border-radius: 3px;
@@ -544,10 +535,10 @@ html:has(.us-root-body) body {
 .us-widget-frost {
   padding: 16px 16px 14px;
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.52);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(32px) saturate(160%);
-  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
   color: var(--us-ink);
 }
 
@@ -569,7 +560,7 @@ html:has(.us-root-body) body {
 }
 
 .us-dday-tile {
-  background: rgba(32, 32, 36, 0.34);
+  background: rgba(255, 255, 255, 0.22);
   color: #fff;
 }
 
@@ -579,7 +570,7 @@ html:has(.us-root-body) body {
 }
 
 .us-dday {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.02;
@@ -665,12 +656,12 @@ html:has(.us-root-body) body {
 
 .us-photo-img {
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 40%;
 }
 
 .us-alert-tile {
   margin-top: 12px;
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.34);
 }
 
 .us-alert-num {

@@ -71,8 +71,18 @@ export const UsHome = ({ onBack }: { onBack: () => void }) => {
             09:41
           </button>
           <div className="us-ios-tray" aria-hidden>
-            <i className="us-ios-signal" />
-            <i className="us-ios-wifi" />
+            <svg className="us-ios-signal" viewBox="0 0 18 12" width="17" height="11">
+              <rect x="0" y="8" width="3" height="4" rx="0.6" fill="#fff" />
+              <rect x="5" y="5" width="3" height="7" rx="0.6" fill="#fff" />
+              <rect x="10" y="2.5" width="3" height="9.5" rx="0.6" fill="#fff" />
+              <rect x="15" y="0" width="3" height="12" rx="0.6" fill="#fff" />
+            </svg>
+            <svg className="us-ios-wifi" viewBox="0 0 16 12" width="15" height="11">
+              <path
+                fill="#fff"
+                d="M8 10.6a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4zm0-3.8c1.3 0 2.5.5 3.4 1.3l-1.2 1.2A2.6 2.6 0 0 0 8 8.6c-.8 0-1.5.3-2.1.7L4.7 8.1A4.7 4.7 0 0 1 8 6.8zm0-3.2c2.3 0 4.4.9 6 2.4L12.8 7A6.6 6.6 0 0 0 8 5.2 6.6 6.6 0 0 0 3.2 7L2 5.9A8.8 8.8 0 0 1 8 3.6z"
+              />
+            </svg>
             <i className="us-ios-battery" />
           </div>
         </header>
