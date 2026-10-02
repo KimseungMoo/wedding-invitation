@@ -48,7 +48,7 @@ export const UsSaveSlot = ({ onContinue }: { onContinue: () => void }) => {
       <article className="us-file-frame us-brick">
         <div className="us-file-inner">
           <div className="us-file-hero">
-            <GroomAdventurer scale={4} label={groom.name} />
+            <GroomAdventurer scale={2} label={groom.name} />
             <div className="min-w-0">
               <p className="us-pixel us-file-id">{us.slotTitle}</p>
               <i className="us-file-rule" />
@@ -105,7 +105,7 @@ export const UsSaveSlot = ({ onContinue }: { onContinue: () => void }) => {
           </div>
 
           <div className="us-file-bride">
-            <BrideAdventurer scale={4} label={bride.name} />
+            <BrideAdventurer scale={2} label={bride.name} />
           </div>
 
           {wink ? (

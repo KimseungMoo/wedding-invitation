@@ -294,8 +294,8 @@ html:has(.us-root-body) body {
 .us-file-hero {
   display: grid;
   grid-template-columns: 64px 1fr;
-  gap: 12px;
-  align-items: end;
+  gap: 10px;
+  align-items: center;
 }
 
 .us-file-id {
@@ -588,14 +588,14 @@ html:has(.us-root-body) body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  min-height: 132px;
+  min-height: 120px;
   padding-bottom: 8px;
 }
 
 .us-pair {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 6px;
 }
 
 .us-alert-num {
