@@ -17,10 +17,8 @@ const nameClass = (from: ChatSpeaker) => {
 
 export const TodayAlert = () => {
   return (
-    <UsWidget>
-      <p className="us-widget-kicker">
-        {wedding.us.botName} 오늘 알림
-      </p>
+    <UsWidget className="us-alert-tile">
+      <p className="us-widget-kicker">{wedding.us.botName} 오늘 알림</p>
       <p className="us-alert-num">1. {wedding.us.typeLine}</p>
     </UsWidget>
   );
@@ -28,7 +26,7 @@ export const TodayAlert = () => {
 
 export const PromiseChat = () => {
   return (
-    <UsWidget tone="game">
+    <UsWidget>
       <p className="us-widget-kicker">{wedding.us.botName}</p>
       <p className="text-[13px] leading-relaxed text-[var(--us-game-dim)]">
         {wedding.us.intro}

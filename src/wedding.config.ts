@@ -83,6 +83,7 @@ export const wedding = {
     intro: "까먹을까 봐 봇에 적어 두기 시작했어요.",
     saveLine: "FILE 1 저장됨",
     slotTitle: "FILE 1",
+    playerLabel: "PLAYER 1",
     fileSelectTitle: "FILE SELECT",
     continueLabel: "CONTINUE",
     newGameLabel: "NEW GAME",

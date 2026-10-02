@@ -17,7 +17,7 @@ export const BrideNotes = () => {
             type="button"
             onClick={() => setOpen((prev) => !prev)}
           >
-            <span className="block text-[15px] font-semibold leading-snug">
+            <span className="block text-[16px] font-semibold leading-snug tracking-tight">
               {note.glance}
             </span>
             {open ? (

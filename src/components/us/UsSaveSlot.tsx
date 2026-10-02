@@ -8,7 +8,7 @@ import { BrideAdventurer, GroomAdventurer, HollowHeart } from "./UsSprites";
 type Menu = "continue" | "new";
 
 export const UsSaveSlot = ({ onContinue }: { onContinue: () => void }) => {
-  const { groom, bride, date, venue, us } = wedding;
+  const { groom, bride, date, us } = wedding;
   const [menu, setMenu] = useState<Menu>("continue");
   const [wink, setWink] = useState(false);
   const ymd = date.iso.replaceAll("-", ".");
@@ -50,7 +50,7 @@ export const UsSaveSlot = ({ onContinue }: { onContinue: () => void }) => {
           <div className="us-file-hero">
             <GroomAdventurer scale={2} label={groom.name} />
             <div className="min-w-0">
-              <p className="us-pixel us-file-id">{us.slotTitle}</p>
+              <p className="us-pixel us-file-id">{us.playerLabel}</p>
               <i className="us-file-rule" />
             </div>
           </div>
@@ -61,15 +61,14 @@ export const UsSaveSlot = ({ onContinue }: { onContinue: () => void }) => {
               <span className="us-pixel us-file-date">{ymd}</span>
             </div>
             <p className="us-ko">{bride.name}</p>
-            <p className="us-ko us-file-venue">{venue.name}</p>
           </div>
 
           <p className="us-file-hearts">
             <span className="us-pixel">{us.heartsLabel}</span>
             <span className="us-file-heart-row" aria-hidden>
-              <HollowHeart size={14} />
-              <HollowHeart size={14} />
-              <HollowHeart size={14} />
+              <HollowHeart size={12} />
+              <HollowHeart size={12} />
+              <HollowHeart size={12} />
             </span>
           </p>
 

@@ -49,108 +49,64 @@ const PixelSprite = ({
   );
 };
 
+// Original 16x16 NES adventurer — red cap / blue shirt. No M, mushroom, or Nintendo marks.
 const GROOM_MAP = [
-  "................................",
-  "..........oooooooo..............",
-  "........ooHHHHHHHHoo............",
-  ".......oHHHHHHHHHHHHo...........",
-  ".......oHHHHhhhhHHHHo...........",
-  ".......oHHHhSSSSHHhHo...........",
-  ".......oHHHSSSSSSHHHo...........",
-  ".......oHHHSwoowSHHHo...........",
-  ".......oHHHSSSSSSHHHo...........",
-  "........oHHSSSsSSHHo............",
-  ".........oSSSSSSSSo.............",
-  "..........osSSSSso..............",
-  ".......ooDDcCIICcDDoo...........",
-  "......oDcCcCIIIICcCDo...........",
-  ".....oDCcCCCIIIIICCcDo..........",
-  ".....oCcCCCCIIIIICCCco..........",
-  ".....oCcCCCCIBBIICCCco..........",
-  ".....ocNCCCCCCCCCCCNco..........",
-  ".....o.NcCCCCCCCCCcNo...........",
-  "......o.CCCCCCCCCCCc.o..........",
-  "......o.CCCPPPPPPCC.o...........",
-  ".......oCCPPPPPPPCCCo...........",
-  "........oPPPPPPPPPPo............",
-  "........oPPPo..oPPPo............",
-  "........oPPPo..oPPPo............",
-  "........oKKKo..oKKKo............",
-  "........oKKKo..oKKKo............",
-  ".........ooo....ooo.............",
-  "................................",
-  "................................",
-  "................................",
-  "................................",
+  "................",
+  ".....ooooo......",
+  "....oRRRRRo.....",
+  "....oHHHHHo.....",
+  "...oHSeSSeHo....",
+  "...oSSSSSSSo....",
+  "....oSSSSSo.....",
+  "...oBBBBBBBo....",
+  "..oBBBBBBBBBo...",
+  "...oBBBBBBBo....",
+  "...on.BB.no.....",
+  "....onn.nno.....",
+  "....oKK.KKo.....",
+  ".....oo.oo......",
+  "................",
+  "................",
 ] as const;
 
+// Original 16x16 partner — black bob, purple dress. Same world as the 시안.
 const BRIDE_MAP = [
-  "................................",
-  ".........oooooooooo.............",
-  ".......ooHHHHHHHHHHoo...........",
-  "......oHHHHHHHHHHHHHHo..........",
-  "......oHHHHHhhhhhHHHHo..........",
-  "......oHHHHhSSSSShHHHo..........",
-  "......oHHHHSSSSSSHHHHo..........",
-  "......oHHHHSwoowSHHHHo..........",
-  "......oHHHHSSSSSSHHHHo..........",
-  ".......oHHHSSSsSSHHHo...........",
-  "........oHHssSSsHHo.............",
-  "......ooHHTTTTTTTTHHoo..........",
-  ".....oHHHhGGGGGGGghHHHo.........",
-  ".....oHHhGGGGIIIIGGhHHo.........",
-  ".....oHHhGGGITTTIIGGhHo.........",
-  ".....oHHh.GGGGGGGG.hHHo.........",
-  ".....oHHN.GGGGGGGG.NHHo.........",
-  ".....oHHh.GGGGGGGG.hHHo.........",
-  ".....oHHhGGGGGGGGGGhHHo.........",
-  ".....oHHhGGGGGGGGGGhHHo.........",
-  "......oHhQGGGGGGGGghHo..........",
-  "......oH.QGGGGGGGGg.Ho..........",
-  ".......o.QGGGGGGGGg.o...........",
-  "........oGGGGGGGGGo.............",
-  "........oGGGGo.oGGo.............",
-  ".........oGGGo.oGo..............",
-  ".........oKKKo.oKo..............",
-  ".........oKKKo.oKo..............",
-  "..........ooo...oo..............",
-  "................................",
-  "................................",
-  "................................",
+  "................",
+  ".....oooooo.....",
+  "....oHHHHHHo....",
+  "...oHHHHHHHHo...",
+  "...oHSeSSeHHo...",
+  "...oHSSSSSHHo...",
+  "....oSSSSSSo....",
+  "...oPPPPPPPPo...",
+  "...oPPPPPPPPo...",
+  "...oPPPPPPPPo...",
+  "...oPPPPPPPPo...",
+  "....oPPPPPPo....",
+  "....oPP.PPo.....",
+  "....oKK.KKo.....",
+  ".....oo.oo......",
+  "................",
 ] as const;
 
 const GROOM_PALETTE = {
-  o: "#0c0a08",
-  H: "#1a1410",
-  h: "#3a2e24",
-  S: "#f0c4a0",
-  s: "#c8946c",
-  w: "#fff8f0",
-  C: "#6b4528",
-  c: "#8d5c38",
-  D: "#3f2a16",
-  I: "#d8c8a8",
-  B: "#c4a060",
-  P: "#35322f",
-  p: "#4a4642",
-  K: "#16120e",
-  N: "#e8b890",
+  o: "#140806",
+  e: "#140806",
+  R: "#e43428",
+  H: "#5a3218",
+  S: "#f2c4a0",
+  B: "#2c58c8",
+  n: "#8a4c28",
+  K: "#241810",
 };
 
 const BRIDE_PALETTE = {
-  o: "#0c0a08",
-  H: "#1a1410",
-  h: "#3a2e24",
-  S: "#f0c4a0",
-  s: "#c8946c",
-  w: "#fff8f0",
-  I: "#d8c8a8",
-  N: "#e8b890",
-  T: "#efe4d2",
-  G: "#3a5a54",
-  g: "#527870",
-  Q: "#2a423e",
-  K: "#16120e",
+  o: "#140806",
+  e: "#140806",
+  H: "#1a1216",
+  S: "#f2c4a0",
+  P: "#7a3d5c",
+  K: "#2a2438",
 };
 
 export const GroomAdventurer = ({
@@ -181,13 +137,6 @@ export const BrideAdventurer = ({
     scale={scale}
     label={label}
   />
-);
-
-export const AdventurerPair = ({ scale = 2 }: { scale?: number }) => (
-  <div className="us-pair" aria-hidden>
-    <GroomAdventurer scale={scale} />
-    <BrideAdventurer scale={scale} />
-  </div>
 );
 
 export const PixelHeart = ({
@@ -244,10 +193,4 @@ export const HollowHeart = ({
       <rect x="3" y="5" width="1" height="1" />
     </g>
   </svg>
-);
-
-export const PortraitWidget = () => (
-  <section className="us-widget-frost us-portrait-tile" aria-label="우리">
-    <AdventurerPair scale={2} />
-  </section>
 );

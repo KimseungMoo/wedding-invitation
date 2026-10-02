@@ -27,7 +27,7 @@ export const UsVenue = () => {
   ] as const;
 
   return (
-    <UsWidget tone="game">
+    <UsWidget>
       <p className="us-widget-kicker">장소</p>
       <p className="text-[17px] font-semibold">{venue.name}</p>
       <p className="mt-1 text-[12px] text-[var(--us-game-dim)]">{venue.hall}</p>

@@ -42,7 +42,7 @@ export const UsAccount = () => {
   );
 
   return (
-    <UsWidget tone="game">
+    <UsWidget>
       <p className="us-widget-kicker">계좌</p>
       <p className="text-[16px] font-semibold">마음 전하실 곳</p>
       <p className="mt-1 text-[12px] text-[var(--us-game-dim)]">

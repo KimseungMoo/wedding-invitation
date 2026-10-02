@@ -6,16 +6,19 @@ import { motion } from "framer-motion";
 type UsWidgetProps = {
   tone?: "frost" | "game";
   className?: string;
+  id?: string;
   children: React.ReactNode;
 };
 
 export const UsWidget = ({
   tone = "frost",
   className = "",
+  id,
   children,
 }: UsWidgetProps) => {
   return (
     <motion.section
+      id={id}
       className={`us-widget-${tone} ${className}`}
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}

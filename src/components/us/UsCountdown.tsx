@@ -4,8 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { wedding } from "@/wedding.config";
 import { UsWidget } from "./UsWidget";
 
-const pad = (n: number) => String(n).padStart(2, "0");
-
 export const useCountdown = (at: string) => {
   const [now, setNow] = useState(() => Date.now());
 
@@ -30,15 +28,10 @@ export const DdayWidget = () => {
   const label = count.done ? "D-DAY" : `D-${count.days}`;
 
   return (
-    <UsWidget>
+    <UsWidget className="us-dday-tile">
       <p className="us-widget-kicker">결혼식까지</p>
       <p className="us-dday">{label}</p>
-      {!count.done ? (
-        <p className="us-dday-clock">
-          {pad(count.hours)}:{pad(count.minutes)}:{pad(count.seconds)}
-        </p>
-      ) : null}
-      <p className="mt-3 text-[11px] text-[var(--us-dim)]">{wedding.date.compact}</p>
+      <p className="us-dday-date">{wedding.date.compact}</p>
     </UsWidget>
   );
 };
@@ -67,7 +60,7 @@ export const CalendarWidget = () => {
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
-    <UsWidget>
+    <UsWidget className="us-cal-tile">
       <p className="us-widget-kicker">February 2027</p>
       <div className="us-cal mb-1">
         {weekDays.map((day, index) => (
