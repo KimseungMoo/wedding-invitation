@@ -10,9 +10,9 @@ const speakerName = (from: ChatSpeaker) => {
 };
 
 const nameClass = (from: ChatSpeaker) => {
-  if (from === "groom") return "text-[#9bb0ff]";
-  if (from === "bride") return "text-[#f0c0c8]";
-  return "text-[#9ee0b0]";
+  if (from === "groom") return "us-name-groom";
+  if (from === "bride") return "us-name-bride";
+  return "us-name-bot";
 };
 
 export const TodayAlert = () => {
@@ -37,7 +37,7 @@ export const PromiseChat = () => {
         <div className="mt-3 space-y-4">
           {wedding.us.chats.map((thread) => (
             <article key={thread.title}>
-              <p className="mb-2 text-[10px] tracking-wide text-[#f4c4d4]">
+              <p className="us-accent-link mb-2 text-[10px] tracking-wide">
                 {thread.title}
               </p>
               {thread.messages.map((message) => (

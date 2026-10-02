@@ -54,7 +54,7 @@ export const UsVenue = () => {
         </dl>
         <a
           href={`tel:${venue.tel.replace(/-/g, "")}`}
-          className="mt-3 block text-center text-[12px] text-[#f4c4d4] underline-offset-2 hover:underline"
+          className="us-accent-link mt-3 block text-center text-[12px] underline-offset-2 hover:underline"
         >
           {venue.tel}
         </a>

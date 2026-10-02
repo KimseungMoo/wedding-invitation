@@ -32,7 +32,7 @@ export const UsAccount = () => {
           <button
             type="button"
             onClick={() => handleCopy(account)}
-            className="shrink-0 text-[11px] text-[#f4c4d4]"
+            className="us-accent-link shrink-0 text-[11px]"
           >
             {copied === account.accountNumber ? "복사됨" : "복사"}
           </button>

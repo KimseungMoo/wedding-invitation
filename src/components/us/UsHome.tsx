@@ -18,8 +18,7 @@ export const UsHome = ({ onBack }: { onBack: () => void }) => {
     <div className="us-home">
       <header className="us-home-top">
         <button type="button" className="us-slot-chip" onClick={onBack}>
-          <PixelHeart size={10} className="text-[var(--us-pink)]" />
-          {us.slotTitle}
+          <span className="us-pixel us-chip-label">{us.slotTitle}</span>
         </button>
         <Link href="/invitation" className="us-peek underline">
           {us.backLink}

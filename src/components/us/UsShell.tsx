@@ -1,3 +1,9 @@
-export const UsShell = ({ children }: { children: React.ReactNode }) => {
-  return <div className="us-root">{children}</div>;
+export const UsShell = ({
+  phase,
+  children,
+}: {
+  phase: "entry" | "body";
+  children: React.ReactNode;
+}) => {
+  return <div className={`us-root us-root-${phase}`}>{children}</div>;
 };
