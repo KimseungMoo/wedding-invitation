@@ -19,14 +19,14 @@ const scenes = [
     id: "hands-side",
     title: "머리 위, 옆을 보는 포즈",
     photo: "/illustrations/sources/hands-side.jpg",
-    illustration: "/illustrations/hands-side.jpg",
+    illustration: "/illustrations/hands-sit-side.jpg",
     wide: false,
   },
   {
     id: "hands-front",
     title: "머리 위, 정면 포즈",
     photo: "/illustrations/sources/hands-front.jpg",
-    illustration: "/illustrations/hands-front.jpg",
+    illustration: "/illustrations/hands-sit-front.jpg",
     wide: false,
   },
   {
