@@ -55,17 +55,17 @@ const GROOM_MAP = [
   ".....hhhhhh.....",
   "....hhhhhhhh....",
   "....hhsssshh....",
-  "....hssssssh....",
-  "....hseesseh....",
-  "....hssssssh....",
+  "...hhsssssshh...",
+  "...hhseessehh...",
+  "...hhsssssshh...",
+  "....hhsssshh....",
   ".....hssssh.....",
   "......ssss......",
   "....nnnnnnnn....",
   "...nnnnwwnnnn...",
-  "...nnnnwwnnnn...",
-  "...nnnnwwnnnn...",
-  "...nnnnnnnnnn...",
-  "...nnnnnnnnnn...",
+  "..nnnnnwwwnnnn..",
+  "..n.nnnwwwnn.n..",
+  "..n.nnnnnnnn.n..",
   "....nnppppnn....",
   ".....pppppp.....",
   ".....pppppp.....",
@@ -90,10 +90,10 @@ const BRIDE_MAP = [
   "......ssss......",
   "....dddddddd....",
   "...dddddddddd...",
-  "...dddddddddd...",
   "..dddddddddddd..",
-  "..dddddddddddd..",
-  "..dddddddddddd..",
+  ".dddddddddddddd.",
+  ".dddddddddddddd.",
+  ".dddddddddddddd.",
   "..dddddddddddd..",
   "...dddddddddd...",
   "...dddddddddd...",
@@ -104,21 +104,21 @@ const BRIDE_MAP = [
 ] as const;
 
 const GROOM_PALETTE = {
-  h: "#2a1a12",
+  h: "#3a281c",
   s: "#f0c4a0",
   e: "#1a120c",
-  n: "#3e5a94",
-  w: "#f3efe6",
-  p: "#4a4846",
-  k: "#1c1816",
+  n: "#4a6eb0",
+  w: "#fff8ee",
+  p: "#5a5652",
+  k: "#2a2018",
 };
 
 const BRIDE_PALETTE = {
-  h: "#241814",
+  h: "#3a281c",
   s: "#f2c8a6",
   e: "#1a120c",
-  d: "#a85a6e",
-  k: "#1c1816",
+  d: "#c46a80",
+  k: "#2a2018",
 };
 
 export const GroomAdventurer = ({
@@ -216,6 +216,6 @@ export const HollowHeart = ({
 
 export const PortraitWidget = () => (
   <section className="us-widget-frost us-portrait-tile" aria-label="우리">
-    <AdventurerPair scale={3} />
+    <AdventurerPair scale={4} />
   </section>
 );
