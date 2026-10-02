@@ -2,16 +2,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback } from "react";
-
-interface AccountInfo {
-  bank: string;
-  accountNumber: string;
-  holder: string;
-}
+import { wedding, type AccountInfo } from "@/wedding.config";
 
 interface AccountProps {
-  groomAccounts?: AccountInfo[];
-  brideAccounts?: AccountInfo[];
+  groomAccounts?: readonly AccountInfo[];
+  brideAccounts?: readonly AccountInfo[];
 }
 
 /**
@@ -19,16 +14,8 @@ interface AccountProps {
  * 우아한 화이트 톤 디자인
  */
 export const Account = ({
-  groomAccounts = [
-    { bank: "신한은행", accountNumber: "110-123-456789", holder: "김신랑" },
-    { bank: "국민은행", accountNumber: "123-45-6789012", holder: "김아버지" },
-    { bank: "우리은행", accountNumber: "1002-123-456789", holder: "김어머니" },
-  ],
-  brideAccounts = [
-    { bank: "하나은행", accountNumber: "123-456789-01234", holder: "이신부" },
-    { bank: "농협은행", accountNumber: "123-4567-8901-23", holder: "이아버지" },
-    { bank: "신한은행", accountNumber: "110-987-654321", holder: "이어머니" },
-  ],
+  groomAccounts = wedding.accounts.groom,
+  brideAccounts = wedding.accounts.bride,
 }: AccountProps) => {
   const [isGroomOpen, setIsGroomOpen] = useState(false);
   const [isBrideOpen, setIsBrideOpen] = useState(false);
