@@ -1,20 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import { wedding } from "@/wedding.config";
-import { UsPanel } from "./UsPanel";
+import { UsWidget } from "./UsWidget";
 
 export const BrideNotes = () => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <UsPanel label="NOTES" title="은지">
-      <div className="space-y-2 font-mono text-[13px]">
+    <UsWidget>
+      <p className="us-widget-kicker">{wedding.bride.shortName}</p>
+      <div className="us-note-list">
         {wedding.us.notes.map((note) => (
-          <p key={note.title} className="leading-relaxed">
-            <span className="text-[var(--us-sky)]">{note.title}</span>
-            <span className="text-[var(--us-dim)]"> = </span>
-            <span className="font-sans text-[var(--us-paper)]">{note.body}</span>
-          </p>
+          <button
+            key={note.title}
+            type="button"
+            onClick={() => setOpen((prev) => !prev)}
+          >
+            <span className="block text-[15px] font-semibold leading-snug">
+              {note.glance}
+            </span>
+            {open ? (
+              <span className="mt-0.5 block text-[11px] leading-relaxed text-[var(--us-dim)]">
+                {note.body}
+              </span>
+            ) : null}
+          </button>
         ))}
       </div>
-    </UsPanel>
+    </UsWidget>
   );
 };

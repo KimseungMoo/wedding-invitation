@@ -2,91 +2,100 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { wedding } from "@/wedding.config";
-import { UsPanel } from "./UsPanel";
+import { UsWidget } from "./UsWidget";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-const useCountdown = (at: string) => {
-  const [now, setNow] = useState(() => Date.now());
+export const useCountdown = (at: string) => {
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
+    setNow(Date.now());
     const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(id);
   }, []);
 
   const target = new Date(at).getTime();
-  const diff = Math.max(0, target - now);
+  const diff = now === null ? 0 : Math.max(0, target - now);
   return {
     days: Math.floor(diff / 86_400_000),
     hours: Math.floor((diff % 86_400_000) / 3_600_000),
     minutes: Math.floor((diff % 3_600_000) / 60_000),
     seconds: Math.floor((diff % 60_000) / 1000),
-    done: diff === 0,
+    done: now !== null && diff === 0,
+    ready: now !== null,
   };
 };
 
-export const UsCountdown = () => {
+export const DdayWidget = () => {
   const count = useCountdown(wedding.date.at);
+  const label = !count.ready || count.done ? "D-DAY" : `D-${count.days}`;
 
-  const calendarDays = useMemo(() => {
+  return (
+    <UsWidget>
+      <p className="us-widget-kicker">결혼식까지</p>
+      <p className="us-dday">{label}</p>
+      {count.ready && !count.done ? (
+        <p className="us-dday-clock">
+          {pad(count.hours)}:{pad(count.minutes)}:{pad(count.seconds)}
+        </p>
+      ) : null}
+      <p className="mt-3 text-[11px] text-[var(--us-dim)]">{wedding.date.compact}</p>
+    </UsWidget>
+  );
+};
+
+export const CalendarWidget = () => {
+  const cells = useMemo(() => {
     const year = 2027;
     const month = 1;
-    const firstDay = new Date(year, month, 1).getDay();
-    const lastDate = new Date(year, month + 1, 0).getDate();
-    const days: (number | null)[] = [];
-    for (let i = 0; i < firstDay; i += 1) days.push(null);
-    for (let i = 1; i <= lastDate; i += 1) days.push(i);
-    return days;
+    const startPad = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const prevDays = new Date(year, month, 0).getDate();
+    const next: { day: number; current: boolean }[] = [];
+    for (let i = startPad; i > 0; i -= 1) {
+      next.push({ day: prevDays - i + 1, current: false });
+    }
+    for (let day = 1; day <= daysInMonth; day += 1) {
+      next.push({ day, current: true });
+    }
+    const trail = (7 - (next.length % 7)) % 7;
+    for (let day = 1; day <= trail; day += 1) {
+      next.push({ day, current: false });
+    }
+    return next;
   }, []);
 
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
-    <UsPanel label="COUNTDOWN" title="D-DAY">
-      <p className="mb-3 font-mono text-[10px] tracking-[0.14em] text-[var(--us-dim)]">
-        {count.done ? "TODAY" : `D-${count.days}`}
-      </p>
-      <div className="mb-5 grid grid-cols-4 gap-2 font-mono">
-        {[
-          [pad(count.days), "DAY"],
-          [pad(count.hours), "HR"],
-          [pad(count.minutes), "MIN"],
-          [pad(count.seconds), "SEC"],
-        ].map(([value, unit]) => (
-          <div
-            key={unit}
-            className="rounded border border-[var(--us-line)] bg-[var(--us-ink-3)] py-2 text-center"
-          >
-            <p className="text-lg text-[var(--us-amber)]">{value}</p>
-            <p className="text-[9px] tracking-wider text-[var(--us-dim)]">{unit}</p>
-          </div>
-        ))}
-      </div>
-
-      <p className="mb-3 text-center font-mono text-[10px] tracking-[0.16em] text-[var(--us-dim)]">
-        FEBRUARY 2027
-      </p>
-      <div className="mb-1 grid grid-cols-7 gap-1 text-center font-mono text-[10px] text-[var(--us-dim)]">
+    <UsWidget>
+      <p className="us-widget-kicker">February 2027</p>
+      <div className="us-cal mb-1">
         {weekDays.map((day, index) => (
-          <span key={`${day}-${index}`}>{day}</span>
-        ))}
-      </div>
-      <div className="grid grid-cols-7 gap-1 text-center font-mono text-[12px]">
-        {calendarDays.map((day, index) => (
           <span
             key={`${day}-${index}`}
-            className={`flex h-7 items-center justify-center rounded ${
-              day === 21
-                ? "bg-[var(--us-amber)] font-medium text-[#20180a]"
-                : day === null
-                  ? ""
-                  : "text-[var(--us-paper)]"
-            }`}
+            className={`us-cal-head${index === 0 ? " is-sun" : ""}`}
           >
-            {day ?? ""}
+            {day}
           </span>
         ))}
       </div>
-    </UsPanel>
+      <div className="us-cal">
+        {cells.map((cell, index) => {
+          const weddingDay = cell.current && cell.day === 21;
+          return (
+            <span
+              key={`${cell.day}-${index}`}
+              className={`us-cal-day${
+                weddingDay ? " is-wed" : cell.current ? "" : " is-out"
+              }`}
+            >
+              {cell.day}
+            </span>
+          );
+        })}
+      </div>
+    </UsWidget>
   );
 };

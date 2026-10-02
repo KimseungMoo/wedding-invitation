@@ -1,7 +1,7 @@
 "use client";
 
 import { wedding, type ChatSpeaker } from "@/wedding.config";
-import { UsPanel } from "./UsPanel";
+import { UsExpand, UsWidget } from "./UsWidget";
 
 const speakerName = (from: ChatSpeaker) => {
   if (from === "groom") return wedding.groom.shortName;
@@ -10,31 +10,40 @@ const speakerName = (from: ChatSpeaker) => {
 };
 
 const nameClass = (from: ChatSpeaker) => {
-  if (from === "groom") return "text-[var(--us-groom)]";
-  if (from === "bride") return "text-[var(--us-bride)]";
-  return "font-mono text-[var(--us-leaf)]";
+  if (from === "groom") return "text-[#9bb0ff]";
+  if (from === "bride") return "text-[#f0c0c8]";
+  return "text-[#9ee0b0]";
+};
+
+export const TodayAlert = () => {
+  return (
+    <UsWidget>
+      <p className="us-widget-kicker">
+        {wedding.us.botName} 오늘 알림
+      </p>
+      <p className="us-alert-num">1. {wedding.us.typeLine}</p>
+    </UsWidget>
+  );
 };
 
 export const PromiseChat = () => {
   return (
-    <UsPanel label="BOT" title={wedding.us.botName}>
-      <p className="mb-4 text-[13px] leading-relaxed text-[var(--us-dim)]">
+    <UsWidget tone="game">
+      <p className="us-widget-kicker">{wedding.us.botName}</p>
+      <p className="text-[13px] leading-relaxed text-[var(--us-game-dim)]">
         {wedding.us.intro}
       </p>
-      <div className="space-y-4">
-        {wedding.us.chats.map((thread) => (
-          <article
-            key={thread.title}
-            className="rounded border border-[var(--us-line)] bg-[var(--us-ink-3)] p-3"
-          >
-            <p className="mb-2 font-mono text-[10px] text-[var(--us-amber)]">
-              {thread.title}
-            </p>
-            <div className="space-y-2">
+      <UsExpand label="대화 펼치기">
+        <div className="mt-3 space-y-4">
+          {wedding.us.chats.map((thread) => (
+            <article key={thread.title}>
+              <p className="mb-2 text-[10px] tracking-wide text-[#f4c4d4]">
+                {thread.title}
+              </p>
               {thread.messages.map((message) => (
                 <p
                   key={`${thread.title}-${message.text}`}
-                  className="text-[13px] leading-relaxed text-[var(--us-paper)]"
+                  className="us-chat-line"
                 >
                   <span className={`mr-2 text-[11px] ${nameClass(message.from)}`}>
                     {speakerName(message.from)}
@@ -42,10 +51,10 @@ export const PromiseChat = () => {
                   {message.text}
                 </p>
               ))}
-            </div>
-          </article>
-        ))}
-      </div>
-    </UsPanel>
+            </article>
+          ))}
+        </div>
+      </UsExpand>
+    </UsWidget>
   );
 };

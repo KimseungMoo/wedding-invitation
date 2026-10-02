@@ -1,9 +1,3 @@
 export { UsShell } from "./UsShell";
-export { UsHero } from "./UsHero";
-export { UsCountdown } from "./UsCountdown";
-export { PromiseChat } from "./PromiseChat";
-export { BrideNotes } from "./BrideNotes";
-export { Reminders } from "./Reminders";
-export { Story } from "./Story";
-export { UsVenue } from "./UsVenue";
-export { UsAccount } from "./UsAccount";
+export { UsSaveSlot } from "./UsSaveSlot";
+export { UsHome } from "./UsHome";

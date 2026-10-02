@@ -18,6 +18,7 @@ export type ChatThread = {
 
 export type Note = {
   title: string;
+  glance: string;
   body: string;
 };
 
@@ -49,6 +50,7 @@ export const wedding = {
     weekday: "일요일",
     time: "오전 11시 30분",
     line: "2027.02.21 SUN AM 11:30",
+    compact: "2027.02.21 11:30",
     full: "2027년 2월 21일 일요일 오전 11시 30분",
   },
   venue: {
@@ -79,6 +81,9 @@ export const wedding = {
     todayAlertText: "오늘 알림 1. 우리, 결혼합니다.",
     typeLine: "우리, 결혼합니다.",
     intro: "까먹을까 봐 봇에 적어 두기 시작했어요.",
+    saveLine: "까먹을까 봐 저장했어요",
+    slotTitle: "슬롯 1 · 우리",
+    continueLabel: "이어하기",
     peekLink: "승무가 몰래 적어 둔 이야기",
     backLink: "일반 청첩장으로",
     tabName: "우리.md",
@@ -123,18 +128,22 @@ export const wedding = {
     notes: [
       {
         title: "입맛",
+        glance: "덜 맵게",
         body: "매운 건 잘 못 먹어요. 고를 때 한 번 더 봐요.",
       },
       {
         title: "손",
+        glance: "장갑",
         body: "조금만 추워도 손이 시려요. 나갈 때 장갑을 챙기면 좋아해요.",
       },
       {
         title: "커피",
+        glance: "라떼",
         body: "아메리카노보다 라떼. 달지 않은 쪽으로.",
       },
       {
         title: "챙길 것",
+        glance: "꽃",
         body: "가족 식사 전에는 꽃을 잊지 말 것.",
       },
     ] satisfies Note[],

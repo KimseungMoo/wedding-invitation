@@ -1,36 +1,41 @@
 "use client";
 
-import {
-  BrideNotes,
-  PromiseChat,
-  Reminders,
-  Story,
-  UsAccount,
-  UsCountdown,
-  UsHero,
-  UsShell,
-  UsVenue,
-} from "@/components/us";
-import { wedding } from "@/wedding.config";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { UsHome, UsSaveSlot, UsShell } from "@/components/us";
 
 export default function UsPage() {
+  const [phase, setPhase] = useState<"entry" | "body">("entry");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [phase]);
+
   return (
     <UsShell>
-      <main>
-        <UsHero />
-        <UsCountdown />
-        <PromiseChat />
-        <BrideNotes />
-        <Reminders />
-        <Story />
-        <UsVenue />
-        <UsAccount />
-      </main>
-      <footer className="px-4 pb-8 pb-safe pt-2">
-        <p className="mx-auto max-w-md text-center font-mono text-[10px] text-[var(--us-dim)]">
-          {wedding.groom.name} && {wedding.bride.name}
-        </p>
-      </footer>
+      <AnimatePresence mode="wait">
+        {phase === "entry" ? (
+          <motion.div
+            key="entry"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28 }}
+          >
+            <UsSaveSlot onContinue={() => setPhase("body")} />
+          </motion.div>
+        ) : (
+          <motion.main
+            key="body"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.32 }}
+          >
+            <UsHome onBack={() => setPhase("entry")} />
+          </motion.main>
+        )}
+      </AnimatePresence>
     </UsShell>
   );
 }
