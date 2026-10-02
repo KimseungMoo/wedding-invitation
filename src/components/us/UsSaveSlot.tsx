@@ -55,7 +55,7 @@ export const UsSaveSlot = ({ onContinue }: { onContinue: () => void }) => {
 
       <article className="us-slot-card">
         <div className="us-slot-portrait">
-          <CoupleSprites pixel={5} />
+          <CoupleSprites className="h-[138px] w-[132px]" />
           <span className="us-slot-badge">
             <PixelHeart size={11} />
           </span>
