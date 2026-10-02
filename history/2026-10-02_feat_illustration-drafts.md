@@ -16,3 +16,7 @@
 - `public/illustrations/` 시안 5장
 - `public/illustrations/sources/` 원본·참고 이미지
 - `/drafts` 비교 페이지
+
+## 후속
+머리 위 구도에서 신랑이 무릎 앉은 형태로 나왔다.
+사진처럼 의자 앉은 포즈(다리·신발 보이게)로 두 장 다시 뽑았다.
