@@ -437,9 +437,8 @@ def compose_back(dest: Path) -> None:
     dashed_rect(draw, (sx, sy, sx + stamp, sy + stamp))
 
     url_f = f(30)
-    url = URL.rstrip("/")
-    mid = url.find("/", 8)
-    lines = [url[:mid], url[mid:]] if mid > 0 else [url]
+    # The QR carries the full URL; print the domain as a clean fallback.
+    lines = [URL.removeprefix("https://").rstrip("/")]
     uy = sy + stamp + 24
     for line in lines:
         ww, hh = measure(draw, line, url_f)
