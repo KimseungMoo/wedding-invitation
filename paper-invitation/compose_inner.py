@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Compose doodle-style inner pages with real Korean text and a scannable QR."""
+"""Compose text-only inner pages with a scannable postage-stamp QR.
+
+No illustrations — cream paper, copy, and QR only.
+"""
 
 from __future__ import annotations
 
@@ -9,12 +12,14 @@ import segno
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent
-ART = ROOT / "art"
 FONT_DIR = ROOT / "fonts"
 URL = "https://seungmoo-eunji-wedding-invitation.vercel.app/"
-SCALE = 3
-INK = (44, 44, 44)
-CREAM_RIGHT = (244, 234, 207)
+
+# Print-friendly at ~300dpi for ~130×174mm cards
+W, H = 1536, 2048
+INK = (52, 48, 42)
+CREAM = (247, 240, 214)
+RULE = (120, 112, 98)
 
 LEFT_GREETING_KO = [
     "서로 다른 길로 걷다가",
@@ -64,11 +69,8 @@ RIGHT_VENUE_EN = [
 ]
 RIGHT_CAPTION_EN = "Mobile invitation"
 
-
 KR_FONT = "Gaegu-Regular.ttf"
-FONT_URL = (
-    "https://github.com/google/fonts/raw/main/ofl/gaegu/Gaegu-Regular.ttf"
-)
+FONT_URL = "https://github.com/google/fonts/raw/main/ofl/gaegu/Gaegu-Regular.ttf"
 
 
 def ensure_font() -> None:
@@ -81,8 +83,12 @@ def ensure_font() -> None:
     urlretrieve(FONT_URL, dest)
 
 
-def font(size: int, name: str = KR_FONT) -> ImageFont.FreeTypeFont:
-    return ImageFont.truetype(str(FONT_DIR / name), size)
+def font(size: int) -> ImageFont.FreeTypeFont:
+    return ImageFont.truetype(str(FONT_DIR / KR_FONT), size)
+
+
+def blank() -> Image.Image:
+    return Image.new("RGB", (W, H), CREAM)
 
 
 def text_size(draw: ImageDraw.ImageDraw, text: str, fnt: ImageFont.FreeTypeFont) -> tuple[int, int]:
@@ -106,17 +112,17 @@ def draw_centered_lines(
             draw.text((center_x - w / 2, y), line, font=fnt, fill=fill)
             y += h + gap
         else:
-            y += max(36, int(getattr(fnt, "size", 80) * 0.55))
+            y += max(28, int(getattr(fnt, "size", 64) * 0.55))
     return y
 
 
 def dashed_rect(
     draw: ImageDraw.ImageDraw,
     box: tuple[int, int, int, int],
-    width: int,
-    dash: int,
-    gap: int,
-    fill: tuple[int, int, int],
+    width: int = 2,
+    dash: int = 12,
+    gap: int = 8,
+    fill: tuple[int, int, int] = RULE,
 ) -> None:
     x0, y0, x1, y1 = box
 
@@ -145,63 +151,49 @@ def make_qr(size: int) -> Image.Image:
     return im.resize((size, size), Image.Resampling.NEAREST)
 
 
-def upscale(src: Path) -> Image.Image:
-    im = Image.open(src).convert("RGB")
-    w, h = im.size
-    return im.resize((w * SCALE, h * SCALE), Image.Resampling.LANCZOS)
-
-
-def compose_left(art: Path, greeting: list[str], names: str, dest: Path) -> None:
-    im = upscale(art)
+def compose_left(greeting: list[str], names: str, dest: Path) -> None:
+    im = blank()
     draw = ImageDraw.Draw(im)
-    cx = im.width // 2
-    title = font(148)
-    name_f = font(110)
-    draw_centered_lines(draw, greeting, cx, top=int(im.height * 0.07), fnt=title, gap=2)
-    draw_centered_lines(draw, [names], cx, top=int(im.height * 0.86), fnt=name_f, gap=0)
+    cx = W // 2
+    body = font(78)
+    name_f = font(64)
+    y = draw_centered_lines(draw, greeting, cx, top=int(H * 0.22), fnt=body, gap=6)
+    # thin rule, then names — no doodles
+    rule_y = max(y + 80, int(H * 0.72))
+    draw.line([(cx - 90, rule_y), (cx + 90, rule_y)], fill=RULE, width=2)
+    draw_centered_lines(draw, [names], cx, top=rule_y + 36, fnt=name_f, gap=0)
     im.save(dest, "PNG")
 
 
 def compose_right(
-    art: Path,
     date_lines: list[str],
     venue_lines: list[str],
     caption: str,
     dest: Path,
 ) -> None:
-    im = upscale(art)
+    im = blank()
     draw = ImageDraw.Draw(im)
-    cx = im.width // 2
-    label = font(88)
-    date_f = font(128)
-    venue_f = font(92)
-    cap = font(72)
+    cx = W // 2
+    label = font(48)
+    date_f = font(72)
+    venue_f = font(56)
+    cap = font(40)
 
-    draw_centered_lines(draw, [date_lines[0]], cx, top=int(70 * SCALE), fnt=label, gap=0)
-    draw_centered_lines(draw, date_lines[2:], cx, top=int(118 * SCALE), fnt=date_f, gap=0)
-    draw_centered_lines(draw, venue_lines, cx, top=int(340 * SCALE), fnt=venue_f, gap=0)
+    y = draw_centered_lines(draw, [date_lines[0]], cx, top=int(H * 0.12), fnt=label, gap=0)
+    y = draw_centered_lines(draw, date_lines[2:], cx, top=y + 18, fnt=date_f, gap=4)
+    draw.line([(cx - 120, y + 40), (cx + 120, y + 40)], fill=RULE, width=2)
+    draw_centered_lines(draw, venue_lines, cx, top=y + 72, fnt=venue_f, gap=4)
 
-    # hide the wide landscape dashed box, drop a square stamp + real QR
-    box = (int(220 * SCALE), int(808 * SCALE), int(662 * SCALE), int(1050 * SCALE))
-    draw.rectangle(box, fill=CREAM_RIGHT)
-
-    qr_size = int(168 * SCALE)
-    stamp = qr_size + int(22 * SCALE)
-    sx = (im.width - stamp) // 2
-    sy = int(820 * SCALE)
-    qr = make_qr(qr_size)
-    im.paste(qr, (sx + int(11 * SCALE), sy + int(11 * SCALE)))
+    qr_size = 320
+    pad = 22
+    stamp = qr_size + pad * 2
+    sx = (W - stamp) // 2
+    sy = int(H * 0.68)
+    im.paste(make_qr(qr_size), (sx + pad, sy + pad))
     draw = ImageDraw.Draw(im)
-    dashed_rect(
-        draw,
-        (sx, sy, sx + stamp, sy + stamp),
-        width=max(2, SCALE),
-        dash=int(10 * SCALE),
-        gap=int(6 * SCALE),
-        fill=INK,
-    )
-    w, h = text_size(draw, caption, cap)
-    draw.text(((im.width - w) / 2, sy + stamp + int(8 * SCALE)), caption, font=cap, fill=INK)
+    dashed_rect(draw, (sx, sy, sx + stamp, sy + stamp))
+    w, _ = text_size(draw, caption, cap)
+    draw.text(((W - w) / 2, sy + stamp + 16), caption, font=cap, fill=INK)
     im.save(dest, "PNG")
 
 
@@ -220,21 +212,15 @@ def make_spread(left: Path, right: Path, dest: Path) -> None:
 
 def main() -> None:
     ensure_font()
-    ART.mkdir(exist_ok=True)
-    left_art = ART / "inner-left-art.jpg"
-    right_art = ART / "inner-right-art.jpg"
-    if not left_art.exists() or not right_art.exists():
-        raise SystemExit("art images missing")
-
     left_ko = ROOT / "inner-left-ko.png"
     right_ko = ROOT / "inner-right-ko.png"
     left_en = ROOT / "inner-left-en.png"
     right_en = ROOT / "inner-right-en.png"
 
-    compose_left(left_art, LEFT_GREETING_KO, LEFT_NAMES_KO, left_ko)
-    compose_right(right_art, RIGHT_DATE_KO, RIGHT_VENUE_KO, RIGHT_CAPTION_KO, right_ko)
-    compose_left(left_art, LEFT_GREETING_EN, LEFT_NAMES_EN, left_en)
-    compose_right(right_art, RIGHT_DATE_EN, RIGHT_VENUE_EN, RIGHT_CAPTION_EN, right_en)
+    compose_left(LEFT_GREETING_KO, LEFT_NAMES_KO, left_ko)
+    compose_right(RIGHT_DATE_KO, RIGHT_VENUE_KO, RIGHT_CAPTION_KO, right_ko)
+    compose_left(LEFT_GREETING_EN, LEFT_NAMES_EN, left_en)
+    compose_right(RIGHT_DATE_EN, RIGHT_VENUE_EN, RIGHT_CAPTION_EN, right_en)
     make_spread(left_ko, right_ko, ROOT / "inner-spread-ko.png")
     make_spread(left_en, right_en, ROOT / "inner-spread-en.png")
 
