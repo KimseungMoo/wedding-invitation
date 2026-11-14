@@ -18,7 +18,11 @@
 - `src/components/invitation/Gallery.tsx`, `src/app/globals.css`, `src/app/invitation/page.tsx`, `public/gallery/01-kakao-006.jpg ~ 22-num-06.jpg`
   - `/Users/sunmoo/Downloads/청첩장사진`에서 `7.jpg`, `10.jpg`, `010.jpeg`를 제외한 총 22장을 요청 순서(`006.jpeg` → `001~009.jpeg` → `011~014.jpeg` → `11~18.jpg` → `25.jpg` → `3~6.jpg`)로 정렬·최적화하여 갤러리에 연동
   - 이전 `photo-01.jpg` 브라우저/Next 이미지 캐시 충돌을 방지하기 위해 파일명을 `01-kakao-006.jpg` ~ `22-num-06.jpg`로 고유화하고, `IntersectionObserver`를 통해 갤러리 섹션이 화면에 진입했을 때부터 4초 자동 넘김이 시작되도록 개선하여 스크롤 도달 시 항상 1번 사진(`006.jpeg`)이 먼저 표시되도록 수정
+  - 가로 구도인 `013.jpeg`(`12-kakao-013-v2.jpg`)와 정방형 `014.jpeg`(`13-kakao-014-v2.jpg`)에서 좌측 벽면 대신 우측의 신랑·신부가 3:4 세로 프레임 중앙에 오도록 크롭 위치를 재조정
   - 갤러리 클릭 확대 모달을 제거하고, 멀티터치 핀치줌·iOS 제스처·롱프레스 이미지 저장(`-webkit-touch-callout: none`, `pointer-events: none` 및 투명 오버레이)·우클릭·드래그·인쇄/캡처 단축키 제한 적용
+  - 모바일 OS 스크린샷 우회 보호를 위해 전체 갤러리 사진 해상도를 모바일 카드 표시 크기(최대 변 720px, 품질 72)로 축소하고, 미세 필름 그레인 패턴과 대각선 워터마크 오버레이를 적용
+- `src/components/invitation/Account.tsx`
+  - 신랑(`김승무 - 토스뱅크 1000-1599-2712`) 및 신부(`성은지 - 농협 127-12-344017`) 계좌를 추가하고, 기존 혼주 계좌번호에 은행별 표준 하이픈(`112-2040-3246-03`, `3333-07-2869593`, `127-12-380646`, `127-12-204590`)을 적용
 
 ## 검증 결과
 

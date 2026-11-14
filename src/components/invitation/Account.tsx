@@ -21,12 +21,14 @@ interface AccountProps {
  */
 export const Account = ({
   groomAccounts = [
-    { role: "아버지", bank: "부산은행", accountNumber: "1122040324603", holder: "김종렬" },
-    { role: "어머니", bank: "카카오뱅크", accountNumber: "3333072869593", holder: "김숙희" },
+    { role: "신랑", bank: "토스뱅크", accountNumber: "1000-1599-2712", holder: "김승무" },
+    { role: "아버지", bank: "부산은행", accountNumber: "112-2040-3246-03", holder: "김종렬" },
+    { role: "어머니", bank: "카카오뱅크", accountNumber: "3333-07-2869593", holder: "김숙희" },
   ],
   brideAccounts = [
-    { role: "아버지", bank: "농협", accountNumber: "12712380646", holder: "성낙인" },
-    { role: "어머니", bank: "농협", accountNumber: "12712204590", holder: "김보예" },
+    { role: "신부", bank: "농협", accountNumber: "127-12-344017", holder: "성은지" },
+    { role: "아버지", bank: "농협", accountNumber: "127-12-380646", holder: "성낙인" },
+    { role: "어머니", bank: "농협", accountNumber: "127-12-204590", holder: "김보예" },
   ],
 }: AccountProps) => {
   const [isGroomOpen, setIsGroomOpen] = useState(false);
