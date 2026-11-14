@@ -29,7 +29,7 @@ export const Greeting = ({
   brideFather = "성낙인",
   brideMother = "김보예",
   brideName = "성은지",
-  dateText = "2027년 2월 21일 (일) 오전 11시 30분",
+  dateText = "2027년 2월 21일 (일)\n오전 11시 30분",
   venueText = "더 채플 앳 청담 채플홀 (6층)",
   addressText = "서울특별시 강남구 선릉로 757 (논현동 94-9)",
 }: GreetingProps) => {
@@ -109,12 +109,12 @@ export const Greeting = ({
 
             {/* 일시 & 장소 요약 표 */}
             <div className="mt-9 border-t border-[#dfd4c5] pt-5 text-left break-keep">
-              <div className="mb-3 grid grid-cols-[52px_1px_1fr] items-baseline gap-x-3.5">
-                <span className="text-center text-xs tracking-[0.28em] text-[#6b5a4a]">
+              <div className="mb-3 grid grid-cols-[52px_1px_1fr] items-start gap-x-3.5">
+                <span className="pt-0.5 text-center text-xs tracking-[0.28em] text-[#6b5a4a]">
                   일 시
                 </span>
-                <span className="h-3 w-px self-center bg-[#cbbba5]" />
-                <span className="text-[13px] font-normal text-[#3f342b] sm:text-sm">
+                <span className="mt-1.5 h-3 w-px bg-[#cbbba5]" />
+                <span className="whitespace-pre-line text-[13px] font-normal leading-relaxed text-[#3f342b] sm:text-sm">
                   {dateText}
                 </span>
               </div>

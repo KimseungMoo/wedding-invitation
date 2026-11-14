@@ -80,7 +80,15 @@ export const Account = ({
           </div>
           {hasAccount ? (
             <p className="mt-1 text-xs font-light text-[#5c4a3a]">
-              {account.bank} {account.accountNumber}
+              <span>{account.bank} </span>
+              <button
+                type="button"
+                onClick={() => handleCopyAccount(account, cardKey)}
+                className="cursor-pointer underline decoration-[#b9a792] underline-offset-4 transition-colors hover:text-[#3f342b]"
+                aria-label={`${account.holder} 계좌번호 ${account.accountNumber} 복사`}
+              >
+                {account.accountNumber}
+              </button>
             </p>
           ) : (
             <p className="mt-1 text-xs font-light text-[#9b8976]">

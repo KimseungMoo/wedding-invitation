@@ -51,6 +51,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://seungmoo-eunji-wedding-invitation.vercel.app"),
   title: "김승무 ♥ 성은지 결혼식에 초대합니다",
   description: "2027년 2월 21일 (일) 오전 11시 30분 · 더 채플 앳 청담 채플홀 (6층)",
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
   icons: {
     icon: "/wedding-invitation.png",
     apple: "/wedding-invitation.png",

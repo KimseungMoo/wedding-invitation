@@ -127,7 +127,7 @@ export default function InvitationPage() {
         brideFather="성낙인"
         brideMother="김보예"
         brideName="성은지"
-        dateText="2027년 2월 21일 (일) 오전 11시 30분"
+        dateText={`2027년 2월 21일 (일)\n오전 11시 30분`}
         venueText="더 채플 앳 청담 채플홀 (6층)"
         addressText="서울특별시 강남구 선릉로 757 (논현동 94-9)"
       />

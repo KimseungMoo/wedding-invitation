@@ -560,7 +560,7 @@ export const DoorOpen = () => {
           SEUNGMOO &amp; EUNJI
         </h1>
         <p className="mt-1 text-[11px] tracking-[0.16em] text-[#76634b] font-serif">
-          2027. 02. 21. SUN PM 12:20
+          2027. 02. 21. SUN AM 11:30
         </p>
       </motion.header>
 
