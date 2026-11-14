@@ -38,9 +38,9 @@ export const Account = ({
   const handleCopyAccount = useCallback(
     async (account: AccountInfo, key: string) => {
       if (!account.accountNumber) return;
-      const textToCopy = `${account.bank} ${account.accountNumber} ${account.holder}`.trim();
+      const digitsOnly = account.accountNumber.replace(/\D/g, "");
       try {
-        await navigator.clipboard.writeText(textToCopy);
+        await navigator.clipboard.writeText(digitsOnly);
         setCopiedKey(key);
         setTimeout(() => setCopiedKey(null), 2000);
       } catch {
