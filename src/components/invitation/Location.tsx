@@ -98,13 +98,18 @@ export const Location = ({
               <button
                 type="button"
                 onClick={handleCopyAddress}
-                className={`shrink-0 whitespace-nowrap rounded px-2.5 py-1 text-[11px] transition-colors ${
+                className={`inline-grid shrink-0 place-items-center whitespace-nowrap rounded px-2.5 py-1 text-[11px] transition-colors ${
                   copiedAddress
                     ? "border border-[#8b7355] bg-[#8b7355]/10 text-[#4a3728]"
                     : "border border-[#d6c7b4] bg-white text-[#7a6856] hover:bg-[#f6f1ea]"
                 }`}
               >
-                {copiedAddress ? "복사됨" : "주소 복사"}
+                <span className="invisible col-start-1 row-start-1" aria-hidden="true">
+                  주소 복사
+                </span>
+                <span className="col-start-1 row-start-1">
+                  {copiedAddress ? "복사됨" : "주소 복사"}
+                </span>
               </button>
             </div>
           </div>

@@ -18,7 +18,7 @@
 - `src/components/invitation/Gallery.tsx`, `src/app/globals.css`, `src/app/invitation/page.tsx`, `public/gallery/img-001.jpg ~ img-022.jpg`
   - `/Users/sunmoo/Downloads/청첩장사진`에서 재정렬된 `001.jpeg` ~ `022.jpg` 총 22장을 번호 순서 그대로 고화질(높이 1200px, 품질 90)로 변환하여 갤러리에 연동
   - 브라우저/Next 이미지 캐시 충돌을 방지하기 위해 파일명을 `img-001.jpg` ~ `img-022.jpg`로 고유화하고, `IntersectionObserver`를 통해 갤러리 섹션이 화면에 진입했을 때부터 4초 자동 넘김이 시작되도록 개선하여 스크롤 도달 시 항상 1번 사진(`001.jpeg`)이 먼저 표시되도록 수정
-  - 가로 구도인 `020.jpeg`(`img-020.jpg`)와 정방형 `021.jpeg`(`img-021.jpg`)에서 좌측 벽면 대신 우측의 신랑·신부가 3:4 세로 프레임 중앙에 오도록 크롭 위치를 재조정
+  - 가로 구도인 `020.jpeg`(`img-020.jpg`)와 정방형 `021.jpeg`(`img-021.jpg`)에서 좌측 벽면 대신 신랑·신부가 3:4 세로 프레임 중앙에 오도록 크롭 위치를 재조정 (`020.jpeg` 원본 비율·확대 유지 상태에서 `left=3200..7700`으로 이동해 인물을 가운데 배치)
   - 갤러리 클릭 확대 모달을 제거하고, 멀티터치 핀치줌·iOS 제스처·롱프레스 이미지 저장(`-webkit-touch-callout: none`, `pointer-events: none` 및 투명 오버레이)·우클릭·드래그·인쇄/캡처 단축키 제한 적용
 - `src/components/invitation/Account.tsx`, `src/app/layout.tsx`
   - 신랑(`김승무 - 토스뱅크 1000-1599-2712`) 및 신부(`성은지 - 농협 127-12-344017`) 계좌를 추가하고, 기존 혼주 계좌번호에 은행별 표준 하이픈(`112-2040-3246-03`, `3333-07-2869593`, `127-12-380646`, `127-12-204590`)을 적용하되 복사 버튼 클릭 시에는 하이픈을 제거한 순수 숫자만 클립보드에 복사되도록 수정
@@ -27,6 +27,7 @@
 - `src/components/invitation/Location.tsx`
   - 지하철 안내 문구에서 `'도보 약 8분'`, `'도보 약 10분'`이 역명과 출구 뒤 다음 줄로 내려오도록 줄바꿈 적용
   - 하단에 정중한 축하 화환 사양 안내(`NOTICE`) 문구 1문장 추가
+  - `주소 복사` 버튼 클릭 후 텍스트가 `'복사됨'`으로 바뀔 때도 버튼 폭이 줄지 않도록 `inline-grid` 고정 레이어로 주소 줄바꿈 흔들림 제거
 - `src/components/BgmPlayer.tsx`, `src/app/layout.tsx`, `src/components/intro/DoorOpen.tsx`, `public/audio/bgm-prelude.m4a`
   - 퍼블릭 도메인 음원(바흐 평균율 1권 프렐류드 1번 BWV 846, Kimiko Ishizaka 연주)을 경량 AAC(`.m4a`)로 탑재
   - `RootLayout` 전역 `BgmPlayer`를 배치해 문 열기 터치 시 부드럽게 페이드인 재생을 시작하고 `/invitation` 전환 이후에도 끊김 없이 이어지도록 구성, 우측 상단 플로팅 토글 및 백그라운드 전환 시 자동 일시정지 적용
