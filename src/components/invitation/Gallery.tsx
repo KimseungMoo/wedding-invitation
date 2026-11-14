@@ -156,8 +156,7 @@ export const Gallery = ({ images }: GalleryProps) => {
                       src={src}
                       alt={`웨딩 갤러리 사진 ${index + 1}`}
                       fill
-                      quality={68}
-                      sizes="360px"
+                      sizes="(max-width: 480px) 100vw, 448px"
                       draggable={false}
                       className="object-cover pointer-events-none select-none"
                     />
@@ -276,8 +275,7 @@ export const Gallery = ({ images }: GalleryProps) => {
                     src={src}
                     alt={`웨딩 썸네일 ${index + 1}`}
                     fill
-                    quality={60}
-                    sizes="110px"
+                    sizes="(max-width: 480px) 33vw, 140px"
                     draggable={false}
                     className="object-cover pointer-events-none select-none"
                   />
