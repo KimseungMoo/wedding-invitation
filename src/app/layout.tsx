@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond } from "next/font/google";
 import localFont from "next/font/local";
+import { BgmPlayer } from "@/components/BgmPlayer";
 import "./globals.css";
 
 /**
@@ -102,6 +103,7 @@ export default function RootLayout({
       <body
         className={`${maruBuri.className} ${maruBuri.variable} ${cormorantGaramond.variable} font-serif antialiased`}
       >
+        <BgmPlayer />
         {children}
       </body>
     </html>

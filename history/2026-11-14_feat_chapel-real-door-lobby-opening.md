@@ -26,6 +26,10 @@
   - `AccountCard`를 모듈 스코프로 분리하고 `copyTimerRef`로 타이머를 관리해 복사 버튼 클릭 및 2초 후 초기화 시 카드가 재마운트되며 깜빡거리던 문제 해결
 - `src/components/invitation/Location.tsx`
   - 지하철 안내 문구에서 `'도보 약 8분'`, `'도보 약 10분'`이 역명과 출구 뒤 다음 줄로 내려오도록 줄바꿈 적용
+  - 하단에 정중한 축하 화환 사양 안내(`NOTICE`) 문구 1문장 추가
+- `src/components/BgmPlayer.tsx`, `src/app/layout.tsx`, `src/components/intro/DoorOpen.tsx`, `public/audio/bgm-prelude.m4a`
+  - 퍼블릭 도메인 음원(바흐 평균율 1권 프렐류드 1번 BWV 846, Kimiko Ishizaka 연주)을 경량 AAC(`.m4a`)로 탑재
+  - `RootLayout` 전역 `BgmPlayer`를 배치해 문 열기 터치 시 부드럽게 페이드인 재생을 시작하고 `/invitation` 전환 이후에도 끊김 없이 이어지도록 구성, 우측 상단 플로팅 토글 및 백그라운드 전환 시 자동 일시정지 적용
 - `src/app/layout.tsx`, `src/app/globals.css`, `public/fonts/MaruBuri-*.woff2`, `public/og-image.jpg`
   - 네이버 마루부리(`MaruBuri` Light/Regular/SemiBold/Bold `.woff2`) 폰트 파일을 프로젝트 내에 다운로드하고 `next/font/local`로 셀프 호스팅 연동하여 외부 CDN 의존 없이 모든 브라우저에서 마루부리 서체가 즉시 적용되도록 구성
   - 공유 링크 미리보기용 세로형 OG 이미지(`public/og-image.jpg`, `900×1200` `3:4` 비율 베일 컷 기반)를 생성해 Open Graph 및 Twitter 카드 메타데이터에 적용

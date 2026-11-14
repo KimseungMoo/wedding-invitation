@@ -241,6 +241,7 @@ export const DoorOpen = () => {
   const handleDoorClick = useCallback(() => {
     if (isOpen) return;
     setIsOpen(true);
+    window.dispatchEvent(new CustomEvent("wedding-bgm-start"));
 
     setTimeout(() => {
       setShowTransition(true);

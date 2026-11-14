@@ -490,6 +490,24 @@ export const Location = ({
             </div>
           </div>
         </motion.div>
+
+        {/* === 화환 사양 안내 === */}
+        <motion.div
+          className="mt-8 rounded-lg border border-[#e5dcd0] bg-[#faf7f2] px-5 py-6 text-center"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+        >
+          <p className="mb-2.5 font-display text-[10px] tracking-[0.28em] text-[#8b7355]">
+            NOTICE
+          </p>
+          <p className="text-[13px] font-light leading-[1.9] text-[#5c4a3a]">
+            축하해 주시는 마음만으로도 감사드리며,
+            <br />
+            화환은 정중히 사양하겠습니다.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
