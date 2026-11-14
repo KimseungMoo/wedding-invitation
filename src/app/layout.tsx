@@ -1,14 +1,41 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Noto_Serif_KR } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 /**
- * 한글 세리프 폰트 - 웨딩 분위기에 어울리는 우아한 폰트
+ * 한글 마루부리(MaruBuri) 로컬 웹폰트 - 웨딩 청첩장 본문 서체
  */
-const notoSerifKR = Noto_Serif_KR({
-  variable: "--font-noto-serif-kr",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const maruBuri = localFont({
+  variable: "--font-maruburi",
+  display: "swap",
+  src: [
+    {
+      path: "../../public/fonts/MaruBuri-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-SemiBold.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-SemiBold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
 });
 
 /**
@@ -58,7 +85,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${notoSerifKR.variable} ${cormorantGaramond.variable} font-serif antialiased`}
+        className={`${maruBuri.variable} ${cormorantGaramond.variable} font-serif antialiased`}
       >
         {children}
       </body>
