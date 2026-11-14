@@ -451,14 +451,16 @@ export const Location = ({
               </div>
               <span className="text-xs font-normal text-[#4a3728]">지하철</span>
             </div>
-            <div className="flex-1 space-y-1.5 border-l border-[#e6dcd0] pl-4 text-[13px] font-light leading-relaxed text-[#5c4a3a]">
+            <div className="flex-1 space-y-2 border-l border-[#e6dcd0] pl-4 text-[13px] font-light leading-relaxed text-[#5c4a3a]">
               <p>
-                압구정로데오역 5번 출구에서{" "}
-                <span className="whitespace-nowrap">도보 약 8분</span>
+                압구정로데오역 5번 출구에서
+                <br />
+                도보 약 8분
               </p>
               <p>
-                강남구청역 3-1번 출구에서{" "}
-                <span className="whitespace-nowrap">도보 약 10분</span>
+                강남구청역 3-1번 출구에서
+                <br />
+                도보 약 10분
               </p>
             </div>
           </div>

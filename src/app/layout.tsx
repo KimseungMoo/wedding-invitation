@@ -67,8 +67,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
+        width: 800,
+        height: 1200,
         alt: "김승무 ♥ 성은지 결혼식 초대",
       },
     ],

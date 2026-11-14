@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 export interface AccountInfo {
   role?: string;
@@ -14,6 +14,71 @@ interface AccountProps {
   groomAccounts?: AccountInfo[];
   brideAccounts?: AccountInfo[];
 }
+
+interface AccountCardProps {
+  account: AccountInfo;
+  cardKey: string;
+  isCopied: boolean;
+  onCopy: (account: AccountInfo, key: string) => void;
+}
+
+/**
+ * 개별 계좌 카드 (부모 상태 변경 시 언마운트·재마운트로 인한 깜빡임 방지를 위해 모듈 스코프에 선언)
+ */
+const AccountCard = ({ account, cardKey, isCopied, onCopy }: AccountCardProps) => {
+  const hasAccount = Boolean(account.accountNumber && account.bank);
+  return (
+    <motion.div
+      className="mb-3 flex items-center justify-between rounded-lg border border-[#e2d7c8] bg-white p-4 last:mb-0"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
+    >
+      <div>
+        <div className="flex items-center gap-2">
+          {account.role && (
+            <span className="text-[11px] font-light text-[#8b7355]">
+              {account.role}
+            </span>
+          )}
+          <span className="text-sm font-normal text-[#3f342b]">
+            {account.holder}
+          </span>
+        </div>
+        {hasAccount ? (
+          <p className="mt-1 text-xs font-light text-[#5c4a3a]">
+            <span>{account.bank} </span>
+            <button
+              type="button"
+              onClick={() => onCopy(account, cardKey)}
+              className="cursor-pointer underline decoration-[#b9a792] underline-offset-4 transition-colors hover:text-[#3f342b]"
+              aria-label={`${account.holder} 계좌번호 ${account.accountNumber} 복사`}
+            >
+              {account.accountNumber}
+            </button>
+          </p>
+        ) : (
+          <p className="mt-1 text-xs font-light text-[#9b8976]">
+            계좌번호 추후 안내 예정
+          </p>
+        )}
+      </div>
+      {hasAccount && (
+        <button
+          type="button"
+          onClick={() => onCopy(account, cardKey)}
+          className={`rounded-md px-3.5 py-2 text-xs font-light transition-all ${
+            isCopied
+              ? "border border-[#8b7355] bg-[#8b7355]/10 text-[#4a3728]"
+              : "border border-[#d6c7b4] bg-[#faf7f2] text-[#6b5344] hover:bg-[#f2ebe0]"
+          }`}
+        >
+          {isCopied ? "복사됨" : "복사"}
+        </button>
+      )}
+    </motion.div>
+  );
+};
 
 /**
  * 축의금 계좌 섹션
@@ -34,6 +99,13 @@ export const Account = ({
   const [isGroomOpen, setIsGroomOpen] = useState(false);
   const [isBrideOpen, setIsBrideOpen] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current);
+    };
+  }, []);
 
   const handleCopyAccount = useCallback(
     async (account: AccountInfo, key: string) => {
@@ -41,77 +113,18 @@ export const Account = ({
       const digitsOnly = account.accountNumber.replace(/\D/g, "");
       try {
         await navigator.clipboard.writeText(digitsOnly);
+        if (copyTimerRef.current) clearTimeout(copyTimerRef.current);
         setCopiedKey(key);
-        setTimeout(() => setCopiedKey(null), 2000);
+        copyTimerRef.current = setTimeout(() => {
+          setCopiedKey(null);
+          copyTimerRef.current = null;
+        }, 2000);
       } catch {
         setCopiedKey(null);
       }
     },
     []
   );
-
-  const AccountCard = ({
-    account,
-    cardKey,
-    isCopied,
-  }: {
-    account: AccountInfo;
-    cardKey: string;
-    isCopied: boolean;
-  }) => {
-    const hasAccount = Boolean(account.accountNumber && account.bank);
-    return (
-      <motion.div
-        className="mb-3 flex items-center justify-between rounded-lg border border-[#e2d7c8] bg-white p-4 last:mb-0"
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25 }}
-      >
-        <div>
-          <div className="flex items-center gap-2">
-            {account.role && (
-              <span className="text-[11px] font-light text-[#8b7355]">
-                {account.role}
-              </span>
-            )}
-            <span className="text-sm font-normal text-[#3f342b]">
-              {account.holder}
-            </span>
-          </div>
-          {hasAccount ? (
-            <p className="mt-1 text-xs font-light text-[#5c4a3a]">
-              <span>{account.bank} </span>
-              <button
-                type="button"
-                onClick={() => handleCopyAccount(account, cardKey)}
-                className="cursor-pointer underline decoration-[#b9a792] underline-offset-4 transition-colors hover:text-[#3f342b]"
-                aria-label={`${account.holder} 계좌번호 ${account.accountNumber} 복사`}
-              >
-                {account.accountNumber}
-              </button>
-            </p>
-          ) : (
-            <p className="mt-1 text-xs font-light text-[#9b8976]">
-              계좌번호 추후 안내 예정
-            </p>
-          )}
-        </div>
-        {hasAccount && (
-          <button
-            type="button"
-            onClick={() => handleCopyAccount(account, cardKey)}
-            className={`rounded-md px-3.5 py-2 text-xs font-light transition-all ${
-              isCopied
-                ? "border border-[#8b7355] bg-[#8b7355]/10 text-[#4a3728]"
-                : "border border-[#d6c7b4] bg-[#faf7f2] text-[#6b5344] hover:bg-[#f2ebe0]"
-            }`}
-          >
-            {isCopied ? "복사됨" : "복사"}
-          </button>
-        )}
-      </motion.div>
-    );
-  };
 
   return (
     <section className="bg-[#f6f1ea] px-6 py-20">
@@ -196,6 +209,7 @@ export const Account = ({
                       cardKey={key}
                       account={account}
                       isCopied={copiedKey === key}
+                      onCopy={handleCopyAccount}
                     />
                   );
                 })}
@@ -264,6 +278,7 @@ export const Account = ({
                       cardKey={key}
                       account={account}
                       isCopied={copiedKey === key}
+                      onCopy={handleCopyAccount}
                     />
                   );
                 })}
