@@ -23,8 +23,11 @@
 - `src/components/invitation/Account.tsx`, `src/app/layout.tsx`
   - 신랑(`김승무 - 토스뱅크 1000-1599-2712`) 및 신부(`성은지 - 농협 127-12-344017`) 계좌를 추가하고, 기존 혼주 계좌번호에 은행별 표준 하이픈(`112-2040-3246-03`, `3333-07-2869593`, `127-12-380646`, `127-12-204590`)을 적용하되 복사 버튼 클릭 시에는 하이픈을 제거한 순수 숫자만 클립보드에 복사되도록 수정
   - iOS 사파리·인앱 브라우저에서 계좌번호 일부만 전화번호로 오인식해 밑줄이 생기던 현상을 막기 위해 `formatDetection` 비활성화를 추가하고, 모든 계좌번호에 균일한 밑줄과 클릭 복사 동작을 적용
-- `src/app/layout.tsx`, `src/app/globals.css`, `public/fonts/MaruBuri-*.woff2`
+- `src/app/layout.tsx`, `src/app/globals.css`, `public/fonts/MaruBuri-*.woff2`, `public/og-image.jpg`
   - 네이버 마루부리(`MaruBuri` Light/Regular/SemiBold/Bold `.woff2`) 폰트 파일을 프로젝트 내에 다운로드하고 `next/font/local`로 셀프 호스팅 연동하여 외부 CDN 의존 없이 모든 브라우저에서 마루부리 서체가 즉시 적용되도록 구성
+  - 공유 링크 미리보기용 `1200×630` 가로형 OG 이미지(`public/og-image.jpg`, 베일 컷 기반)를 생성해 Open Graph 및 Twitter 카드 메타데이터에 적용
+- `src/components/invitation/MainVisual.tsx`
+  - 모바일 가시 높이(`100dvh`) 안에서 표지 카드와 `SCROLL` 힌트가 바로 보이도록 모바일 여백·일러스트 크기를 최적화하고 등장 딜레이를 `1s → 0.2s`로 단축
 
 ## 검증 결과
 

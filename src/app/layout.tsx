@@ -66,11 +66,18 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/main.jpeg",
-        width: 512,
-        height: 512,
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "김승무 ♥ 성은지 결혼식 초대",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "김승무 ♥ 성은지 결혼식에 초대합니다",
+    description: "2027년 2월 21일 (일) 오전 11시 30분 · 더 채플 앳 청담 채플홀 (6층)",
+    images: ["/og-image.jpg"],
   },
 };
 
