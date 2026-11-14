@@ -28,7 +28,9 @@
   - 지하철 안내 문구에서 `'도보 약 8분'`, `'도보 약 10분'`이 역명과 출구 뒤 다음 줄로 내려오도록 줄바꿈 적용
 - `src/app/layout.tsx`, `src/app/globals.css`, `public/fonts/MaruBuri-*.woff2`, `public/og-image.jpg`
   - 네이버 마루부리(`MaruBuri` Light/Regular/SemiBold/Bold `.woff2`) 폰트 파일을 프로젝트 내에 다운로드하고 `next/font/local`로 셀프 호스팅 연동하여 외부 CDN 의존 없이 모든 브라우저에서 마루부리 서체가 즉시 적용되도록 구성
-  - 공유 링크 미리보기용 세로형 OG 이미지(`public/og-image.jpg`, `800×1200` 베일 컷 기반)를 생성해 Open Graph 및 Twitter 카드 메타데이터에 적용
+  - 공유 링크 미리보기용 세로형 OG 이미지(`public/og-image.jpg`, `900×1200` `3:4` 비율 베일 컷 기반)를 생성해 Open Graph 및 Twitter 카드 메타데이터에 적용
+- `src/app/invitation/page.tsx`
+  - 카카오 JS SDK(`v2.7.4`)와 `NEXT_PUBLIC_KAKAO_APP_KEY`(`.env.local` / Vercel 환경변수)를 연동해 `청첩장 공유하기` 클릭 시 `Kakao.Share.sendDefault` 피드 템플릿(`imageWidth: 900, imageHeight: 1200`, `3:4` 세로 카드)으로 공유되도록 구현하고, 키 미설정 또는 SDK 오류 시 기존 Web Share 및 클립보드 복사로 폴백 처리
 - `src/components/invitation/MainVisual.tsx`
   - 모바일 가시 높이(`100dvh`) 안에서 표지 카드와 `SCROLL` 힌트가 바로 보이도록 모바일 여백·일러스트 크기를 최적화하고 등장 딜레이를 `1s → 0.2s`로 단축
 

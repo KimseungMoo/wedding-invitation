@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Script from "next/script";
 import { useCallback, useEffect, useState } from "react";
 import {
   MainVisual,
@@ -36,12 +37,65 @@ const GALLERY_IMAGES = [
   "/gallery/img-022.jpg",
 ];
 
+const KAKAO_APP_KEY = process.env.NEXT_PUBLIC_KAKAO_APP_KEY;
+const PROD_ORIGIN = "https://seungmoo-eunji-wedding-invitation.vercel.app";
+const SHARE_TITLE = "김승무 ♥ 성은지 결혼식에 초대합니다";
+const SHARE_DESCRIPTION =
+  "2027년 2월 21일 (일) 오전 11시 30분 · 더 채플 앳 청담 채플홀 (6층)";
+
+interface KakaoLink {
+  mobileWebUrl: string;
+  webUrl: string;
+}
+
+interface KakaoSDK {
+  init: (appKey: string) => void;
+  isInitialized: () => boolean;
+  Share: {
+    sendDefault: (options: {
+      objectType: "feed";
+      content: {
+        title: string;
+        description: string;
+        imageUrl: string;
+        imageWidth: number;
+        imageHeight: number;
+        link: KakaoLink;
+      };
+      buttons: Array<{
+        title: string;
+        link: KakaoLink;
+      }>;
+    }) => void;
+  };
+}
+
+declare global {
+  interface Window {
+    Kakao?: KakaoSDK;
+  }
+}
+
+function initKakaoSdk() {
+  if (!KAKAO_APP_KEY || typeof window === "undefined") return false;
+  const kakao = window.Kakao;
+  if (!kakao) return false;
+  if (!kakao.isInitialized()) {
+    kakao.init(KAKAO_APP_KEY);
+  }
+  return kakao.isInitialized();
+}
+
 /**
  * 청첩장 메인 페이지
  * 종이 청첩장 표지 및 내지 디자인·정보를 모바일에 최적화하여 구성
  */
 export default function InvitationPage() {
   const [copiedLink, setCopiedLink] = useState(false);
+
+  useEffect(() => {
+    initKakaoSdk();
+  }, []);
 
   useEffect(() => {
     const preventMultiTouch = (e: TouchEvent) => {
@@ -80,11 +134,46 @@ export default function InvitationPage() {
 
   const handleShareLink = useCallback(async () => {
     const shareUrl = window.location.origin;
+    const isLocalOrigin =
+      /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0|192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/i.test(
+        shareUrl
+      );
+    const kakaoOrigin = isLocalOrigin ? PROD_ORIGIN : shareUrl;
+
+    if (initKakaoSdk() && window.Kakao?.Share) {
+      try {
+        const link: KakaoLink = {
+          mobileWebUrl: kakaoOrigin,
+          webUrl: kakaoOrigin,
+        };
+        window.Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: SHARE_TITLE,
+            description: SHARE_DESCRIPTION,
+            imageUrl: `${kakaoOrigin}/og-image.jpg`,
+            imageWidth: 900,
+            imageHeight: 1200,
+            link,
+          },
+          buttons: [
+            {
+              title: "청첩장 보기",
+              link,
+            },
+          ],
+        });
+        return;
+      } catch {
+        // Kakao SDK 공유 실패 시 기본 Web Share / 클립보드로 폴백
+      }
+    }
+
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "김승무 ♥ 성은지 결혼식에 초대합니다",
-          text: "2027년 2월 21일 (일) 오전 11시 30분 · 더 채플 앳 청담 채플홀 (6층)",
+          title: SHARE_TITLE,
+          text: SHARE_DESCRIPTION,
           url: shareUrl,
         });
         return;
@@ -109,6 +198,16 @@ export default function InvitationPage() {
       onContextMenu={(e) => e.preventDefault()}
       onDragStart={(e) => e.preventDefault()}
     >
+      {KAKAO_APP_KEY && (
+        <Script
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          onLoad={() => {
+            initKakaoSdk();
+          }}
+        />
+      )}
       {/* 표지: SAVE THE DATE & 더 채플 앳 청담 일러스트 */}
       <MainVisual
         groomEnglishName="KIM SEUNG MOO"
