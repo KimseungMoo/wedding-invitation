@@ -161,28 +161,7 @@ export const Gallery = ({ images }: GalleryProps) => {
                       draggable={false}
                       className="object-cover pointer-events-none select-none"
                     />
-                    {/* 캡처 화질 저하용 미세 필름 그레인 + 대각선 워터마크 보호 레이어 */}
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 z-10 overflow-hidden select-none"
-                      style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(-32deg, rgba(255,253,249,0.032) 0px, rgba(255,253,249,0.032) 1px, transparent 1px, transparent 5px), repeating-linear-gradient(58deg, rgba(60,46,34,0.026) 0px, rgba(60,46,34,0.026) 1px, transparent 1px, transparent 6px)",
-                      }}
-                    >
-                      <div className="absolute -inset-12 flex -rotate-24 flex-col justify-around opacity-[0.065]">
-                        {Array.from({ length: 6 }).map((_, rowIdx) => (
-                          <div
-                            key={rowIdx}
-                            className="flex justify-around whitespace-nowrap font-display text-[10px] tracking-[0.28em] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.65)]"
-                          >
-                            <span>KIM SEUNG MOO · SEONG EUN JI</span>
-                            <span>2027. 02. 21</span>
-                            <span>KIM SEUNG MOO · SEONG EUN JI</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    <div className="absolute inset-0 z-10" />
                   </div>
                 ))
               : placeholderImages.map((img) => (
