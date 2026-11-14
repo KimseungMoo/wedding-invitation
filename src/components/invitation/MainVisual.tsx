@@ -4,147 +4,144 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 interface MainVisualProps {
-  groomName?: string;
-  brideName?: string;
-  greeting?: string;
+  groomEnglishName?: string;
+  brideEnglishName?: string;
+  dateLabel?: string;
+  timeLabel?: string;
+  venueLabel?: string;
 }
 
 /**
  * 메인 비주얼 섹션
- * 우아한 화이트 톤 디자인
+ * 종이 청첩장 표지(SAVE THE DATE + 더 채플 앳 청담 아치 일러스트)를 모바일에 맞게 재현
  */
 export const MainVisual = ({
-  groomName = "김승무",
-  brideName = "성은지",
-  greeting = "사랑하지 않고 스쳐 갈 수도 있었는데,\n사랑일지도 모른다고 걸음을 멈춰준\n그 사람이 정녕 고맙다고\n-양귀자 '모순'-",
+  groomEnglishName = "KIM SEUNG MOO",
+  brideEnglishName = "SEONG EUN JI",
+  dateLabel = "2027. 2. 21. (일)",
+  timeLabel = "오전 11시 30분",
+  venueLabel = "더 채플 앳 청담 채플홀 (6층)",
 }: MainVisualProps) => {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#faf9f6] px-6 py-20">
-      {/* === 배경 장식 === */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#f5efe8] via-[#faf9f6] to-[#f8f5f0]" />
+    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#faf7f2] px-4 py-8 sm:px-6 sm:py-12">
+      {/* === 배경 은은한 그라데이션 === */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#f4ede3] via-[#faf7f2] to-[#f6f1ea]" />
 
-        {/* 좌상단 장식 */}
-        <motion.div
-          className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[#d4c5a9]/10 blur-[80px]"
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-
-        {/* 우하단 장식 */}
-        <motion.div
-          className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-[#e8d4c4]/15 blur-[80px]"
-          animate={{ scale: [1.1, 1, 1.1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-
-        {/* 플로럴 라인 장식 (상단) */}
-        <svg className="absolute left-1/2 top-8 -translate-x-1/2 opacity-20" width="200" height="60" viewBox="0 0 200 60">
-          <path
-            d="M100 30 Q80 10 60 30 Q40 50 20 30 M100 30 Q120 10 140 30 Q160 50 180 30"
-            fill="none"
-            stroke="#c9a961"
-            strokeWidth="1"
-          />
-          <circle cx="100" cy="30" r="3" fill="#c9a961" />
-        </svg>
-      </div>
-
-      {/* === 메인 이미지 영역 === */}
+      {/* === 종이 청첩장 표지 카드 프레임 === */}
       <motion.div
-        className="relative z-10 mb-10"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="relative h-56 w-56 overflow-hidden rounded-full border border-[#d4c5a9]/30 bg-gradient-to-br from-[#f5f0e8] to-[#ebe4d8] shadow-[0_10px_40px_rgba(180,160,130,0.15)] sm:h-72 sm:w-72">
-          {/* 메인 이미지 */}
-          <Image
-            src="/main.jpeg"
-            alt="웨딩 사진"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        {/* 장식 링 */}
-        <div className="absolute -inset-3 rounded-full border border-dashed border-[#d4c5a9]/25" />
-        <div className="absolute -inset-6 rounded-full border border-[#d4c5a9]/10" />
-      </motion.div>
-
-      {/* === 장식 라인 === */}
-      <motion.div
-        className="z-10 mb-6 flex items-center justify-center gap-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-      >
-        <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a961]/40" />
-        <div className="h-1.5 w-1.5 rotate-45 border border-[#c9a961]/50" />
-        <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a961]/40" />
-      </motion.div>
-
-      {/* === 이름 === */}
-      <motion.div
-        className="z-10 mb-8 text-center"
-        initial={{ opacity: 0, y: 20 }}
+        className="relative z-10 mx-auto w-full max-w-[420px] border border-[#dcd0c0] bg-[#f8f3eb]/90 p-2 shadow-[0_14px_45px_rgba(92,72,52,0.08)]"
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
+        transition={{ duration: 0.8 }}
       >
-        <div className="flex items-center justify-center gap-5">
-          <span className="text-2xl font-light tracking-wide text-[#4a4a4a]">
-            {groomName}
-          </span>
-          <div className="flex items-center gap-2">
-            <div className="h-px w-3 bg-[#d4a5a5]/50" />
-            <svg className="h-4 w-4 text-[#d4a5a5]" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-            <div className="h-px w-3 bg-[#d4a5a5]/50" />
-          </div>
-          <span className="text-2xl font-light tracking-wide text-[#4a4a4a]">
-            {brideName}
-          </span>
-        </div>
-      </motion.div>
+        <div className="flex flex-col items-center border border-[#e6dcd0] bg-gradient-to-b from-[#faf6ef] via-[#faf7f2] to-[#f6f0e6] px-4 pb-10 pt-9 text-center sm:px-6 sm:pb-12 sm:pt-11">
+          {/* SAVE THE DATE */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+          >
+            <p className="font-display text-sm font-medium tracking-[0.42em] text-[#5c4a3a] sm:text-base">
+              SAVE THE DATE
+            </p>
+            <div className="mx-auto mt-4 h-px w-8 bg-[#bfa98e]/70" />
+          </motion.div>
 
-      {/* === 인사말 === */}
-      <motion.div
-        className="z-10 max-w-sm text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-      >
-        <p className="whitespace-pre-line text-base font-light leading-loose text-[#6b6b6b]">
-          {greeting}
-        </p>
+          {/* 채플 아치 일러스트 */}
+          <motion.div
+            className="relative my-4 w-full max-w-[340px]"
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.25 }}
+          >
+            <div
+              className="relative aspect-[646/583] w-full overflow-hidden"
+              style={{
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 92% 90% at 50% 50%, black 66%, transparent 100%)",
+                maskImage:
+                  "radial-gradient(ellipse 92% 90% at 50% 50%, black 66%, transparent 100%)",
+              }}
+            >
+              <Image
+                src="/chapel-illustration.png"
+                alt="더 채플 앳 청담 아치 일러스트"
+                fill
+                className="object-contain mix-blend-multiply"
+                priority
+              />
+            </div>
+          </motion.div>
+
+          {/* 예식 일시 */}
+          <motion.div
+            className="mt-1 space-y-1"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
+          >
+            <p className="text-base font-normal tracking-[0.18em] text-[#4a3728] sm:text-[17px]">
+              {dateLabel}
+            </p>
+            <p className="text-xs font-light tracking-[0.14em] text-[#7a6856] sm:text-[13px]">
+              {timeLabel}
+            </p>
+          </motion.div>
+
+          {/* 영문 성함 */}
+          <motion.div
+            className="mt-6 flex flex-col items-center gap-1"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+          >
+            <p className="font-display text-base font-medium tracking-[0.28em] text-[#4a3728] sm:text-lg">
+              {groomEnglishName}
+            </p>
+            <span className="font-display text-sm italic text-[#9d8770]">&amp;</span>
+            <p className="font-display text-base font-medium tracking-[0.28em] text-[#4a3728] sm:text-lg">
+              {brideEnglishName}
+            </p>
+          </motion.div>
+
+          {/* 예식장 안내 */}
+          <motion.p
+            className="mt-5 text-[11px] tracking-[0.14em] text-[#8b7763]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.75 }}
+          >
+            {venueLabel}
+          </motion.p>
+        </div>
       </motion.div>
 
       {/* === 스크롤 힌트 === */}
       <motion.div
-        className="absolute bottom-10 z-10 pb-safe"
+        className="relative z-10 mt-6 pb-safe"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
         <motion.div
-          animate={{ y: [0, 6, 0] }}
+          animate={{ y: [0, 5, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2"
+          className="flex flex-col items-center gap-1.5"
         >
           <svg
-            width="18"
-            height="18"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
-            className="text-[#a08d6e]/50"
+            className="text-[#8b7355]/60"
           >
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
-          <span className="text-[10px] tracking-[0.2em] text-[#b0b0b0]">SCROLL</span>
+          <span className="font-display text-[10px] tracking-[0.28em] text-[#9b8976]">
+            SCROLL
+          </span>
         </motion.div>
       </motion.div>
     </section>

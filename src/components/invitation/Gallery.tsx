@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import { useState, useCallback, useEffect, useRef } from "react";
 
 interface GalleryProps {
@@ -9,10 +10,9 @@ interface GalleryProps {
 
 /**
  * 갤러리 섹션
- * 우아한 화이트 톤 디자인
+ * 실제 사진 배열이 전달되면 이미지를 렌더링하고, 미전달 시 플레이스홀더 카드 표시
  */
 export const Gallery = ({ images }: GalleryProps) => {
-  // 플레이스홀더 이미지
   const placeholderImages = [
     { id: 1, label: "First Meeting" },
     { id: 2, label: "Spring Date" },
@@ -22,19 +22,15 @@ export const Gallery = ({ images }: GalleryProps) => {
     { id: 6, label: "Wedding Photo" },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalIndex, setModalIndex] = useState(0);
-  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const hasRealImages = Boolean(images && images.length > 0);
+  const totalCount = hasRealImages ? images!.length : placeholderImages.length;
 
-  // === 자동 넘김 (4초 간격) ===
-  const startAutoPlay = useCallback(() => {
-    autoPlayRef.current = setInterval(() => {
-      setCurrentIndex((prev) =>
-        prev === placeholderImages.length - 1 ? 0 : prev + 1
-      );
-    }, 4000);
-  }, [placeholderImages.length]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showAllThumbs, setShowAllThumbs] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const stopAutoPlay = useCallback(() => {
     if (autoPlayRef.current) {
@@ -43,10 +39,36 @@ export const Gallery = ({ images }: GalleryProps) => {
     }
   }, []);
 
+  // === 자동 넘김 (갤러리 섹션이 화면에 보일 때만 4초 간격 실행) ===
+  const startAutoPlay = useCallback(() => {
+    stopAutoPlay();
+    if (totalCount <= 1 || !isInView) return;
+    autoPlayRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev === totalCount - 1 ? 0 : prev + 1));
+    }, 4000);
+  }, [totalCount, isInView, stopAutoPlay]);
+
   useEffect(() => {
-    if (!isModalOpen) startAutoPlay();
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isInView) {
+      startAutoPlay();
+    } else {
+      stopAutoPlay();
+    }
     return () => stopAutoPlay();
-  }, [isModalOpen, startAutoPlay, stopAutoPlay]);
+  }, [isInView, startAutoPlay, stopAutoPlay]);
 
   /** 사용자 조작 시 자동 넘김 리셋 */
   const handleUserInteraction = useCallback(
@@ -59,36 +81,38 @@ export const Gallery = ({ images }: GalleryProps) => {
   );
 
   const handlePrev = useCallback(() => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? placeholderImages.length - 1 : prev - 1
-    );
-  }, [placeholderImages.length]);
+    setCurrentIndex((prev) => (prev === 0 ? totalCount - 1 : prev - 1));
+  }, [totalCount]);
 
   const handleNext = useCallback(() => {
-    setCurrentIndex((prev) =>
-      prev === placeholderImages.length - 1 ? 0 : prev + 1
-    );
-  }, [placeholderImages.length]);
+    setCurrentIndex((prev) => (prev === totalCount - 1 ? 0 : prev + 1));
+  }, [totalCount]);
 
-  const handleImageClick = useCallback((index: number) => {
-    setModalIndex(index);
-    setIsModalOpen(true);
-  }, []);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
 
-  const handleModalPrev = useCallback(() => {
-    setModalIndex((prev) =>
-      prev === 0 ? placeholderImages.length - 1 : prev - 1
-    );
-  }, [placeholderImages.length]);
-
-  const handleModalNext = useCallback(() => {
-    setModalIndex((prev) =>
-      prev === placeholderImages.length - 1 ? 0 : prev + 1
-    );
-  }, [placeholderImages.length]);
+  const handleTouchEnd = (
+    e: React.TouchEvent,
+    onPrev: () => void,
+    onNext: () => void
+  ) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) handleUserInteraction(onNext);
+      else handleUserInteraction(onPrev);
+    }
+    touchStartX.current = null;
+  };
 
   return (
-    <section className="bg-[#f8f5f0] px-6 py-20">
+    <section
+      ref={sectionRef}
+      className="bg-[#f6f1ea] px-6 py-20 select-none"
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
+    >
       <div className="mx-auto max-w-md">
         {/* === 섹션 제목 === */}
         <motion.div
@@ -98,81 +122,134 @@ export const Gallery = ({ images }: GalleryProps) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#a08d6e]">GALLERY</p>
+          <p className="mb-2 font-display text-[11px] tracking-[0.34em] text-[#8b7355]">
+            GALLERY
+          </p>
           <div className="mx-auto flex items-center justify-center gap-3">
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#d4c5a9]/50" />
-            <div className="h-1 w-1 rotate-45 border border-[#c9a961]/50" />
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#d4c5a9]/50" />
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#cbbba5]" />
+            <div className="h-1 w-1 rotate-45 border border-[#8b7355]/60" />
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#cbbba5]" />
           </div>
         </motion.div>
 
         {/* === 메인 캐러셀 === */}
         <motion.div
-          className="relative mb-6 overflow-hidden rounded-lg"
-          initial={{ opacity: 0, scale: 0.95 }}
+          className="relative mb-5 overflow-hidden rounded-lg border border-[#e2d7c8] bg-white shadow-[0_6px_24px_rgba(92,72,52,0.05)]"
+          initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={(e) => handleTouchEnd(e, handlePrev, handleNext)}
         >
-          {/* 이미지 컨테이너 */}
           <div
-            className="flex cursor-pointer transition-transform duration-300 ease-out"
+            className="flex transition-transform duration-300 ease-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {placeholderImages.map((img, index) => (
-              <div
-                key={img.id}
-                className="aspect-[4/3] w-full flex-shrink-0"
-                onClick={() => handleImageClick(index)}
-              >
-                <div className="flex h-full w-full flex-col items-center justify-center border border-[#e8e2d9] bg-gradient-to-br from-white to-[#f5f0e8]">
-                  <svg className="mb-3 h-12 w-12 text-[#d4c5a9]/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <span className="text-xs tracking-wider text-[#a0a0a0]">{img.label}</span>
-                </div>
-              </div>
-            ))}
+            {hasRealImages
+              ? images!.map((src, index) => (
+                  <div
+                    key={src + index}
+                    className="relative aspect-[3/4] w-full flex-shrink-0 bg-[#f8f4ee]"
+                  >
+                    <Image
+                      src={src}
+                      alt={`웨딩 갤러리 사진 ${index + 1}`}
+                      fill
+                      sizes="(max-width: 480px) 100vw, 448px"
+                      draggable={false}
+                      className="object-cover pointer-events-none select-none"
+                    />
+                    <div className="absolute inset-0 z-10" />
+                  </div>
+                ))
+              : placeholderImages.map((img) => (
+                  <div
+                    key={img.id}
+                    className="aspect-[3/4] w-full flex-shrink-0"
+                  >
+                    <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-[#fcfaf7] to-[#f4ede3]">
+                      <svg
+                        className="mb-3 h-11 w-11 text-[#cbbba5]/70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                      >
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                      </svg>
+                      <span className="font-display text-xs tracking-[0.18em] text-[#9b8976]">
+                        {img.label}
+                      </span>
+                    </div>
+                  </div>
+                ))}
           </div>
 
-          {/* 좌우 버튼 */}
-          <button
-            onClick={() => handleUserInteraction(handlePrev)}
-            className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4c5a9]/30 bg-white/90 shadow-sm transition-all hover:bg-white"
-            aria-label="이전 사진"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="1.5">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <button
-            onClick={() => handleUserInteraction(handleNext)}
-            className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4c5a9]/30 bg-white/90 shadow-sm transition-all hover:bg-white"
-            aria-label="다음 사진"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="1.5">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+          {/* 좌우 버튼 & 카운터 */}
+          {totalCount > 1 && (
+            <>
+              <div className="pointer-events-none absolute right-3 bottom-3 rounded-full bg-black/40 px-2.5 py-1 font-display text-[11px] tracking-[0.14em] text-white backdrop-blur-xs">
+                {currentIndex + 1} / {totalCount}
+              </div>
+              <button
+                type="button"
+                onClick={() => handleUserInteraction(handlePrev)}
+                className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6c7b4]/50 bg-white/90 shadow-sm transition-all hover:bg-white"
+                aria-label="이전 사진"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6b5344"
+                  strokeWidth="1.5"
+                >
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleUserInteraction(handleNext)}
+                className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6c7b4]/50 bg-white/90 shadow-sm transition-all hover:bg-white"
+                aria-label="다음 사진"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6b5344"
+                  strokeWidth="1.5"
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </>
+          )}
         </motion.div>
 
         {/* === 인디케이터 === */}
-        <div className="flex justify-center gap-1.5">
-          {placeholderImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleUserInteraction(() => setCurrentIndex(index))}
-              className={`h-1.5 rounded-full transition-all ${
-                index === currentIndex
-                  ? "w-5 bg-[#c9a961]"
-                  : "w-1.5 bg-[#d4c5a9]/40"
-              }`}
-              aria-label={`${index + 1}번째 사진으로 이동`}
-            />
-          ))}
-        </div>
+        {totalCount > 1 && (
+          <div className="flex flex-wrap justify-center gap-1.5 px-2">
+            {Array.from({ length: totalCount }).map((_, index) => (
+              <button
+                type="button"
+                key={index}
+                onClick={() => handleUserInteraction(() => setCurrentIndex(index))}
+                className={`h-1.5 rounded-full transition-all ${
+                  index === currentIndex
+                    ? "w-5 bg-[#8b7355]"
+                    : "w-1.5 bg-[#cbbba5]/60"
+                }`}
+                aria-label={`${index + 1}번째 사진으로 이동`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* === 썸네일 그리드 === */}
         <motion.div
@@ -180,102 +257,86 @@ export const Gallery = ({ images }: GalleryProps) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         >
-          {placeholderImages.map((img, index) => (
-            <button
-              key={img.id}
-              onClick={() => {
-                setCurrentIndex(index);
-                handleImageClick(index);
-              }}
-              className={`aspect-square overflow-hidden rounded-md border transition-all ${
-                index === currentIndex
-                  ? "border-[#c9a961] shadow-sm"
-                  : "border-[#e8e2d9] opacity-70 hover:opacity-100"
-              }`}
-            >
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white to-[#f5f0e8]">
-                <svg className="h-6 w-6 text-[#d4c5a9]/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <path d="M21 15l-5-5L5 21" />
-                </svg>
-              </div>
-            </button>
-          ))}
+          {hasRealImages
+            ? (showAllThumbs ? images! : images!.slice(0, 9)).map((src, index) => (
+                <button
+                  type="button"
+                  key={src + index}
+                  onClick={() => handleUserInteraction(() => setCurrentIndex(index))}
+                  className={`relative aspect-square overflow-hidden rounded-md border transition-all ${
+                    index === currentIndex
+                      ? "border-[#8b7355] shadow-sm"
+                      : "border-[#e2d7c8] opacity-75 hover:opacity-100"
+                  }`}
+                >
+                  <Image
+                    src={src}
+                    alt={`웨딩 썸네일 ${index + 1}`}
+                    fill
+                    sizes="(max-width: 480px) 33vw, 140px"
+                    draggable={false}
+                    className="object-cover pointer-events-none select-none"
+                  />
+                  <div className="absolute inset-0 z-10" />
+                </button>
+              ))
+            : placeholderImages.map((img, index) => (
+                <button
+                  type="button"
+                  key={img.id}
+                  onClick={() => handleUserInteraction(() => setCurrentIndex(index))}
+                  className={`aspect-square overflow-hidden rounded-md border transition-all ${
+                    index === currentIndex
+                      ? "border-[#8b7355] shadow-sm"
+                      : "border-[#e2d7c8] opacity-75 hover:opacity-100"
+                  }`}
+                >
+                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#fcfaf7] to-[#f4ede3]">
+                    <svg
+                      className="h-6 w-6 text-[#cbbba5]/60"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <path d="M21 15l-5-5L5 21" />
+                    </svg>
+                  </div>
+                </button>
+              ))}
         </motion.div>
-      </div>
 
-      {/* === 모달 === */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0a]/95 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsModalOpen(false)}
-          >
-            {/* 닫기 버튼 */}
+        {hasRealImages && images!.length > 9 && (
+          <div className="mt-5 text-center">
             <button
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:text-white"
-              onClick={() => setIsModalOpen(false)}
-              aria-label="닫기"
+              type="button"
+              onClick={() => setShowAllThumbs((prev) => !prev)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#d6c7b4] bg-white px-5 py-2 text-xs font-light text-[#5c4a3a] shadow-2xs transition-colors hover:bg-[#fcfaf7]"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M18 6L6 18M6 6l12 12" />
+              <span>
+                {showAllThumbs
+                  ? "사진 접기"
+                  : `사진 더보기 (+${images!.length - 9}장)`}
+              </span>
+              <svg
+                className={`h-3.5 w-3.5 text-[#8b7355] transition-transform ${
+                  showAllThumbs ? "rotate-180" : ""
+                }`}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path d="M6 9l6 6 6-6" />
               </svg>
             </button>
-
-            {/* 이미지 */}
-            <motion.div
-              className="aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-lg border border-[#d4c5a9]/20 bg-gradient-to-br from-[#faf9f6] to-[#f0ebe0]"
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex h-full w-full flex-col items-center justify-center">
-                <svg className="mb-4 h-16 w-16 text-[#d4c5a9]/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <path d="M21 15l-5-5L5 21" />
-                </svg>
-                <span className="text-sm tracking-wider text-[#8b8b8b]">
-                  {placeholderImages[modalIndex].label}
-                </span>
-              </div>
-            </motion.div>
-
-            {/* 좌우 버튼 */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleModalPrev();
-              }}
-              className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:text-white"
-              aria-label="이전 사진"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleModalNext();
-              }}
-              className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:text-white"
-              aria-label="다음 사진"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </div>
     </section>
   );
 };

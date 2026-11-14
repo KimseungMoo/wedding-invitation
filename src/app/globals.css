@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  /* 웨딩 테마 색상 */
-  --wedding-pink: #e8a4b8;
-  --wedding-pink-light: #fdf2f5;
-  --wedding-pink-dark: #d4788f;
-  --wedding-gold: #c9a961;
-  --wedding-gold-light: #f5edd6;
-  --wedding-cream: #faf8f5;
-  --wedding-gray: #6b7280;
-  --wedding-text: #3d3d3d;
+  /* 종이 청첩장 기반 샴페인 아이보리 & 에스프레소 토프 테마 */
+  --wedding-pink: #b5655d;
+  --wedding-pink-light: #f8f1ef;
+  --wedding-pink-dark: #944e47;
+  --wedding-gold: #8b7355;
+  --wedding-gold-light: #f4ede3;
+  --wedding-cream: #faf7f2;
+  --wedding-paper: #f6f1ea;
+  --wedding-espresso: #4a3728;
+  --wedding-border: #e5dcd0;
+  --wedding-gray: #6b5e52;
+  --wedding-text: #3f342b;
 
   --background: var(--wedding-cream);
   --foreground: var(--wedding-text);
@@ -19,6 +22,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-serif: var(--font-noto-serif-kr), "Noto Serif KR", Georgia, serif;
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
 
   /* 커스텀 색상 */
   --color-wedding-pink: var(--wedding-pink);
@@ -27,6 +31,9 @@
   --color-wedding-gold: var(--wedding-gold);
   --color-wedding-gold-light: var(--wedding-gold-light);
   --color-wedding-cream: var(--wedding-cream);
+  --color-wedding-paper: var(--wedding-paper);
+  --color-wedding-espresso: var(--wedding-espresso);
+  --color-wedding-border: var(--wedding-border);
   --color-wedding-gray: var(--wedding-gray);
   --color-wedding-text: var(--wedding-text);
 }
@@ -44,16 +51,37 @@
 }
 
 /* 기본 스타일 */
-html,
+html {
+  overflow-x: clip;
+}
+
 body {
-  height: 100%;
-  overflow-x: hidden;
+  min-height: 100%;
+  overflow-x: clip;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-serif);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 이미지 확대·롱프레스 저장·드래그·인쇄 캡처 제한 */
+img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+
+@media print {
+  body {
+    display: none !important;
+  }
 }
 
 /* 터치 최적화 */

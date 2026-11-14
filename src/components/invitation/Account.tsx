@@ -3,7 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback } from "react";
 
-interface AccountInfo {
+export interface AccountInfo {
+  role?: string;
   bank: string;
   accountNumber: string;
   holder: string;
@@ -16,33 +17,32 @@ interface AccountProps {
 
 /**
  * 축의금 계좌 섹션
- * 우아한 화이트 톤 디자인
+ * 종이 청첩장의 실제 가족 성함 반영 및 샴페인 아이보리 톤 디자인 통일
  */
 export const Account = ({
   groomAccounts = [
-    { bank: "신한은행", accountNumber: "110-123-456789", holder: "김신랑" },
-    { bank: "국민은행", accountNumber: "123-45-6789012", holder: "김아버지" },
-    { bank: "우리은행", accountNumber: "1002-123-456789", holder: "김어머니" },
+    { role: "아버지", bank: "부산은행", accountNumber: "1122040324603", holder: "김종렬" },
+    { role: "어머니", bank: "카카오뱅크", accountNumber: "3333072869593", holder: "김숙희" },
   ],
   brideAccounts = [
-    { bank: "하나은행", accountNumber: "123-456789-01234", holder: "이신부" },
-    { bank: "농협은행", accountNumber: "123-4567-8901-23", holder: "이아버지" },
-    { bank: "신한은행", accountNumber: "110-987-654321", holder: "이어머니" },
+    { role: "아버지", bank: "농협", accountNumber: "12712380646", holder: "성낙인" },
+    { role: "어머니", bank: "농협", accountNumber: "12712204590", holder: "김보예" },
   ],
 }: AccountProps) => {
   const [isGroomOpen, setIsGroomOpen] = useState(false);
   const [isBrideOpen, setIsBrideOpen] = useState(false);
-  const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const handleCopyAccount = useCallback(
-    async (account: AccountInfo) => {
-      const textToCopy = `${account.bank} ${account.accountNumber} ${account.holder}`;
+    async (account: AccountInfo, key: string) => {
+      if (!account.accountNumber) return;
+      const textToCopy = `${account.bank} ${account.accountNumber} ${account.holder}`.trim();
       try {
         await navigator.clipboard.writeText(textToCopy);
-        setCopiedAccount(account.accountNumber);
-        setTimeout(() => setCopiedAccount(null), 2000);
+        setCopiedKey(key);
+        setTimeout(() => setCopiedKey(null), 2000);
       } catch {
-        alert("복사에 실패했습니다.");
+        setCopiedKey(null);
       }
     },
     []
@@ -50,37 +50,61 @@ export const Account = ({
 
   const AccountCard = ({
     account,
+    cardKey,
     isCopied,
   }: {
     account: AccountInfo;
+    cardKey: string;
     isCopied: boolean;
-  }) => (
-    <motion.div
-      className="mb-3 flex items-center justify-between rounded-lg border border-[#e8e2d9] bg-white p-4 last:mb-0"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div>
-        <p className="text-xs text-[#a0a0a0]">{account.bank}</p>
-        <p className="text-sm font-light text-[#4a4a4a]">{account.accountNumber}</p>
-        <p className="text-xs text-[#8b8b8b]">{account.holder}</p>
-      </div>
-      <button
-        onClick={() => handleCopyAccount(account)}
-        className={`rounded-md px-4 py-2 text-xs font-light transition-all ${
-          isCopied
-            ? "border border-[#8ba5c9] bg-[#8ba5c9]/10 text-[#8ba5c9]"
-            : "border border-[#d4c5a9] bg-[#faf9f6] text-[#8b7355] hover:bg-[#f5f0e8]"
-        }`}
+  }) => {
+    const hasAccount = Boolean(account.accountNumber && account.bank);
+    return (
+      <motion.div
+        className="mb-3 flex items-center justify-between rounded-lg border border-[#e2d7c8] bg-white p-4 last:mb-0"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25 }}
       >
-        {isCopied ? "복사됨" : "복사"}
-      </button>
-    </motion.div>
-  );
+        <div>
+          <div className="flex items-center gap-2">
+            {account.role && (
+              <span className="text-[11px] font-light text-[#8b7355]">
+                {account.role}
+              </span>
+            )}
+            <span className="text-sm font-normal text-[#3f342b]">
+              {account.holder}
+            </span>
+          </div>
+          {hasAccount ? (
+            <p className="mt-1 text-xs font-light text-[#5c4a3a]">
+              {account.bank} {account.accountNumber}
+            </p>
+          ) : (
+            <p className="mt-1 text-xs font-light text-[#9b8976]">
+              계좌번호 추후 안내 예정
+            </p>
+          )}
+        </div>
+        {hasAccount && (
+          <button
+            type="button"
+            onClick={() => handleCopyAccount(account, cardKey)}
+            className={`rounded-md px-3.5 py-2 text-xs font-light transition-all ${
+              isCopied
+                ? "border border-[#8b7355] bg-[#8b7355]/10 text-[#4a3728]"
+                : "border border-[#d6c7b4] bg-[#faf7f2] text-[#6b5344] hover:bg-[#f2ebe0]"
+            }`}
+          >
+            {isCopied ? "복사됨" : "복사"}
+          </button>
+        )}
+      </motion.div>
+    );
+  };
 
   return (
-    <section className="bg-[#f8f5f0] px-6 py-20">
+    <section className="bg-[#f6f1ea] px-6 py-20">
       <div className="mx-auto max-w-md">
         {/* === 섹션 제목 === */}
         <motion.div
@@ -90,37 +114,44 @@ export const Account = ({
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#a08d6e]">ACCOUNT</p>
-          <div className="mx-auto mb-4 flex items-center justify-center gap-3">
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#d4c5a9]/50" />
-            <div className="h-1 w-1 rotate-45 border border-[#c9a961]/50" />
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#d4c5a9]/50" />
-          </div>
-          <p className="text-sm font-light text-[#8b8b8b]">
-            마음 전하실 곳
+          <p className="mb-2 font-display text-[11px] tracking-[0.34em] text-[#8b7355]">
+            ACCOUNT
           </p>
+          <div className="mx-auto mb-4 flex items-center justify-center gap-3">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#cbbba5]" />
+            <div className="h-1 w-1 rotate-45 border border-[#8b7355]/60" />
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#cbbba5]" />
+          </div>
+          <p className="text-sm font-light text-[#6b5e52]">마음 전하실 곳</p>
         </motion.div>
 
         {/* === 신랑측 === */}
         <motion.div
-          className="mb-4"
+          className="mb-3.5"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
           <button
+            type="button"
             onClick={() => setIsGroomOpen(!isGroomOpen)}
-            className="flex w-full items-center justify-between rounded-lg border border-[#d4c5a9]/40 bg-white p-5 transition-all hover:border-[#c9a961]/60"
+            className="flex w-full items-center justify-between rounded-lg border border-[#d6c7b4]/70 bg-white p-5 transition-all hover:border-[#b89f7d]"
           >
-            <div className="flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8f0f8]">
-                <svg className="h-5 w-5 text-[#8ba5c9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f0e7dc] text-[#6b5344]">
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
                   <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
               </div>
-              <span className="text-sm font-light text-[#4a4a4a]">
+              <span className="text-sm font-normal text-[#3f342b]">
                 신랑측 계좌번호
               </span>
             </div>
@@ -129,7 +160,7 @@ export const Account = ({
               height="18"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#a0a0a0"
+              stroke="#8b7355"
               strokeWidth="1.5"
               animate={{ rotate: isGroomOpen ? 180 : 0 }}
               transition={{ duration: 0.3 }}
@@ -141,19 +172,23 @@ export const Account = ({
           <AnimatePresence>
             {isGroomOpen && (
               <motion.div
-                className="mt-2 overflow-hidden rounded-lg bg-[#f5f8fa] p-4"
+                className="mt-2 overflow-hidden rounded-lg border border-[#e5dcd0] bg-[#faf7f2] p-3.5"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                {groomAccounts.map((account) => (
-                  <AccountCard
-                    key={account.accountNumber}
-                    account={account}
-                    isCopied={copiedAccount === account.accountNumber}
-                  />
-                ))}
+                {groomAccounts.map((account, idx) => {
+                  const key = `groom-${idx}-${account.holder}`;
+                  return (
+                    <AccountCard
+                      key={key}
+                      cardKey={key}
+                      account={account}
+                      isCopied={copiedKey === key}
+                    />
+                  );
+                })}
               </motion.div>
             )}
           </AnimatePresence>
@@ -164,20 +199,27 @@ export const Account = ({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
         >
           <button
+            type="button"
             onClick={() => setIsBrideOpen(!isBrideOpen)}
-            className="flex w-full items-center justify-between rounded-lg border border-[#d4c5a9]/40 bg-white p-5 transition-all hover:border-[#c9a961]/60"
+            className="flex w-full items-center justify-between rounded-lg border border-[#d6c7b4]/70 bg-white p-5 transition-all hover:border-[#b89f7d]"
           >
-            <div className="flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#fdf0f0]">
-                <svg className="h-5 w-5 text-[#d4a5a5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f5eae6] text-[#944e47]">
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
                   <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
               </div>
-              <span className="text-sm font-light text-[#4a4a4a]">
+              <span className="text-sm font-normal text-[#3f342b]">
                 신부측 계좌번호
               </span>
             </div>
@@ -186,7 +228,7 @@ export const Account = ({
               height="18"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#a0a0a0"
+              stroke="#8b7355"
               strokeWidth="1.5"
               animate={{ rotate: isBrideOpen ? 180 : 0 }}
               transition={{ duration: 0.3 }}
@@ -198,19 +240,23 @@ export const Account = ({
           <AnimatePresence>
             {isBrideOpen && (
               <motion.div
-                className="mt-2 overflow-hidden rounded-lg bg-[#fdf8f8] p-4"
+                className="mt-2 overflow-hidden rounded-lg border border-[#e5dcd0] bg-[#faf7f2] p-3.5"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                {brideAccounts.map((account) => (
-                  <AccountCard
-                    key={account.accountNumber}
-                    account={account}
-                    isCopied={copiedAccount === account.accountNumber}
-                  />
-                ))}
+                {brideAccounts.map((account, idx) => {
+                  const key = `bride-${idx}-${account.holder}`;
+                  return (
+                    <AccountCard
+                      key={key}
+                      cardKey={key}
+                      account={account}
+                      isCopied={copiedKey === key}
+                    />
+                  );
+                })}
               </motion.div>
             )}
           </AnimatePresence>
