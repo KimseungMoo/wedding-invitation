@@ -83,9 +83,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html
+      lang="ko"
+      className={`${maruBuri.variable} ${cormorantGaramond.variable}`}
+    >
       <body
-        className={`${maruBuri.variable} ${cormorantGaramond.variable} font-serif antialiased`}
+        className={`${maruBuri.className} ${maruBuri.variable} ${cormorantGaramond.variable} font-serif antialiased`}
       >
         {children}
       </body>
