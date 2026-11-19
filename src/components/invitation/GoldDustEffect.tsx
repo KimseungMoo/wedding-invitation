@@ -107,65 +107,65 @@ export const GoldDustEffect = () => {
 
     resize();
 
-    const scaleCount = width < 480 ? 1 : 1.35;
-    const bokehCount = Math.round(14 * scaleCount);
-    const orbCount = Math.round(26 * scaleCount);
-    const sparkleCount = Math.round(20 * scaleCount);
+    const scaleCount = width < 480 ? 1 : 1.25;
+    const bokehCount = Math.round(5 * scaleCount);
+    const orbCount = Math.round(8 * scaleCount);
+    const sparkleCount = Math.round(6 * scaleCount);
 
     const particles: Particle[] = [];
 
     const spawnParticle = (kind: ParticleKind, initialY?: number): Particle => {
       const colorIndex = Math.floor(Math.random() * PALETTE.length);
       if (kind === "bokeh") {
-        const radius = 15 + Math.random() * 19;
+        const radius = 14 + Math.random() * 16;
         return {
           kind,
           x: Math.random() * width,
           y: initialY ?? -radius * 2,
           radius,
           colorIndex,
-          baseAlpha: 0.2 + Math.random() * 0.16,
-          vy: 0.22 + Math.random() * 0.26,
-          swayAmp: 0.25 + Math.random() * 0.35,
-          swayFreq: 0.008 + Math.random() * 0.008,
+          baseAlpha: 0.14 + Math.random() * 0.12,
+          vy: 0.18 + Math.random() * 0.2,
+          swayAmp: 0.2 + Math.random() * 0.3,
+          swayFreq: 0.007 + Math.random() * 0.007,
           phase: Math.random() * Math.PI * 2,
-          twinkleSpeed: 0.01 + Math.random() * 0.012,
+          twinkleSpeed: 0.009 + Math.random() * 0.01,
           hasStar: false,
         };
       }
 
       if (kind === "orb") {
-        const radius = 5 + Math.random() * 7.5;
+        const radius = 4.5 + Math.random() * 6;
         return {
           kind,
           x: Math.random() * width,
           y: initialY ?? -radius * 2,
           radius,
           colorIndex,
-          baseAlpha: 0.42 + Math.random() * 0.28,
-          vy: 0.35 + Math.random() * 0.42,
-          swayAmp: 0.3 + Math.random() * 0.45,
-          swayFreq: 0.012 + Math.random() * 0.012,
+          baseAlpha: 0.28 + Math.random() * 0.18,
+          vy: 0.28 + Math.random() * 0.32,
+          swayAmp: 0.25 + Math.random() * 0.35,
+          swayFreq: 0.01 + Math.random() * 0.01,
           phase: Math.random() * Math.PI * 2,
-          twinkleSpeed: 0.018 + Math.random() * 0.018,
+          twinkleSpeed: 0.015 + Math.random() * 0.015,
           hasStar: false,
         };
       }
 
-      const radius = 1.4 + Math.random() * 1.6;
+      const radius = 1.3 + Math.random() * 1.4;
       return {
         kind: "sparkle",
         x: Math.random() * width,
         y: initialY ?? -radius * 4,
         radius,
         colorIndex,
-        baseAlpha: 0.55 + Math.random() * 0.35,
-        vy: 0.28 + Math.random() * 0.36,
-        swayAmp: 0.2 + Math.random() * 0.35,
-        swayFreq: 0.014 + Math.random() * 0.014,
+        baseAlpha: 0.38 + Math.random() * 0.24,
+        vy: 0.24 + Math.random() * 0.28,
+        swayAmp: 0.18 + Math.random() * 0.28,
+        swayFreq: 0.012 + Math.random() * 0.012,
         phase: Math.random() * Math.PI * 2,
-        twinkleSpeed: 0.028 + Math.random() * 0.025,
-        hasStar: Math.random() < 0.36,
+        twinkleSpeed: 0.022 + Math.random() * 0.02,
+        hasStar: Math.random() < 0.3,
       };
     };
 
