@@ -13,6 +13,8 @@
   - `prefers-reduced-motion: reduce` 설정 시 애니메이션을 비활성화하고, 브라우저 탭이 백그라운드로 전환될 때(`document.hidden`) 루프를 일시 중지하도록 처리했다.
 - `src/components/invitation/index.ts`, `src/app/invitation/page.tsx`
   - `GoldDustEffect`를 배럴 파일에 등록하고 청첩장 메인 페이지(`/invitation`)에 `pointer-events-none` 고정 오버레이로 배치해 터치와 스크롤 조작을 방해하지 않도록 연결했다.
+- `src/components/invitation/Account.tsx`
+  - 신랑측·신부측 계좌 목록의 표시 순서를 `아버지 → 어머니 → 신랑/신부` 순으로 변경해 신랑과 신부 계좌가 가장 아래에 오도록 조정했다.
 
 ## 검증
 
