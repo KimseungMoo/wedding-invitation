@@ -5,3 +5,5 @@ export { Gallery } from "./Gallery";
 export { Location } from "./Location";
 export { Account } from "./Account";
 export { AddressText } from "./AddressText";
+export { GoldDustEffect } from "./GoldDustEffect";
+

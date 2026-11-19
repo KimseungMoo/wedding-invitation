@@ -10,6 +10,7 @@ import {
   Gallery,
   Location,
   Account,
+  GoldDustEffect,
 } from "@/components/invitation";
 
 const GALLERY_IMAGES = [
@@ -208,6 +209,9 @@ export default function InvitationPage() {
           }}
         />
       )}
+      {/* 샴페인 골드 빛가루 & 보케 배경 낙하 이펙트 */}
+      <GoldDustEffect />
+
       {/* 표지: SAVE THE DATE & 더 채플 앳 청담 일러스트 */}
       <MainVisual
         groomEnglishName="KIM SEUNG MOO"
